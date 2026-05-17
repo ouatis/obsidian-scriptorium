@@ -1,22 +1,22 @@
-# SCRIPTORIUM
+# Scriptorium
 
 A warm, minimal Obsidian theme for long-form reading and writing.
 
 [Chinese](./README.zh-CN.md)
 
-![SCRIPTORIUM screenshot](./screenshot.png)
+![Scriptorium screenshot](./screenshot.png)
 
-SCRIPTORIUM keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed Chinese and Latin notes.
+Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed Chinese and Latin notes.
 
 > [!NOTE]
-> SCRIPTORIUM is a personal aesthetic. It does not aim to support the `Style Settings` plugin.
+> Scriptorium is a personal aesthetic. It does not aim to support the `Style Settings` plugin.
 
 ## Install
 
-1. Search for `SCRIPTORIUM` in Obsidian Community Themes.
+1. Search for `Scriptorium` in Obsidian Community Themes.
 2. Click **Install and use**.
 
-Manual install: copy `theme.css` and `manifest.json` into `.obsidian/themes/SCRIPTORIUM/`, then select `SCRIPTORIUM` in Appearance -> Themes.
+Manual install: copy `theme.css` and `manifest.json` into `.obsidian/themes/Scriptorium/`, then select `Scriptorium` in Appearance -> Themes.
 
 ## Design
 

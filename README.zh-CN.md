@@ -1,22 +1,22 @@
-# SCRIPTORIUM 主题
+# Scriptorium 主题
 
 一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
 
 [English](./README.md)
 
-![SCRIPTORIUM screenshot](./screenshot.png)
+![Scriptorium screenshot](./screenshot.png)
 
-SCRIPTORIUM 让正文保持主位：柔和纸色、克制对比、安静的工作区界面、更平的标签与 callout，以及针对中英文混排调过的字体层级。
+Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工作区界面、更平的标签与 callout，以及针对中英文混排调过的字体层级。
 
 > [!NOTE]
-> SCRIPTORIUM 是偏个人审美的主题，不以支持 `Style Settings` 插件为目标。
+> Scriptorium 是偏个人审美的主题，不以支持 `Style Settings` 插件为目标。
 
 ## 安装
 
-1. 在 Obsidian 社区主题中搜索 `SCRIPTORIUM`。
+1. 在 Obsidian 社区主题中搜索 `Scriptorium`。
 2. 点击“安装并启用”。
 
-手动安装：将 `theme.css` 和 `manifest.json` 放入 `.obsidian/themes/SCRIPTORIUM/`，再在“外观 -> 主题”中选择 `SCRIPTORIUM`。
+手动安装：将 `theme.css` 和 `manifest.json` 放入 `.obsidian/themes/Scriptorium/`，再在“外观 -> 主题”中选择 `Scriptorium`。
 
 ## 设计
 
