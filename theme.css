@@ -1468,8 +1468,8 @@ body:not(.is-mobile) .status-bar {
     min-height: 8px;
     overflow: hidden;
     white-space: nowrap;
-    background-color: color-mix(in srgb, var(--panel-surface) 84%, transparent);
-    border: var(--border-width) solid color-mix(in srgb, var(--panel-border-color) 72%, transparent);
+    background-color: color-mix(in srgb, var(--panel-surface) 92%, transparent);
+    border: var(--border-width) solid color-mix(in srgb, var(--panel-border-color) 80%, transparent);
     border-radius: 999px;
     box-shadow: var(--scrip-shadow-ambient);
     transition:
@@ -1494,15 +1494,15 @@ body:not(.is-mobile) .status-bar:not(:hover):not(:focus-within) {
     max-width: var(--scrip-status-compact-width) !important;
     min-width: var(--scrip-status-compact-width);
     padding-inline: var(--size-2) !important;
-    border-color: color-mix(in srgb, var(--panel-border-color) 56%, transparent) !important;
-    background-color: color-mix(in srgb, var(--panel-surface) 76%, transparent) !important;
+    border-color: color-mix(in srgb, var(--panel-border-color) 64%, transparent) !important;
+    background-color: color-mix(in srgb, var(--panel-surface) 96%, transparent) !important;
     box-shadow: none;
-    opacity: 0.88;
+    opacity: 1;
     transform: none;
 }
 
 body:not(.is-mobile) .status-bar:not(:hover):not(:focus-within) > * {
-    opacity: 0.8;
+    opacity: 0.9;
     transform: none;
     filter: none;
 }
@@ -1510,7 +1510,12 @@ body:not(.is-mobile) .status-bar:not(:hover):not(:focus-within) > * {
 body:not(.is-mobile) .status-bar:hover,
 body:not(.is-mobile) .status-bar:focus-within {
     padding-inline: var(--size-3);
+    background-color: color-mix(in srgb, var(--panel-surface) 98%, transparent);
     box-shadow: var(--shadow-s);
+}
+
+body:is(body, .status-bar-default):not(.status-bar-full, .status-bar-cupertino) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type .node-insert-event {
+    padding-bottom: 36px;
 }
 
 /* [10] Buttons */
