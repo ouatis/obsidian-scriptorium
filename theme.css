@@ -725,8 +725,8 @@ html {
     --text-link-active: var(--interactive-active);
     --text-link-subtle: var(--text-accent-subtle);
     --text-a: var(--interactive);
-    --text-a-hover: var(--interactive-hover);
-    --text-a-active: var(--interactive-active);
+    --text-a-hover: var(--text-accent-hover);
+    --text-a-active: var(--text-accent-active);
     --text-mark: var(--highlight);
     --text-mark-subtle: var(--highlight-subtle);
     --text-mark-strong: var(--highlight-strong);
