@@ -492,8 +492,8 @@
     --text-accent-active: color-mix(in srgb, var(--interactive) 68%, var(--text-primary));
     --text-accent-subtle: color-mix(in srgb, var(--interactive) 54%, var(--text-primary));
     --interactive-accent: var(--interactive);
-    --interactive-accent-hover: var(--interactive-hover);
-    --interactive-accent-active: var(--interactive-active);
+    --interactive-accent-hover: color-mix(in srgb, var(--interactive) 90%, rgb(var(--gray-100)));
+    --interactive-accent-active: color-mix(in srgb, var(--interactive) 82%, rgb(var(--gray-100)));
     --interactive-accent-rgb: var(--color-accent-rgb);
     --highlight: rgba(var(--color-accent-rgb), var(--opacity-strong));
     --highlight-subtle: rgba(var(--color-accent-rgb), var(--opacity-medium));
@@ -1526,8 +1526,6 @@ body:not(.is-mobile) .status-bar:focus-within {
     box-shadow: var(--scrip-shadow-tactile);
 
     &:hover:not(:disabled) {
-        background-color: var(--layer-hover-1);
-        border-color: var(--border-subtle-2);
         box-shadow: var(--scrip-shadow-s);
         transform: translateY(var(--transform-translate-hover));
     }
@@ -1571,18 +1569,32 @@ body:not(.is-mobile) .status-bar:focus-within {
 }
 
 /* Primary CTA buttons */
-:where(button.mod-cta, .modal-button-container button.mod-cta) {
+button.mod-cta,
+.modal-button-container button.mod-cta,
+.mod-cta:not(.workspace-leaf):not(.workspace-tab-header):not(.view-header) {
     background-color: var(--interactive);
     color: var(--text-on-accent);
     border-color: var(--interactive);
+    --input-shadow: inset 0 0 0 var(--border-width) var(--interactive-accent);
+    --input-shadow-hover: inset 0 0 0 var(--border-width) var(--interactive-accent-hover);
+    box-shadow:
+        var(--scrip-shadow-tactile),
+        var(--input-shadow);
 
     &:hover:not(:disabled) {
-        background-color: var(--interactive-hover);
-        border-color: var(--interactive-hover);
+        color: var(--text-on-accent);
+        border-color: var(--interactive-accent-hover);
+        box-shadow:
+            var(--scrip-shadow-s),
+            var(--input-shadow-hover);
     }
 
     &:active:not(:disabled) {
-        background-color: var(--interactive-active);
+        color: var(--text-on-accent);
+        border-color: var(--interactive-accent-active);
+        box-shadow:
+            var(--scrip-shadow-tactile),
+            var(--input-shadow);
     }
 }
 
