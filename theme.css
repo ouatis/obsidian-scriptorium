@@ -1,4 +1,4 @@
-﻿/* =====================================================================
+/* =====================================================================
    SCRIPTORIUM CSS Theme for Obsidian
    
    Designed for Obsidian with a focus on readability and elegant visual experience.
@@ -112,9 +112,7 @@
     /* Mobile Text Size Adjust */
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-}
 
-:root {
     /* Density Modifier */
     --density-modifier: 1;
 
@@ -363,6 +361,7 @@
     /* Warning yellow-orange */
 
     /* Vault switcher mask tuning is defined at :root by default; override here only when theme-specific changes are needed. */
+    --scrip-app-texture: var(--scrip-texture-noise);
 }
 
 .theme-dark {
@@ -433,7 +432,7 @@
     --color-success-rgb: 142, 186, 142;
     --color-warning-rgb: 240, 185, 90;
 
-
+    --scrip-app-texture: var(--scrip-texture-noise-dark);
 }
 
 
@@ -548,13 +547,6 @@
     --background-modifier-selected: var(--background-selected);
     --background-modifier-selected-hover: var(--background-selected-hover);
     --background-modifier-cover: var(--overlay);
-
-    /* App texture token */
-    --scrip-app-texture: var(--scrip-texture-noise);
-}
-
-.theme-dark {
-    --scrip-app-texture: var(--scrip-texture-noise-dark);
 }
 
 
@@ -577,7 +569,7 @@ body.is-mobile {
 
 /* [04] Global Semantics */
 /* [04b] Semantic Aliases */
-body {
+html {
     /* Text colors */
     --text-on-accent: rgb(var(--white));
     --text-on-accent-inverted: rgb(var(--gray-100));
@@ -688,7 +680,7 @@ body {
 }
 
 /* [05a] Workspace Tokens */
-body {
+.workspace {
 
     /* Navigation item styles */
     --nav-item-background-hover: rgba(var(--color-accent-rgb), var(--opacity-subtle));
@@ -772,6 +764,10 @@ body {
     --paragraph-spacing: calc(var(--paragraph-spacing-base) * var(--density-modifier));
     --paragraph-spacing-tight: calc(var(--paragraph-spacing-base) * var(--multiplier-tight));
     --paragraph-spacing-relaxed: calc(var(--paragraph-spacing-base) * var(--multiplier-relaxed));
+
+    --scrip-chrome-muted-opacity: 0.72;
+    --scrip-status-compact-width: min(13rem, calc(100vw - var(--size-8)));
+    --scrip-status-expanded-width: min(28rem, calc(100vw - var(--size-8)));
 }
 
 /* 滚动条 hover 宽度过渡 / Scrollbar Hover Width Transition */
@@ -800,12 +796,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     background-color: transparent !important;
 }
 
-/* [05a] Workspace Tokens */
-body {
-    --scrip-chrome-muted-opacity: 0.72;
-    --scrip-status-compact-width: min(13rem, calc(100vw - var(--size-8)));
-    --scrip-status-expanded-width: min(28rem, calc(100vw - var(--size-8)));
-}
+
 /* Shared focus ring lives at the semantic layer so navigation, links,
    buttons, and form fields inherit one accessibility treatment. */
 :is(button, input, textarea, select, a, .nav-file-title, .nav-folder-title, .tree-item-inner, [tabindex]:not([tabindex="-1"])):focus-visible {
@@ -878,7 +869,6 @@ body {
     word-break: break-word;
     line-break: auto;
     text-align: justify;
-    text-justify: inter-ideograph;
     text-wrap: pretty;
     hyphens: none;
 
@@ -895,7 +885,11 @@ body {
    structured or technical reading contexts where spacing artifacts are more noticeable. */
 .markdown-preview-view :is(li p, blockquote p, .callout-content p, .markdown-embed p, td p, th p) {
     text-align: start;
-    text-justify: auto;
+}
+
+.markdown-preview-view p:has(.tag),
+.markdown-source-view.mod-cm6 .cm-line:has(.cm-hashtag) {
+    text-align: start;
 }
 
 /* [06e] Shared Selection */
@@ -942,63 +936,57 @@ body {
 }
 
 /* [06h] Reading Headings */
-.markdown-preview-view {
+.markdown-preview-view :is(h1, h2) {
+    font-family: var(--font-headings);
+    color: var(--scrip-ink-strong);
+    text-wrap: balance;
+}
 
-    & h1,
-    & h2 {
-        font-family: var(--font-headings);
-        color: var(--scrip-ink-strong);
-        text-wrap: balance;
-    }
+.markdown-preview-view h1 {
+    font-size: var(--scrip-type-h1-size);
+    line-height: var(--scrip-type-h1-leading);
+    letter-spacing: var(--scrip-type-h1-tracking);
+    font-weight: var(--font-semibold);
+    margin-top: calc(var(--paragraph-spacing) * 1.28);
+    padding-left: var(--size-4);
+    border-left: var(--indicator-width-wide) solid var(--scrip-heading-accent);
+    margin-bottom: calc(var(--paragraph-spacing) * 0.92);
+}
 
-    & h1 {
-        font-size: var(--scrip-type-h1-size);
-        line-height: var(--scrip-type-h1-leading);
-        letter-spacing: var(--scrip-type-h1-tracking);
-        font-weight: var(--font-semibold);
-        margin-top: calc(var(--paragraph-spacing) * 1.28);
-        padding-left: var(--size-4);
-        border-left: var(--indicator-width-wide) solid var(--scrip-heading-accent);
-        margin-bottom: calc(var(--paragraph-spacing) * 0.92);
-    }
+.markdown-preview-view h2 {
+    font-size: var(--scrip-type-h2-size);
+    line-height: var(--scrip-type-h2-leading);
+    letter-spacing: var(--scrip-type-h2-tracking);
+    font-weight: var(--font-semibold);
+    margin-top: calc(var(--paragraph-spacing) * 1.42);
+    border-bottom: var(--border-width) solid var(--title-rule-color);
+    width: 100%;
+    padding-bottom: var(--size-2);
+    margin-bottom: calc(var(--paragraph-spacing) * 0.84);
+}
 
-    & h2 {
-        font-size: var(--scrip-type-h2-size);
-        line-height: var(--scrip-type-h2-leading);
-        letter-spacing: var(--scrip-type-h2-tracking);
-        font-weight: var(--font-semibold);
-        margin-top: calc(var(--paragraph-spacing) * 1.42);
-        border-bottom: var(--border-width) solid var(--title-rule-color);
-        width: 100%;
-        padding-bottom: var(--size-2);
-        margin-bottom: calc(var(--paragraph-spacing) * 0.84);
-    }
+.markdown-preview-view h3 {
+    font-size: var(--scrip-type-h3-size);
+    line-height: var(--scrip-type-h3-leading);
+    letter-spacing: var(--scrip-type-h3-tracking);
+    font-family: var(--font-headings);
+    font-weight: var(--font-semibold);
+    color: var(--text-secondary-accent);
+    margin-top: calc(var(--paragraph-spacing) * 1.16);
+    margin-bottom: calc(var(--paragraph-spacing-tight) * 0.9);
+}
 
-    & h3 {
-        font-size: var(--scrip-type-h3-size);
-        line-height: var(--scrip-type-h3-leading);
-        letter-spacing: var(--scrip-type-h3-tracking);
-        font-family: var(--font-headings);
-        font-weight: var(--font-semibold);
-        color: var(--text-secondary-accent);
-        margin-top: calc(var(--paragraph-spacing) * 1.16);
-        margin-bottom: calc(var(--paragraph-spacing-tight) * 0.9);
-    }
+.markdown-preview-view :is(h4, h5, h6) {
+    line-height: var(--line-height-tight);
+    letter-spacing: 0;
+    text-wrap: balance;
+    margin-top: var(--paragraph-spacing);
+    margin-bottom: calc(var(--paragraph-spacing-tight) * 0.72);
+    color: var(--scrip-ink-soft);
+}
 
-    & h4,
-    & h5,
-    & h6 {
-        line-height: var(--line-height-tight);
-        letter-spacing: 0;
-        text-wrap: balance;
-        margin-top: var(--paragraph-spacing);
-        margin-bottom: calc(var(--paragraph-spacing-tight) * 0.72);
-        color: var(--scrip-ink-soft);
-    }
-
-    & :is(h1, h2, h3, h4, h5, h6):first-child {
-        margin-top: 0;
-    }
+.markdown-preview-view :is(h1, h2, h3, h4, h5, h6):first-child {
+    margin-top: 0;
 }
 
 /* [06i] Editor Heading Sync */
@@ -1054,106 +1042,96 @@ body {
    preview/table/list scopes are easier to maintain when the token and the rule
    live together inside the same markdown element section. */
 /* [07a] Tables */
-.markdown-preview-view {
+.markdown-preview-view table {
     --table-border-radius: var(--radius-l);
     --table-border-width: var(--border-width);
     --table-border-color: var(--border-subtle-1);
     --table-header-bg: var(--layer-2);
+    border-collapse: separate;
+    border-spacing: 0;
+    border: var(--table-border-width) solid var(--table-border-color);
+    border-radius: var(--table-border-radius);
+    overflow: hidden;
+    width: 100%;
+    margin-block: var(--size-6);
+}
 
-    & table {
-        border-collapse: separate;
-        border-spacing: 0;
-        border: var(--table-border-width) solid var(--table-border-color);
-        border-radius: var(--table-border-radius);
-        overflow: hidden;
-        width: 100%;
-        margin-block: var(--size-6);
+.markdown-preview-view table th {
+    background-color: var(--layer-2);
+    font-weight: var(--font-semibold);
+    padding: var(--size-2) var(--size-4);
+    text-align: start;
+    border-bottom: var(--border-width) solid var(--border-subtle-1);
+}
 
-        & th {
-            background-color: var(--table-header-bg);
-            font-weight: var(--font-semibold);
-            padding: var(--size-2) var(--size-4);
-            text-align: start;
-            border-bottom: var(--border-width) solid var(--border-subtle-1);
-        }
+.markdown-preview-view table td {
+    padding: var(--size-2) var(--size-4);
+}
 
-        & td {
-            padding: var(--size-2) var(--size-4);
-        }
+.markdown-preview-view table tbody tr:nth-child(even) {
+    background-color: var(--table-zebra);
+}
 
-        & tbody tr {
-            &:nth-child(even) {
-                background-color: var(--table-zebra);
-            }
+.markdown-preview-view table tbody tr:hover {
+    background-color: var(--table-hover);
+    transition: background-color var(--ease-fast-smooth);
+}
 
-            &:hover {
-                background-color: var(--table-hover);
-                transition: background-color var(--ease-fast-smooth);
-            }
-        }
+@media (max-width: 900px) {
+    .markdown-preview-view table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        box-shadow: var(--scrip-shadow-ambient);
     }
 
-    @media (max-width: 900px) {
-        & table {
-            display: block;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            white-space: nowrap;
-            box-shadow: var(--scrip-shadow-ambient);
-        }
-
-        & table th,
-        & table td {
-            min-width: 9rem;
-        }
+    .markdown-preview-view table th,
+    .markdown-preview-view table td {
+        min-width: 9rem;
     }
 }
 
 /* [07c] List Styles */
-.markdown-preview-view {
+.markdown-preview-view ul,
+.markdown-preview-view ol {
+    margin: calc(var(--paragraph-spacing) * 0.92) 0;
+    padding-inline-start: var(--size-6);
+}
 
-    & ul,
-    & ol {
-        margin: calc(var(--paragraph-spacing) * 0.92) 0;
-        padding-inline-start: var(--size-6);
+.markdown-preview-view :is(ul, ol) :is(ul, ol) {
+    margin: calc(var(--paragraph-spacing-tight) * 0.8) 0;
+    padding-inline-start: var(--size-5);
+}
 
-        /* Nested lists */
-        & ul,
-        & ol {
-            margin: calc(var(--paragraph-spacing-tight) * 0.8) 0;
-            padding-inline-start: var(--size-5);
-        }
-    }
+.markdown-preview-view li {
+    margin: calc(var(--size-2) * 0.9) 0;
+    line-height: var(--line-height-normal);
+}
 
-    & li {
-        margin: calc(var(--size-2) * 0.9) 0;
-        line-height: var(--line-height-normal);
+.markdown-preview-view li::marker {
+    color: var(--list-marker-color);
+}
 
-        &::marker {
-            color: var(--list-marker-color);
-        }
-    }
+.markdown-preview-view li>p {
+    margin-block-end: calc(var(--paragraph-spacing-tight) * 0.7);
+}
 
-    & li>p {
-        margin-block-end: calc(var(--paragraph-spacing-tight) * 0.7);
-    }
+/* List marker styling */
+.markdown-preview-view ul {
+    list-style-type: disc;
+}
 
-    /* List marker styling */
-    & ul {
-        list-style-type: disc;
+.markdown-preview-view ul ul {
+    list-style-type: circle;
+}
 
-        & ul {
-            list-style-type: circle;
+.markdown-preview-view ul ul ul {
+    list-style-type: square;
+}
 
-            & ul {
-                list-style-type: square;
-            }
-        }
-    }
-
-    & ol {
-        list-style-type: decimal;
-    }
+.markdown-preview-view ol {
+    list-style-type: decimal;
 }
 
 /* [07d] Highlight Styles */
@@ -1185,7 +1163,7 @@ body {
 
 /* [07e] Link Styles */
 /* [07e-i] Link Tokens */
-body {
+:is(.markdown-rendered, .markdown-source-view) {
     --link-unresolved-opacity: 0.6;
     --link-unresolved-color: var(--text-muted);
     --link-unresolved-hover-color: var(--text-secondary);
@@ -1387,49 +1365,46 @@ body {
 
 /* Workspace Chrome ==================================================== */
 /* [08] 导航栏 / Navigation */
-body {
+/* 导航项基础样式 */
+.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner, .nav-folder-title-content, .nav-file-title-content) {
+    color: var(--nav-item-color);
+}
 
-    /* 导航项基础样式 */
-    & :is(.nav-folder-title, .nav-file-title, .tree-item-inner, .nav-folder-title-content, .nav-file-title-content) {
-        color: var(--nav-item-color);
-    }
+/* Interactive navigation styling */
+.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner) {
+    transition: var(--transition-state);
+}
 
-    /* Interactive navigation styling */
-    & :is(.nav-folder-title, .nav-file-title, .tree-item-inner) {
-        transition: var(--transition-state);
+/* Keyboard focus state */
+.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner):focus-visible {
+    outline: var(--outline-width) solid var(--focus);
+    outline-offset: var(--outline-offset);
+    background-color: var(--nav-item-background-hover);
+    color: var(--nav-item-color-active);
+}
 
-        /* Keyboard focus state */
-        &:focus-visible {
-            outline: var(--outline-width) solid var(--focus);
-            outline-offset: var(--outline-offset);
-            background-color: var(--nav-item-background-hover);
-            color: var(--nav-item-color-active);
-        }
+/* Hover state */
+.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner):hover {
+    background-color: var(--nav-item-background-hover);
+    color: var(--nav-item-color-hover);
+}
 
-        /* Hover state */
-        &:hover {
-            background-color: var(--nav-item-background-hover);
-            color: var(--nav-item-color-hover);
+.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner):hover :is(.nav-folder-title-content, .nav-file-title-content, .tree-item-self, .nav-folder-collapse-indicator) {
+    color: var(--nav-folder-color-hover);
+}
 
-            & :is(.nav-folder-title-content, .nav-file-title-content, .tree-item-self, .nav-folder-collapse-indicator) {
-                color: var(--nav-folder-color-hover);
-            }
-        }
+/* Active state with refined highlighting */
+.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner).is-active {
+    background-color: var(--nav-item-background-active);
+    color: var(--text-primary);
+    box-shadow: inset 3px 0 0 0 var(--interactive-accent);
+    font-weight: var(--font-semibold);
+}
 
-        /* Active state with refined highlighting */
-        &.is-active {
-            background-color: var(--nav-item-background-active);
-            color: var(--text-primary);
-            box-shadow: inset 3px 0 0 0 var(--interactive-accent);
-            font-weight: var(--font-semibold);
-        }
-    }
-
-    /* Mobile active navigation state */
-    &.is-mobile :is(.nav-folder-title, .nav-file-title, .tree-item-inner).is-active {
-        background-color: var(--nav-item-background-active);
-        color: var(--text-primary);
-    }
+/* Mobile active navigation state */
+body.is-mobile :is(.nav-folder-title, .nav-file-title, .tree-item-inner).is-active {
+    background-color: var(--nav-item-background-active);
+    color: var(--text-primary);
 }
 
 /* [08a] Note Header Hover Reveal */
@@ -1787,9 +1762,8 @@ input[type=checkbox] {
    using side color bars and soft backgrounds to create a sticky-note feel
    while staying aligned with the accent and secondary palette. */
 
-/* Callout Color Palette (Warm Tones) */
-/* [13a] Callout Tokens */
-body {
+/* Callout base structure */
+.callout {
     --callout-default-rgb: var(--gray-60);
 
     /* Info uses the warm secondary green. */
@@ -1812,10 +1786,7 @@ body {
 
     /* Questions use a golden brown accent. */
     --callout-question-rgb: 190, 140, 80;
-}
 
-/* Callout base structure */
-.callout {
     --callout-radius: var(--radius-m);
     --callout-padding: var(--size-4);
     --callout-bg-opacity: 0.04;
