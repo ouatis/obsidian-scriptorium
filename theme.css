@@ -1462,25 +1462,40 @@ body:not(.is-mobile) {
 /* Workspace Auto-hide ================================================ */
 /* [09a] Status Bar Hover Reveal */
 body:not(.is-mobile) .status-bar {
+    position: relative;
+    z-index: 0;
     width: auto !important;
     min-width: 0 !important;
     max-width: var(--scrip-status-expanded-width);
     min-height: 8px;
+    height: calc-size(auto, size);
     overflow: hidden;
     white-space: nowrap;
-    background-color: color-mix(in srgb, var(--panel-surface) 92%, transparent);
-    border: var(--border-width) solid color-mix(in srgb, var(--panel-border-color) 80%, transparent);
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     border-radius: 999px;
-    box-shadow: var(--scrip-shadow-ambient);
+    box-shadow: none;
     transition:
         max-width var(--ease-moderate-smooth),
         padding var(--ease-fast-smooth),
         opacity var(--ease-fast-smooth),
         transform var(--ease-moderate-smooth),
         background-color var(--ease-fast-smooth),
-        border-color var(--ease-fast-smooth),
         box-shadow var(--ease-fast-smooth);
     transform-origin: bottom right;
+}
+
+body:not(.is-mobile) .status-bar::before {
+    transition: var(--ease-moderate-smooth) var(--anim-motion-baseline);
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150%;
+    height: 200%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(farthest-side at right bottom, var(--background-primary), rgba(var(--mono-rgb-0), 0));
 }
 
 body:not(.is-mobile) .status-bar > * {
@@ -1494,15 +1509,17 @@ body:not(.is-mobile) .status-bar:not(:hover):not(:focus-within) {
     max-width: var(--scrip-status-compact-width) !important;
     min-width: var(--scrip-status-compact-width);
     padding-inline: var(--size-2) !important;
-    border-color: color-mix(in srgb, var(--panel-border-color) 64%, transparent) !important;
-    background-color: color-mix(in srgb, var(--panel-surface) 96%, transparent) !important;
     box-shadow: none;
     opacity: 1;
     transform: none;
 }
 
+body:not(.is-mobile) .status-bar:not(:hover):not(:focus-within)::before {
+    opacity: 0;
+}
+
 body:not(.is-mobile) .status-bar:not(:hover):not(:focus-within) > * {
-    opacity: 0.9;
+    opacity: 1;
     transform: none;
     filter: none;
 }
@@ -1510,11 +1527,15 @@ body:not(.is-mobile) .status-bar:not(:hover):not(:focus-within) > * {
 body:not(.is-mobile) .status-bar:hover,
 body:not(.is-mobile) .status-bar:focus-within {
     padding-inline: var(--size-3);
-    background-color: color-mix(in srgb, var(--panel-surface) 98%, transparent);
     box-shadow: var(--shadow-s);
 }
 
-body:is(body, .status-bar-default):not(.status-bar-full, .status-bar-cupertino) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type .node-insert-event {
+body:not(.is-mobile) .status-bar:hover::before,
+body:not(.is-mobile) .status-bar:focus-within::before {
+    opacity: 1;
+}
+
+body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type .node-insert-event {
     padding-bottom: 36px;
 }
 
