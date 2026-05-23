@@ -32,6 +32,13 @@ It is designed as a coherent theme system rather than a small visual tweak.
 
 ## Recent Maintenance Changes
 
+The 0.9.8 maintenance pass focused on the live Scriptorium patch used in the JARDIN vault:
+
+1. The status bar now uses a compact capsule that expands on hover or focus.
+2. Left sidebar vault/profile controls and panel header buttons now stay quiet until needed, while focus-within states keep them recoverable.
+3. Mobile table rules were relaxed so narrow screens can wrap dense cells instead of forcing wide horizontal overflow.
+4. Reduced-motion handling now covers the main interaction transitions, not only modal entrance animation.
+
 The 0.9.5 maintenance pass focused on writing-first readability, calmer chrome, and clearer component roles:
 
 1. Light-mode accent contrast was tightened so body-sized interactive text remains readable on the paper-toned background.
