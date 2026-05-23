@@ -6,7 +6,7 @@ A warm, minimal Obsidian theme for long-form reading and writing.
 
 ![Scriptorium screenshot](./screenshot.png)
 
-Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed Chinese and Latin notes.
+Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed CJK and Latin notes.
 
 > [!NOTE]
 > Scriptorium is a personal aesthetic. It does not aim to support the `Style Settings` plugin.
