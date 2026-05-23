@@ -2,7 +2,7 @@
 
 A warm, minimal Obsidian theme for long-form reading and writing.
 
-[Chinese](./README.zh-CN.md)
+[Chinese](./README.zh-CN.md) | [Japanese](./README.ja.md)
 
 ![Scriptorium screenshot](./screenshot.png)
 

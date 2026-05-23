@@ -2,7 +2,7 @@
 
 一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
 
-[English](./README.md)
+[English](./README.md) | [Japanese](./README.ja.md)
 
 ![Scriptorium screenshot](./screenshot.png)
 
