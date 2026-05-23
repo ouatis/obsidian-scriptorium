@@ -858,7 +858,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     word-break: break-word;
     line-break: auto;
     text-align: justify;
-    text-justify: inter-character;
     text-wrap: pretty;
     hyphens: none;
 
@@ -874,11 +873,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 /* Keep full justification for prose, but fall back to start alignment for
    structured or technical reading contexts where spacing artifacts are more noticeable. */
 .markdown-preview-view :is(li p, blockquote p, .callout-content p, .markdown-embed p, td p, th p) {
-    text-align: start;
-}
-
-.markdown-preview-view p:has(.tag),
-.markdown-source-view.mod-cm6 .cm-line:has(.cm-hashtag) {
     text-align: start;
 }
 
@@ -1137,8 +1131,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     background-repeat: no-repeat;
     transition: background-size var(--ease-moderate-smooth);
     border-radius: var(--radius-s);
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
 
     &:hover {
         background-size: 100% 100%, 0 .1em;
@@ -1188,40 +1180,38 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     font-style: var(--link-style);
     text-transform: var(--link-text-transform);
     color: var(--link-color-base);
-    text-decoration: underline;
-    text-decoration-color: var(--link-underline-color-base);
-    text-decoration-thickness: var(--link-underline-thickness-base);
-    text-decoration-style: var(--link-underline-style-base);
-    text-underline-offset: var(--link-underline-offset);
-    text-decoration-skip-ink: auto;
     font-weight: var(--font-medium);
+    --link-underline-current: var(--link-underline-color-base);
+    --link-underline-width: var(--link-underline-thickness-base);
+    background-image: linear-gradient(var(--link-underline-current), var(--link-underline-current));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% var(--link-underline-width);
+    padding-bottom: 0.04em;
     transition: color var(--ease-fast-smooth),
-        text-decoration-color var(--ease-fast-smooth),
-        text-decoration-thickness var(--ease-fast-smooth);
+        background-size var(--ease-fast-smooth);
 
     &:hover {
         color: var(--link-color-hover);
-        text-decoration: underline;
-        text-decoration-color: var(--link-underline-color-hover);
-        text-decoration-thickness: var(--link-underline-thickness-hover);
+        --link-underline-current: var(--link-underline-color-hover);
+        --link-underline-width: var(--link-underline-thickness-hover);
     }
 
     &:active {
         color: var(--link-color-active);
-        text-decoration-color: var(--link-underline-color-active);
-        text-decoration-thickness: var(--link-underline-thickness-active);
+        --link-underline-current: var(--link-underline-color-active);
+        --link-underline-width: var(--link-underline-thickness-active);
     }
 
     &:visited {
         color: var(--link-visited-color-base);
-        text-decoration-color: var(--link-visited-underline-color-base);
-        text-decoration-thickness: var(--link-underline-thickness-base);
-        text-decoration-style: var(--link-underline-style-visited);
+        --link-underline-current: var(--link-visited-underline-color-base);
+        --link-underline-width: var(--link-underline-thickness-base);
 
         &:hover {
             color: var(--link-visited-color-hover);
-            text-decoration-color: var(--link-visited-underline-color-hover);
-            text-decoration-thickness: var(--link-underline-thickness-hover);
+            --link-underline-current: var(--link-visited-underline-color-hover);
+            --link-underline-width: var(--link-underline-thickness-hover);
         }
     }
 }
@@ -1229,18 +1219,18 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 .markdown-rendered .external-link,
 .markdown-source-view .cm-link:not(.cm-hmd-internal-link) {
     color: var(--link-external-color-base);
-    text-decoration-color: var(--link-external-underline-color-base);
+    --link-underline-current: var(--link-external-underline-color-base);
 
     &:hover {
         color: var(--link-external-color-hover);
-        text-decoration-color: var(--link-external-underline-color-hover);
-        text-decoration-thickness: var(--link-underline-thickness-hover);
+        --link-underline-current: var(--link-external-underline-color-hover);
+        --link-underline-width: var(--link-underline-thickness-hover);
     }
 
     &:active {
         color: var(--link-external-color-active);
-        text-decoration-color: var(--link-external-color-active);
-        text-decoration-thickness: var(--link-underline-thickness-active);
+        --link-underline-current: var(--link-external-color-active);
+        --link-underline-width: var(--link-underline-thickness-active);
     }
 }
 
@@ -1248,7 +1238,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 .markdown-source-view.mod-cm6 .is-unresolved {
     color: var(--link-unresolved-color);
     opacity: var(--link-unresolved-opacity);
-    text-decoration: none;
     font-weight: var(--font-bold);
     transition: color var(--ease-moderate-smooth),
         opacity var(--ease-moderate-smooth);
@@ -1256,13 +1245,11 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     &:hover {
         color: var(--link-unresolved-hover-color);
         opacity: 1;
-        text-decoration: none;
     }
 }
 
 .markdown-source-view .cm-url .cm-underline {
     font-style: var(--link-external-style);
-    text-decoration: none;
 }
 
 /* Restore a gentle emphasis style for Markdown `*emphasis*`,
@@ -1417,13 +1404,13 @@ body:not(.is-phone, .view-header-title-always) .view-header-title-parent {
 }
 
 body:not(.is-phone, .view-header-title-always) .view-header:not(:hover):not(:focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions):not(:focus-within) {
-    opacity: var(--scrip-chrome-muted-opacity) !important;
+    opacity: var(--scrip-chrome-muted-opacity);
     transform: none;
 }
 
 body:not(.is-phone, .view-header-title-always) .view-header:is(:hover, :focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions) {
-    opacity: 1 !important;
-    transform: none !important;
+    opacity: 1;
+    transform: none;
 }
 /* [09] Nav Button Container */
 body:not(.is-mobile) {
@@ -1493,10 +1480,8 @@ body:not(.is-mobile) .app-container .status-bar:focus-within {
 }
 
 /* Move sync status indicator to the left so it displays when collapsed */
-body:not(.is-mobile) .app-container .status-bar .status-bar-item:has(.sync-status-icon),
 body:not(.is-mobile) .app-container .status-bar .status-bar-item.plugin-sync,
-body:not(.is-mobile) .app-container .status-bar .status-bar-item[class*="sync"],
-body:not(.is-mobile) .app-container .status-bar .status-bar-item:has([class*="sync"]) {
+body:not(.is-mobile) .app-container .status-bar .status-bar-item[class*="sync"] {
     order: -1;
 }
 
@@ -1506,10 +1491,8 @@ body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .
 }
 
 /* Keep only the sync status item visible when collapsed */
-body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item:has(.sync-status-icon),
 body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item.plugin-sync,
-body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item[class*="sync"],
-body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item:has([class*="sync"]) {
+body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item[class*="sync"] {
     display: flex;
 }
 
@@ -1616,11 +1599,11 @@ body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-h
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        transition-delay: 0ms !important;
-        scroll-behavior: auto !important;
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        transition-duration: 0.01ms;
+        transition-delay: 0ms;
+        scroll-behavior: auto;
     }
 }
 
