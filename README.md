@@ -20,7 +20,7 @@ Manual install: copy `theme.css` and `manifest.json` into `.obsidian/themes/Scri
 
 ## Design
 
-- Recommended fonts: IBM Plex Sans SC for mixed CJK and Latin notes, IBM Plex Serif, IBM Plex Mono.
+- Recommended fonts: IBM Plex Sans, IBM Plex Serif, IBM Plex Mono.
 - Document surfaces stay light: texture, shadow, and accent color are deliberately restrained.
 - Navigation, search, menus, tags, callouts, and embeds stay quiet so prose remains central.
 - Version 0.9.8 adds a compact status-bar capsule, hover-revealed sidebar controls, calmer mobile tables, and reduced-motion handling.
