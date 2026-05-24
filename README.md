@@ -23,7 +23,7 @@ Manual install: copy `theme.css` and `manifest.json` into `.obsidian/themes/Scri
 - Recommended fonts: IBM Plex Sans, IBM Plex Serif, IBM Plex Mono.
 - Document surfaces stay light: texture, shadow, and accent color are deliberately restrained.
 - Navigation, search, menus, tags, callouts, and embeds stay quiet so prose remains central.
-- Version 0.9.8 adds a compact status-bar capsule, hover-revealed sidebar controls, calmer mobile tables, and reduced-motion handling.
+- Version 0.9.9 refines link clarity while keeping the original underline style.
 - The theme ships as a single `theme.css` with no external dependencies.
 
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline). See [SCRIPT-MAINTENANCE.md](./SCRIPT-MAINTENANCE.md) for maintenance notes.

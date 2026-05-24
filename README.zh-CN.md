@@ -23,7 +23,7 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 - 推荐字体：IBM Plex Sans SC（适合中英混排笔记）、IBM Plex Serif、IBM Plex Mono。
 - 阅读面保持轻：纹理、阴影和强调色都刻意压低。
 - 导航、搜索、菜单、标签、callout 和 embed 尽量安静，让正文居中。
-- 0.9.8 加入收拢状态栏胶囊、侧栏控件悬停显隐、更稳的移动端表格，以及减动偏好处理。
+- 0.9.9 调整了链接的清晰度，同时保留 Obsidian 的原生下划线样式。
 - 主题以单一 `theme.css` 发布，无外部依赖。
 
 由 [@ouatis](https://github.com/ouatis/) 制作。受 [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) 与 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 启发。维护说明见 [SCRIPT-MAINTENANCE.md](./SCRIPT-MAINTENANCE.md)。

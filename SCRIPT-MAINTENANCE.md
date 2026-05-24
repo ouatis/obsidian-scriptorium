@@ -32,6 +32,12 @@ It is designed as a coherent theme system rather than a small visual tweak.
 
 ## Recent Maintenance Changes
 
+The 0.9.9 maintenance pass focused on keeping links readable without fighting Obsidian's native underline behavior:
+
+1. Link color contrast was tightened so inline links stand out more clearly in long-form notes.
+2. The theme now relies on Obsidian's native underline style instead of layering a custom one.
+3. Unresolved links were kept readable without making them compete with regular links.
+
 The 0.9.8 maintenance pass focused on the live Scriptorium patch used in the JARDIN vault:
 
 1. The status bar now uses a compact capsule that expands on hover or focus.
