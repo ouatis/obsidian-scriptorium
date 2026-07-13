@@ -6,90 +6,63 @@
    Acknowledgments:
    - Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) by @jdanielmourao.
 
-   Structure Map:
-   [01]-[03] Foundations: tokens, palettes, semantic mappings
-   [04]-[05] Base Semantics: aliases, focus, typography rhythm
-   [06]-[07] Writing Surface: editor, reading flow, markdown elements
-   [08]-[09] Workspace Chrome: navigation and workspace controls
-   [10]-[11] UI Components: buttons, modals, floating surfaces
-   [12]-[14] Writing Components: tasks, callouts, embedded notes
-
-   Module Structure:
+   Module Map:
    [01] Design Tokens
    [02] Shadows & Theme Colors
    [03] Theme Mapping
-   [04] Global Semantics
-   [05] Typography
+   [04] App Canvas & Global Semantics
+   [05] Workspace Tokens & Typography
    [06] Markdown Layout
-    [07] Markdown Elements
-         [07a] Tables
-         [07b] Lists
-         [07c] Highlights
-         [07d] Links
-         [07e] Blockquotes
-         [07f] Horizontal Rules
-         [07g] Tags
+   [07] Markdown Elements
+        [07a] Tables
+        [07b] Code Styles
+        [07c] Lists
+        [07d] Highlights
+        [07e] Links
+        [07f] Blockquotes
+        [07g] Horizontal Rules
+        [07h] Tags
+        [07i] Native Properties
    [08] Navigation
-   [09] Nav Button Container
+   [09] Workspace Auto-hide & Window States
    [10] Buttons
    [11] Modals
-   [12] Checkboxes & Tasks
+   [12] Reserved
    [13] Callouts
    [14] Embedded Notes
    ===================================================================== */
 
 /* [01] Design Tokens */
 :root {
-    /* Theme overview:
-       SCRIPTORIUM is a full Obsidian theme centered on readability,
+    /* SCRIPTORIUM is a full Obsidian theme centered on readability,
        paper-like tactility, and calm visual rhythm.
-       Module map:
-       [01] Design Tokens [02] Shadows & Theme Colors [03] Theme Mapping [04] Global Semantics
-       [05] Typography [06] Markdown Layout [07] Markdown Elements [08] Navigation
-       [09] Nav Button Container [10] Buttons [11] Modals [12] Checkboxes & Tasks
-       [13] Callouts [14] Embedded Notes */
-    /* Maintenance notes:
+
+       Maintenance notes:
        - Light-mode accent and secondary colors are tuned for better text contrast.
        - Link states are differentiated more clearly for long-form note reading.
-       - Existing garbled comments are legacy encoding artifacts; prefer adding
-         new readable notes near actively maintained sections. */
-    /* Stable module names for maintenance:
-       [01] Design Tokens
-       [02] Shadows & Theme Colors
-       [03] Theme Mapping
-       [04] Global Semantics
-       [05] Typography
-       [06] Markdown Layout
-       [07] Markdown Elements
-       [08] Navigation
-       [09] Nav Button Container
-       [10] Buttons
-       [11] Modals
-       [12] Checkboxes & Tasks
-       [13] Callouts
-       [14] Embedded Notes */
+       - Properties styling is intentionally conservative; avoid changing its
+         layout, spacing, or internal input controls.
+       - Version-specific design notes live next to the rules they explain. */
     /* Font Stacks */
     --scrip-font-mono-stack: "IBM Plex Mono", "SF Mono", "Consolas", "Monaco", "Menlo", "Roboto Mono", "Courier New", monospace;
     --scrip-font-cjk-stack: "IBM Plex Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif;
-    --scrip-font-serif-stack: "IBM Plex Serif", "Georgia", "Times New Roman", serif;
     /* Heading stack uses a serif-forward system to separate titles from sans body text. */
     --scrip-font-heading-stack: "Noto Serif SC", "Source Han Serif SC", "IBM Plex Serif", "Georgia", "Times New Roman", serif;
-    --scrip-font-mono: var(--font-monospace, var(--scrip-font-mono-stack));
     --scrip-font-text: var(--font-text, var(--scrip-font-cjk-stack));
 
-    /* Typographic scale */
-    --scrip-type-inline-title-size: clamp(1.72rem, 3.35vw, 2.08rem);
-    --scrip-type-inline-title-leading: 1.28;
-    --scrip-type-inline-title-tracking: 0.012em;
-    --scrip-type-h1-size: clamp(1.82rem, 4.5vw, 2.18rem);
-    --scrip-type-h1-leading: 1.24;
-    --scrip-type-h1-tracking: 0.016em;
-    --scrip-type-h2-size: clamp(1.4rem, 3.1vw, 1.68rem);
-    --scrip-type-h2-leading: 1.28;
-    --scrip-type-h2-tracking: 0.01em;
-    --scrip-type-h3-size: clamp(1.16rem, 2.2vw, 1.3rem);
+    /* Typographic scale: CJK-heavy headings stay tighter with zero tracking. */
+    --scrip-type-inline-title-size: 2.08rem;
+    --scrip-type-inline-title-leading: 1.18;
+    --scrip-type-inline-title-tracking: 0;
+    --scrip-type-h1-size: 2.16rem;
+    --scrip-type-h1-leading: 1.16;
+    --scrip-type-h1-tracking: 0;
+    --scrip-type-h2-size: 1.62rem;
+    --scrip-type-h2-leading: 1.22;
+    --scrip-type-h2-tracking: 0;
+    --scrip-type-h3-size: 1.24rem;
     --scrip-type-h3-leading: 1.34;
-    --scrip-type-h3-tracking: 0.008em;
+    --scrip-type-h3-tracking: 0;
 
     /* 字号 / Font Sizes */
     --font-size-h1: var(--scrip-type-h1-size);
@@ -167,11 +140,12 @@
     --radius-l: 12px;
     --radius-xl: 20px;
 
-    /* Transform Values */
-    --transform-scale-pressed: 0.99;
+    /* High-frequency controls avoid hover lift; press feedback stays visible
+       through scale instead. */
+    --transform-scale-pressed: 0.97;
     --transform-scale-checked: 1.05;
     --transform-scale-hidden: 0.85;
-    --transform-translate-hover: -1px;
+    --transform-translate-hover: 0;
     --transform-translate-hidden: -12px;
 
     /* Spacing Multipliers */
@@ -196,6 +170,7 @@
 
     /* Responsive Breakpoints */
     --size-max-width-reading: 65ch;
+    --size-max-width-reading-paper: min(75ch, calc(100vw - 4rem));
     --size-max-width-mobile: 90vw;
 
     /* Color Palette */
@@ -217,11 +192,13 @@
 
     /* Accent color: warm orange family */
     --color-accent-rgb-light: 194, 78, 24;
-    --color-accent-rgb-dark: 197, 82, 18;
+    --color-accent-rgb-dark: 218, 114, 56;
+    --color-accent-fill-rgb-light: 194, 78, 24;
+    --color-accent-fill-rgb-dark: 197, 82, 18;
 
     /* Secondary color: muted green family */
     --color-secondary-rgb-light: 64, 110, 64;
-    --color-secondary-rgb-dark: 63, 107, 64;
+    --color-secondary-rgb-dark: 126, 158, 119;
 
     /* Heading accents */
     --h4-color-rgb-light: 188, 80, 26;
@@ -243,15 +220,8 @@
     --table-hover-light: rgba(var(--gray-20), var(--opacity-half));
     --table-hover-dark: rgba(var(--gray-80), var(--opacity-half));
 
-    /* Vault Switcher Mask */
-    --scrip-vault-mask-top-alpha: 1;
-    --scrip-vault-mask-mid-alpha: 0.6;
-    --scrip-vault-mask-bottom-alpha: 0;
-    --scrip-vault-mask-mid-stop: 50%;
-
     /* Status Bar Dimensions & Opacity */
     --scrip-chrome-muted-opacity: 0.72;
-    --scrip-status-compact-width: min(13rem, calc(100vw - var(--size-8)));
     --scrip-status-expanded-width: min(28rem, calc(100vw - var(--size-8)));
 }
 
@@ -259,7 +229,6 @@
 /* [02] Shadows & Theme Colors */
 .theme-light {
     color-scheme: light;
-    --scrip-highlight-blend: darken;
     --color-accent: rgb(var(--color-accent-rgb-light));
     --color-secondary: rgb(var(--color-secondary-rgb-light));
     --scrip-shadow-color: 28deg 15% 35%;
@@ -280,6 +249,7 @@
         0 3px 12px -6px hsl(var(--scrip-shadow-color) / 0.2),
         0 1px 4px -2px hsl(var(--scrip-shadow-color) / 0.16);
     --color-accent-rgb: var(--color-accent-rgb-light);
+    --color-accent-fill-rgb: var(--color-accent-fill-rgb-light);
     --color-secondary-rgb: var(--color-secondary-rgb-light);
     --h4-color-rgb: var(--h4-color-rgb-light);
     --h5-color-rgb: var(--h5-color-rgb-light);
@@ -359,7 +329,6 @@
 
 .theme-dark {
     color-scheme: dark;
-    --scrip-highlight-blend: lighten;
     --color-accent: rgb(var(--color-accent-rgb-dark));
     --color-secondary: rgb(var(--color-secondary-rgb-dark));
     --scrip-shadow-color: 28deg 28% 16%;
@@ -373,6 +342,7 @@
         0 3px 10px -6px hsl(var(--scrip-shadow-color) / 0.36),
         0 1px 3px -1px hsl(var(--scrip-shadow-color) / 0.48);
     --color-accent-rgb: var(--color-accent-rgb-dark);
+    --color-accent-fill-rgb: var(--color-accent-fill-rgb-dark);
     --color-secondary-rgb: var(--color-secondary-rgb-dark);
     --h4-color-rgb: var(--h4-color-rgb-dark);
     --h5-color-rgb: var(--h5-color-rgb-dark);
@@ -432,14 +402,6 @@
 /* [03] Theme Mapping */
 .theme-light,
 .theme-dark {
-
-
-    /* Vault switcher gradient mask */
-    --scrip-vault-mask: linear-gradient(to top,
-            rgba(var(--layer-2-rgb), var(--scrip-vault-mask-top-alpha)) 0%,
-            rgba(var(--layer-2-rgb), var(--scrip-vault-mask-mid-alpha)) var(--scrip-vault-mask-mid-stop),
-            rgba(var(--layer-2-rgb), var(--scrip-vault-mask-bottom-alpha)) 100%);
-
     /* Background and layers */
     --background: rgb(var(--background-base-rgb));
     --layer-1: rgb(var(--layer-1-rgb));
@@ -484,10 +446,10 @@
     --text-accent-hover: color-mix(in srgb, var(--interactive) 82%, var(--text-primary));
     --text-accent-active: color-mix(in srgb, var(--interactive) 68%, var(--text-primary));
     --text-accent-subtle: color-mix(in srgb, var(--interactive) 54%, var(--text-primary));
-    --interactive-accent: var(--interactive);
-    --interactive-accent-hover: color-mix(in srgb, var(--interactive) 90%, rgb(var(--gray-100)));
-    --interactive-accent-active: color-mix(in srgb, var(--interactive) 82%, rgb(var(--gray-100)));
-    --interactive-accent-rgb: var(--color-accent-rgb);
+    --interactive-accent: rgb(var(--color-accent-fill-rgb));
+    --interactive-accent-hover: color-mix(in srgb, var(--interactive-accent) 90%, rgb(var(--gray-100)));
+    --interactive-accent-active: color-mix(in srgb, var(--interactive-accent) 82%, rgb(var(--gray-100)));
+    --interactive-accent-rgb: var(--color-accent-fill-rgb);
     --highlight: rgba(var(--color-accent-rgb), var(--opacity-strong));
     --highlight-subtle: rgba(var(--color-accent-rgb), var(--opacity-medium));
     --highlight-strong: rgba(var(--color-accent-rgb), 0.9);
@@ -560,7 +522,24 @@ body.is-mobile {
     background-image: none;
 }
 
-/* [04] Global Semantics */
+body.is-popout-window,
+body.is-translucent {
+    background-color: var(--background-secondary);
+}
+
+body.is-popout-window .workspace,
+body.is-translucent .workspace {
+    background-color: color-mix(in srgb, var(--background-secondary) 92%, transparent);
+}
+
+body.is-mobile {
+    --scrip-app-texture: none;
+    --scrip-reading-paper-radius: var(--radius-m);
+    --scrip-reading-paper-border: transparent;
+    --scrip-reading-paper-shadow: none;
+    --scrip-chrome-muted-opacity: 1;
+}
+
 /* [04b] Semantic Aliases */
 html {
     /* Text colors */
@@ -618,14 +597,22 @@ html {
     --panel-border-color: var(--scrip-rule-soft);
     --panel-shadow-soft: 0 8px 18px -18px rgba(var(--gray-100), 0.12);
     --title-rule-color: var(--scrip-rule-accent);
+    --scrip-reading-paper-radius: var(--radius-l);
+    --scrip-reading-paper-border: color-mix(in srgb, var(--paper-frame-border) 48%, transparent);
+    --scrip-reading-paper-shadow: 0 18px 42px rgba(var(--gray-100), 0.08);
+    --scrip-editorial-rule-strong: linear-gradient(90deg,
+            color-mix(in srgb, var(--interactive-accent) 86%, var(--text-primary)) 0,
+            color-mix(in srgb, var(--interactive-accent) 42%, transparent) 26%,
+            transparent 84%);
+    --scrip-native-surface: color-mix(in srgb, var(--panel-surface) 96%, transparent);
+    --scrip-native-surface-muted: color-mix(in srgb, var(--layer-2) 46%, transparent);
+    --scrip-native-rule: color-mix(in srgb, var(--paper-frame-border) 52%, transparent);
 
-    /* Secondary interaction background */
     /* Secondary interaction backgrounds */
     --secondary-bg-light: color-mix(in srgb, var(--color-secondary) 18%, var(--background));
     --secondary-bg-medium: color-mix(in srgb, var(--color-secondary) 26%, var(--background));
     --secondary-bg-strong: color-mix(in srgb, var(--color-secondary) 34%, var(--background));
 
-    /* Icons */
     /* Icons */
     --icon-s: 1em;
     --icon-color: var(--icon-primary);
@@ -633,7 +620,6 @@ html {
     --icon-color-active: var(--interactive);
     --icon-color-disabled: var(--icon-secondary);
 
-    /* Dividers and tabs */
     /* Dividers and tabs */
     --divider-color: var(--border-subtle-1);
     --tab-text-color: var(--text-secondary);
@@ -647,7 +633,6 @@ html {
     --input-shadow-focus: 0 0 0 var(--focus-ring-width) var(--focus);
 
     /* Tags */
-    /* Tags */
     --tag-color: var(--color-secondary);
     --tag-color-hover: var(--color-secondary-dark-2);
     --tag-color-active: var(--color-secondary-dark-3);
@@ -659,11 +644,9 @@ html {
     --tag-border-color-hover: rgba(var(--color-secondary-rgb), var(--opacity-half));
 
     /* Search clear button */
-    /* Search clear button */
     --search-clear-button-color: var(--icon-secondary);
     --search-clear-button-color-hover: var(--icon-primary);
 
-    /* Scrollbars */
     /* Scrollbars */
     --scrollbar-size: 8px;
     --scrollbar-radius: var(--radius-s);
@@ -753,13 +736,17 @@ html {
     --line-height-relaxed: 1.8;
 
     /* Paragraph spacing */
-    --paragraph-spacing-base: clamp(1.1rem, 2.2vw, 1.55rem);
+    --paragraph-spacing-base: 1.28rem;
     --paragraph-spacing: calc(var(--paragraph-spacing-base) * var(--density-modifier));
     --paragraph-spacing-tight: calc(var(--paragraph-spacing-base) * var(--multiplier-tight));
     --paragraph-spacing-relaxed: calc(var(--paragraph-spacing-base) * var(--multiplier-relaxed));
+    --scrip-editorial-rule: linear-gradient(90deg,
+            var(--scrip-heading-accent) 0,
+            color-mix(in srgb, var(--scrip-heading-accent) 48%, transparent) 16%,
+            transparent 80%);
 }
 
-/* 滚动条 hover 宽度过渡 / Scrollbar Hover Width Transition */
+/* Scrollbar Hover Width Transition */
 ::-webkit-scrollbar {
     width: 14px;
     background-color: var(--scrollbar-track-color);
@@ -768,14 +755,14 @@ html {
 ::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-thumb-color);
     border-radius: var(--scrollbar-radius);
-    border: 4px solid transparent; /* 侧边留白防止由于宽度变化导致的抖动 */
+    border: 4px solid transparent;
     background-clip: content-box;
     transition: background-color var(--ease-fast-smooth), border-width 0.2s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: var(--scrollbar-thumb-color-hover);
-    border-width: 2px; /* 悬停时稍微变粗，但不改变 scrollbar 总宽度 */
+    border-width: 2px;
 }
 
 body.styled-scrollbars .cm-scroller:not(:hover)::-webkit-scrollbar-thumb,
@@ -800,6 +787,21 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 /* [06] Markdown Layout */
+.workspace-leaf-content[data-type="markdown"] {
+    container-name: scriptorium-note;
+    container-type: inline-size;
+}
+
+@container scriptorium-note (max-width: 34rem) {
+    :is(.markdown-source-view, .markdown-preview-view, .inline-title) {
+        --scrip-type-inline-title-size: 1.78rem;
+        --scrip-type-h1-size: 1.86rem;
+        --scrip-type-h2-size: 1.4rem;
+        --scrip-type-h3-size: 1.12rem;
+        --paragraph-spacing-base: 1.08rem;
+    }
+}
+
 /* [06a] Editor Surface */
 .markdown-source-view {
     line-height: var(--line-height-normal);
@@ -809,8 +811,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    /* Mobile adjustments */
-    /* Mobile responsive adjustments */
     @media (max-width: 900px) {
         font-feature-settings: "kern" 1, "liga" 1;
     }
@@ -823,8 +823,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     text-wrap: pretty;
     position: relative;
 
-    /* Mobile adjustments */
-    /* Mobile responsive adjustments */
     @media (max-width: 900px) {
         margin-block-end: calc(var(--paragraph-spacing) * 0.65);
     }
@@ -841,13 +839,25 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "palt" 1;
 
-
-    /* Mobile adjustments */
-    /* Mobile responsive adjustments */
     @media (max-width: 900px) {
         max-width: var(--size-max-width-mobile);
         font-feature-settings: "kern" 1, "liga" 1;
     }
+}
+
+.markdown-reading-view .markdown-preview-view {
+    box-sizing: border-box;
+    max-width: var(--size-max-width-reading-paper);
+    padding: clamp(1.6rem, 3vw, 2.6rem);
+    margin-block: clamp(1rem, 2.4vw, 2.4rem);
+    background:
+        linear-gradient(180deg,
+            color-mix(in srgb, var(--panel-surface) 99%, transparent),
+            color-mix(in srgb, var(--background-primary) 96%, transparent)),
+        var(--scrip-app-texture);
+    border: var(--border-width) solid var(--scrip-reading-paper-border);
+    border-radius: var(--scrip-reading-paper-radius);
+    box-shadow: var(--scrip-reading-paper-shadow);
 }
 
 /* [06d] Reading Paragraph Rhythm */
@@ -861,8 +871,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     text-wrap: pretty;
     hyphens: none;
 
-    /* Mobile adjustments */
-    /* Mobile responsive adjustments */
     @media (max-width: 900px) {
         margin-block-end: calc(var(--paragraph-spacing) * 0.8);
         text-align: start;
@@ -900,10 +908,14 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     font-weight: var(--font-semibold);
     color: var(--scrip-ink-strong);
     text-wrap: balance;
-    max-width: min(100%, 34ch);
-    padding: var(--size-2) 0 var(--size-3);
-    margin-bottom: var(--size-3);
-    border-bottom: var(--border-width-thick) solid color-mix(in srgb, var(--title-rule-color) 74%, transparent);
+    max-width: min(100%, 36ch);
+    padding: var(--size-2) 0 var(--size-4);
+    margin-bottom: var(--size-5);
+    border-bottom: 0;
+    background-image: var(--scrip-editorial-rule-strong);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: min(28rem, 68%) var(--border-width-thick);
 }
 
 /* [06g] Shared Typographic Refinements */
@@ -931,10 +943,19 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     line-height: var(--scrip-type-h1-leading);
     letter-spacing: var(--scrip-type-h1-tracking);
     font-weight: var(--font-semibold);
-    margin-top: calc(var(--paragraph-spacing) * 1.28);
-    padding-left: var(--size-4);
-    border-left: var(--indicator-width-wide) solid var(--scrip-heading-accent);
-    margin-bottom: calc(var(--paragraph-spacing) * 0.92);
+    margin-top: calc(var(--paragraph-spacing) * 1.18);
+    padding-left: 0;
+    border-left: 0;
+    background-image: var(--scrip-editorial-rule);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: min(22rem, 68%) var(--border-width-thick);
+    padding-bottom: var(--size-2);
+    margin-bottom: calc(var(--paragraph-spacing) * 1.05);
+}
+
+.markdown-reading-view .markdown-preview-view h1 {
+    margin-top: calc(var(--paragraph-spacing) * 1.7);
 }
 
 .markdown-preview-view h2 {
@@ -942,11 +963,10 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     line-height: var(--scrip-type-h2-leading);
     letter-spacing: var(--scrip-type-h2-tracking);
     font-weight: var(--font-semibold);
-    margin-top: calc(var(--paragraph-spacing) * 1.42);
-    border-bottom: var(--border-width) solid var(--title-rule-color);
+    margin-top: calc(var(--paragraph-spacing) * 1.78);
+    border-bottom: 0;
     width: 100%;
-    padding-bottom: var(--size-2);
-    margin-bottom: calc(var(--paragraph-spacing) * 0.84);
+    margin-bottom: calc(var(--paragraph-spacing) * 0.78);
 }
 
 .markdown-preview-view h3 {
@@ -956,16 +976,16 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     font-family: var(--font-headings);
     font-weight: var(--font-semibold);
     color: var(--text-secondary-accent);
-    margin-top: calc(var(--paragraph-spacing) * 1.16);
-    margin-bottom: calc(var(--paragraph-spacing-tight) * 0.9);
+    margin-top: calc(var(--paragraph-spacing) * 0.98);
+    margin-bottom: calc(var(--paragraph-spacing-tight) * 0.82);
 }
 
 .markdown-preview-view :is(h4, h5, h6) {
     line-height: var(--line-height-tight);
     letter-spacing: 0;
     text-wrap: balance;
-    margin-top: var(--paragraph-spacing);
-    margin-bottom: calc(var(--paragraph-spacing-tight) * 0.72);
+    margin-top: calc(var(--paragraph-spacing) * 0.9);
+    margin-bottom: calc(var(--paragraph-spacing-tight) * 0.64);
     color: var(--scrip-ink-soft);
 }
 
@@ -975,9 +995,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
 /* [06i] Editor Heading Sync */
 .markdown-source-view.mod-cm6 .HyperMD-header.HyperMD-header-2.cm-line {
-    border-bottom: var(--border-width-thick) solid var(--border-subtle-1);
-    width: 100%;
-    padding-bottom: var(--size-2);
+    border-bottom: 0;
 }
 
 .markdown-source-view.mod-cm6 :is(.HyperMD-header-1, .HyperMD-header-2, .HyperMD-header-3).cm-line {
@@ -990,7 +1008,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     font-size: var(--scrip-type-h1-size);
     line-height: var(--scrip-type-h1-leading);
     letter-spacing: var(--scrip-type-h1-tracking);
-    margin-top: calc(var(--paragraph-spacing) * 0.6);
+    margin-top: calc(var(--paragraph-spacing) * 0.85);
     margin-bottom: calc(var(--paragraph-spacing-tight) * 0.9);
 }
 
@@ -1038,10 +1056,11 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     overflow: hidden;
     width: 100%;
     margin-block: var(--size-6);
+    box-shadow: none;
 }
 
 .markdown-preview-view table th {
-    background-color: var(--layer-2);
+    background-color: color-mix(in srgb, var(--layer-2) 96%, var(--panel-surface));
     font-weight: var(--font-semibold);
     padding: var(--size-2) var(--size-4);
     text-align: start;
@@ -1053,11 +1072,11 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 .markdown-preview-view table tbody tr:nth-child(even) {
-    background-color: var(--table-zebra);
+    background-color: color-mix(in srgb, var(--table-zebra) 72%, transparent);
 }
 
 .markdown-preview-view table tbody tr:hover {
-    background-color: var(--table-hover);
+    background-color: color-mix(in srgb, var(--table-hover) 72%, transparent);
     transition: background-color var(--ease-fast-smooth);
 }
 
@@ -1066,7 +1085,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        box-shadow: var(--scrip-shadow-ambient);
+        box-shadow: none;
     }
 
     .markdown-preview-view table th,
@@ -1076,25 +1095,79 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     }
 }
 
+/* [07b] Code Styles */
+/* The reading paper is the main elevated surface, so code blocks keep texture
+   and border but avoid their own shadow layer. */
+.markdown-preview-view :not(pre) > code,
+.markdown-rendered :not(pre) > code,
+.markdown-source-view.mod-cm6 .cm-inline-code {
+    font-family: var(--font-monospace);
+    font-size: 0.94em;
+    color: var(--text-primary);
+    background-color: color-mix(in srgb, var(--layer-2) 68%, var(--panel-surface));
+    border: 1px solid color-mix(in srgb, var(--paper-frame-border) 50%, transparent);
+    border-radius: var(--radius-s);
+    padding: 0.08em 0.36em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.markdown-preview-view pre,
+.markdown-rendered pre {
+    font-family: var(--font-monospace);
+    background-color: color-mix(in srgb, var(--panel-surface) 92%, var(--layer-2));
+    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 56%, transparent);
+    border-radius: var(--radius-m);
+    padding: var(--size-3) var(--size-4);
+    margin: var(--size-5) 0;
+    overflow-x: auto;
+    box-shadow: none;
+    tab-size: 4;
+}
+
+.markdown-preview-view pre code,
+.markdown-rendered pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 0.92em;
+    line-height: var(--line-height-normal);
+    color: inherit;
+}
+
+.markdown-source-view.mod-cm6 .cm-formatting-code {
+    color: var(--text-muted);
+    opacity: 0.72;
+}
+
+/* Source mode gets a quiet left rail so code reads as structure while editing. */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock {
+    font-family: var(--font-monospace);
+    color: var(--text-primary);
+    background-color: color-mix(in srgb, var(--layer-2) 34%, transparent);
+    border-left: var(--border-width-thick) solid color-mix(in srgb, var(--paper-frame-border) 48%, transparent);
+    padding-inline-start: var(--size-3);
+}
+
 /* [07c] List Styles */
 .markdown-preview-view ul,
 .markdown-preview-view ol {
-    margin: calc(var(--paragraph-spacing) * 0.92) 0;
-    padding-inline-start: var(--size-6);
+    margin: calc(var(--paragraph-spacing) * 0.96) 0;
+    padding-inline-start: var(--size-7);
 }
 
 .markdown-preview-view :is(ul, ol) :is(ul, ol) {
-    margin: calc(var(--paragraph-spacing-tight) * 0.8) 0;
-    padding-inline-start: var(--size-5);
+    margin: calc(var(--paragraph-spacing-tight) * 0.82) 0;
+    padding-inline-start: var(--size-6);
 }
 
 .markdown-preview-view li {
-    margin: calc(var(--size-2) * 0.9) 0;
+    margin: calc(var(--size-2) * 0.85) 0;
     line-height: var(--line-height-normal);
 }
 
 .markdown-preview-view li::marker {
-    color: var(--list-marker-color);
+    color: color-mix(in srgb, var(--list-marker-color) 80%, var(--text-muted));
 }
 
 .markdown-preview-view li>p {
@@ -1160,19 +1233,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     --link-external-color-active: var(--text-a-active);
     --link-visited-color-base: color-mix(in srgb, var(--text-secondary-accent) 78%, var(--text-primary));
     --link-visited-color-hover: color-mix(in srgb, var(--text-secondary-accent-active) 84%, var(--text-primary));
-    --link-underline-color-base: rgba(var(--color-accent-rgb), 0.42);
-    --link-underline-color-hover: var(--text-accent);
-    --link-underline-color-active: var(--text-accent-active);
-    --link-external-underline-color-base: rgba(var(--color-secondary-rgb), 0.45);
-    --link-external-underline-color-hover: var(--color-secondary-dark-1);
-    --link-visited-underline-color-base: rgba(var(--color-secondary-rgb), 0.68);
-    --link-visited-underline-color-hover: var(--text-secondary-accent-active);
-    --link-underline-thickness-base: 1.25px;
-    --link-underline-thickness-hover: 2px;
-    --link-underline-thickness-active: 2.25px;
     --link-underline-offset: 0.15em;
-    --link-underline-style-base: solid;
-    --link-underline-style-visited: dotted;
 }
 
 .markdown-rendered :is(.internal-link, .external-link),
@@ -1217,10 +1278,10 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 .markdown-rendered .internal-link.is-unresolved,
-.markdown-source-view.mod-cm6 .is-unresolved {
+.markdown-source-view.mod-cm6 :is(.cm-hmd-internal-link, .cm-link).is-unresolved {
     color: var(--link-unresolved-color);
     opacity: var(--link-unresolved-opacity);
-    font-weight: var(--font-semibold);
+    font-weight: var(--font-medium);
     transition: color var(--ease-moderate-smooth),
         opacity var(--ease-moderate-smooth);
 
@@ -1245,20 +1306,23 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
 /* [07f] Blockquotes */
 .markdown-preview-view blockquote {
-    background-image: linear-gradient(to right,
-            color-mix(in srgb, var(--blockquote-background-subtle) 28%, transparent),
-            transparent 72%);
-    background-color: transparent;
-    border-left: var(--border-width) solid color-mix(in srgb, var(--blockquote-border-color) 58%, transparent);
-    padding: var(--size-2) 0 var(--size-2) var(--size-4);
-    margin: calc(var(--paragraph-spacing) * 1.08) 0;
-    border-radius: 0;
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
+    background-image:
+        linear-gradient(to right,
+            color-mix(in srgb, var(--blockquote-background-subtle) 50%, var(--panel-surface)),
+            color-mix(in srgb, var(--panel-surface) 94%, transparent) 72%,
+            transparent),
+        var(--scrip-app-texture);
+    background-color: color-mix(in srgb, var(--panel-surface) 94%, transparent);
+    border-left: var(--indicator-width-wide) solid color-mix(in srgb, var(--blockquote-border-color) 64%, transparent);
+    padding: var(--size-2) var(--size-4);
+    margin: calc(var(--paragraph-spacing) * 0.96) 0;
+    border-radius: var(--radius-s);
+    border-top: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 36%, transparent);
+    border-right: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 20%, transparent);
+    border-bottom: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 24%, transparent);
     font-style: normal;
     line-height: var(--line-height-relaxed);
-    color: color-mix(in srgb, var(--blockquote-text-color) 78%, var(--text-muted));
+    color: color-mix(in srgb, var(--blockquote-text-color) 82%, var(--text-muted));
     box-shadow: none;
 }
 
@@ -1282,20 +1346,21 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     height: var(--border-width);
     background: linear-gradient(to right,
             transparent,
-            var(--border-subtle-1),
+            color-mix(in srgb, var(--border-subtle-1) 72%, transparent),
             transparent);
-    margin: var(--size-7) 0;
+    margin: var(--size-6) 0;
+    opacity: 0.9;
 }
 
 /* [07h] Tag Styles */
 .tag {
-    background-color: transparent;
-    border: 1px solid color-mix(in srgb, var(--tag-border-color) 68%, transparent);
+    background-color: color-mix(in srgb, var(--tag-background) 44%, var(--panel-surface));
+    border: 1px solid color-mix(in srgb, var(--tag-border-color) 46%, transparent);
     color: var(--tag-color-subtle);
     border-radius: var(--radius-s);
-    padding: 0.06em 0.36em;
-    font-size: 0.8rem;
-    font-weight: var(--font-normal);
+    padding: 0.06em 0.42em;
+    font-size: 0.76rem;
+    font-weight: var(--font-medium);
     line-height: var(--line-height-tight);
     transition:
         background-color var(--ease-fast-smooth),
@@ -1307,7 +1372,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     box-shadow: none;
 
     &:hover {
-        background-color: color-mix(in srgb, var(--tag-background-hover) 58%, transparent);
+        background-color: color-mix(in srgb, var(--tag-background-hover) 54%, transparent);
         border-color: var(--tag-border-color-hover);
         color: var(--tag-color-hover);
         box-shadow: none;
@@ -1315,16 +1380,56 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
     &:active,
     &.is-active {
-        background-color: color-mix(in srgb, var(--tag-background-active) 64%, transparent);
+        background-color: color-mix(in srgb, var(--tag-background-active) 48%, transparent);
         border-color: var(--tag-border-color-hover);
         color: var(--tag-color-active);
         box-shadow: none;
     }
 }
 
+/* [07i] Native Properties */
+/* Keep native Properties close to Obsidian's layout; only tune surface,
+   color, and focus affordance. */
+.metadata-container {
+    border-block-color: var(--scrip-native-rule);
+    background-color: color-mix(in srgb, var(--scrip-native-surface-muted) 24%, transparent);
+    color: var(--scrip-ink-soft);
+}
+
+.metadata-property {
+    border-radius: var(--radius-s);
+    transition:
+        background-color var(--ease-fast-smooth),
+        box-shadow var(--ease-fast-smooth);
+}
+
+.metadata-property:hover,
+.metadata-property:focus-within {
+    background-color: color-mix(in srgb, var(--background-hover) 72%, transparent);
+}
+
+.metadata-property:focus-within {
+    box-shadow: inset 2px 0 0 color-mix(in srgb, var(--interactive) 58%, transparent);
+}
+
+.metadata-property-key {
+    color: var(--scrip-ink-faint);
+    font-weight: var(--font-medium);
+}
+
+.metadata-property-key-input,
+.metadata-property-value {
+    color: var(--scrip-ink-strong);
+    letter-spacing: 0;
+}
+
+.metadata-property-icon {
+    color: var(--scrip-ink-faint);
+    opacity: 0.74;
+}
+
 /* Workspace Chrome ==================================================== */
-/* [08] 导航栏 / Navigation */
-/* 导航项基础样式 */
+/* [08] Navigation */
 .workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner, .nav-folder-title-content, .nav-file-title-content) {
     color: var(--nav-item-color);
 }
@@ -1332,6 +1437,8 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 /* Interactive navigation styling */
 .workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner) {
     transition: var(--transition-state);
+    border-radius: var(--radius-s);
+    padding-block: 3px;
 }
 
 /* Keyboard focus state */
@@ -1342,7 +1449,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     color: var(--nav-item-color-active);
 }
 
-/* Hover state */
 .workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner):hover {
     background-color: var(--nav-item-background-hover);
     color: var(--nav-item-color-hover);
@@ -1354,9 +1460,12 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
 /* Active state with refined highlighting */
 .workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner).is-active {
-    background-color: var(--nav-item-background-active);
+    background:
+        linear-gradient(90deg,
+            color-mix(in srgb, var(--interactive-accent) 16%, transparent),
+            transparent 78%);
     color: var(--text-primary);
-    box-shadow: inset 3px 0 0 0 var(--interactive-accent);
+    box-shadow: inset 4px 0 0 0 var(--interactive-accent);
     font-weight: var(--font-semibold);
 }
 
@@ -1367,13 +1476,13 @@ body.is-mobile :is(.nav-folder-title, .nav-file-title, .tree-item-inner).is-acti
 }
 
 /* [08a] Note Header Hover Reveal */
-body:not(.is-phone, .view-header-title-always) .view-header {
+body:not(.is-mobile, .view-header-title-always) .view-header {
     transition:
         opacity var(--ease-fast-smooth),
         background-color var(--ease-fast-smooth);
 }
 
-body:not(.is-phone, .view-header-title-always) .view-header :is(.view-header-left, .view-header-title-container > div, .view-actions) {
+body:not(.is-mobile, .view-header-title-always) .view-header :is(.view-header-left, .view-header-title-container > div, .view-actions) {
     transition:
         opacity var(--ease-fast-smooth),
         transform var(--ease-moderate-smooth),
@@ -1381,23 +1490,91 @@ body:not(.is-phone, .view-header-title-always) .view-header :is(.view-header-lef
     transform-origin: center left;
 }
 
-body:not(.is-phone, .view-header-title-always) .view-header-title-parent {
+body:not(.is-mobile, .view-header-title-always) .view-header-title-parent {
     color: var(--text-faint);
 }
 
-body:not(.is-phone, .view-header-title-always) .view-header:not(:hover):not(:focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions):not(:focus-within) {
+body:not(.is-mobile, .view-header-title-always) .view-header:not(:hover):not(:focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions):not(:focus-within) {
     opacity: var(--scrip-chrome-muted-opacity);
     transform: none;
 }
 
-body:not(.is-phone, .view-header-title-always) .view-header:is(:hover, :focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions) {
+body:not(.is-mobile, .view-header-title-always) .view-header:is(:hover, :focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions) {
     opacity: 1;
     transform: none;
 }
-/* [09] Nav Button Container */
-body:not(.is-mobile) {
 
-    /* Nav Header */
+/* [08b] Workspace Tabs */
+.workspace-tabs {
+    background-color: color-mix(in srgb, var(--layer-1) 98%, transparent);
+}
+
+.workspace-tab-header-container {
+    gap: 2px;
+    padding: 2px 4px 0;
+}
+
+.workspace-tab-header {
+    border-radius: var(--radius-s) var(--radius-s) 0 0;
+    background-color: transparent;
+    color: var(--text-secondary);
+    margin-inline: 1px;
+    box-shadow: none;
+    transition:
+        background-color var(--ease-fast-smooth),
+        color var(--ease-fast-smooth),
+        box-shadow var(--ease-fast-smooth);
+}
+
+.workspace-tab-header:hover {
+    color: var(--text-primary);
+    background-color: var(--background-hover);
+}
+
+.workspace-tab-header.is-active {
+    color: var(--text-primary);
+    background-color: var(--layer-1);
+    box-shadow:
+        inset 0 -1px 0 0 var(--interactive-accent),
+        0 -1px 0 0 color-mix(in srgb, var(--paper-frame-border) 30%, transparent);
+}
+
+.workspace-tab-header-inner {
+    gap: var(--size-1);
+    padding: var(--size-1) var(--size-2);
+    min-height: 28px;
+}
+
+.workspace-tab-header-inner-title {
+    font-weight: var(--font-medium);
+}
+
+.workspace-tab-header-inner-close-button {
+    opacity: 0.58;
+}
+
+.workspace-tab-header:hover .workspace-tab-header-inner-close-button,
+.workspace-tab-header.is-active .workspace-tab-header-inner-close-button {
+    opacity: 0.86;
+}
+
+.workspace-tab-header-inner-close-button:hover {
+    opacity: 1;
+}
+
+.workspace-tab-header:not(.is-active) .workspace-tab-header-inner {
+    box-shadow: none;
+}
+
+.workspace-tab-header-container-inner {
+    padding-inline: 1px;
+}
+
+/* [09] Workspace Auto-hide & Window States */
+/* Auto-hidden controls remain in the focus order and recover through the
+   same hover/focus-within contract across the workspace. */
+/* [09a] Nav Button Container */
+body:not(.is-mobile) {
     & .nav-header {
         display: flex;
         flex-direction: column;
@@ -1407,8 +1584,6 @@ body:not(.is-mobile) {
         margin-block-end: var(--size-2);
     }
 
-    /* Nav button container with simplified hover effects */
-    /* Nav Buttons Container (floating effect simplified) */
     & .nav-buttons-container {
         display: flex;
         flex-wrap: wrap;
@@ -1418,8 +1593,9 @@ body:not(.is-mobile) {
     }
 }
 
-/* Workspace Auto-hide ================================================ */
-/* [09a] Status Bar Hover Reveal - Option B: Horizontal Capsule Expand */
+/* [09b] Status Bar Hover Reveal */
+/* Keep the status bar compact, but avoid animating width/padding; this control
+   is glanced at often and should feel immediate. */
 body:not(.is-mobile) .app-container .status-bar {
     position: fixed;
     bottom: 12px;
@@ -1428,37 +1604,47 @@ body:not(.is-mobile) .app-container .status-bar {
     width: auto;
     height: 32px;
     min-width: 36px;
-    max-width: 36px; /* Collapsed to a 36px circular pill */
+    max-width: 36px;
     overflow: hidden;
     white-space: nowrap;
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the sync icon when collapsed */
+    justify-content: center;
     
-    /* Elegant floating pill design */
     background-color: var(--layer-1);
     border: var(--border-width) solid var(--border-subtle-1);
     border-radius: 999px;
-    padding: 0; /* No padding when collapsed to center the icon */
-    opacity: 0.65;
-    box-shadow: var(--shadow-tactile);
+    padding: 0;
+    opacity: 0.6;
+    box-shadow: var(--scrip-shadow-tactile);
     
-    /* Smooth horizontal expansion */
-    transition: 
-        max-width var(--ease-moderate-smooth),
-        padding-inline var(--ease-fast-smooth),
+    transition:
         opacity var(--ease-fast-smooth),
-        box-shadow var(--ease-moderate-smooth);
+        box-shadow var(--ease-fast-smooth),
+        background-color var(--ease-fast-smooth);
 }
 
 body:not(.is-mobile) .app-container .status-bar:hover,
 body:not(.is-mobile) .app-container .status-bar:focus-within {
-    /* Hover state: expand horizontally to show all status items */
     max-width: var(--scrip-status-expanded-width);
     opacity: 1;
     box-shadow: var(--shadow-s);
     justify-content: flex-start;
-    padding-inline: var(--size-3); /* Restore padding when expanded */
+    padding-inline: var(--size-3);
+}
+
+body:not(.is-mobile) .app-container .status-bar:not(:has(.status-bar-item.plugin-sync, .status-bar-item[class*="sync"]))::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background-color: var(--icon-secondary);
+    opacity: 0.72;
+}
+
+body:not(.is-mobile) .app-container .status-bar:is(:hover, :focus-within)::before {
+    display: none;
 }
 
 /* Move sync status indicator to the left so it displays when collapsed */
@@ -1467,19 +1653,29 @@ body:not(.is-mobile) .app-container .status-bar .status-bar-item[class*="sync"] 
     order: -1;
 }
 
-/* Hide other status bar items when collapsed to avoid content leakage and ensure centering */
+/* Collapsed items stay keyboard-reachable without affecting pill geometry. */
 body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Keep only the sync status item visible when collapsed */
 body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item.plugin-sync,
 body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item[class*="sync"] {
+    position: static;
     display: flex;
+    opacity: 1;
+    pointer-events: auto;
 }
 
-/* [09b] Sidebar Settings Group Hover Reveal - Sidedock Vault Profile Layout */
-/* Default collapsed state: hide Vault Switcher and Help button */
+body:not(.is-mobile) .app-container .status-bar .status-bar-item {
+    transition:
+        opacity var(--ease-fast-smooth),
+        color var(--ease-fast-smooth);
+}
+
+/* [09c] Sidebar Vault Profile Hover Reveal */
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-switcher,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon:first-child,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
@@ -1499,22 +1695,21 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
     gap: 0;
 }
 
-/* Ensure transition is applied and Help button's display: none is overridden */
+/* Keep hidden profile controls recoverable through hover or keyboard focus.
+   Layout changes are intentionally not animated; only opacity/color should
+   carry the reveal. */
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon:first-child,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"] {
     display: inline-flex;
-    transition: 
+    transition:
         opacity var(--ease-fast-smooth),
-        max-width var(--ease-moderate-smooth),
-        padding var(--ease-moderate-smooth),
-        margin var(--ease-moderate-smooth),
-        gap var(--ease-moderate-smooth);
+        background-color var(--ease-fast-smooth),
+        color var(--ease-fast-smooth);
 }
 
-/* Hover reveal state: expand switcher and Help button */
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-switcher {
     opacity: 1;
     max-width: 180px;
@@ -1538,8 +1733,9 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
     pointer-events: auto;
 }
 
-/* [09d] Sidebar Panel Headers Hover Reveal (Dot Collapsing) */
-/* Default collapsed state: collapse buttons into small indicator dots */
+/* [09d] Sidebar Panel Header Hover Reveal */
+/* Panel actions collapse into quiet dots without width/height animation,
+   preserving fast sidebar scanning. */
 body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header:not(:hover):not(:focus-within) .nav-buttons-container {
     gap: 4px;
     padding: 0;
@@ -1549,13 +1745,13 @@ body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-h
 
 body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header:not(:hover):not(:focus-within) .nav-buttons-container .nav-action-button {
     padding: 2px;
-    width: 4px; /* Small dot width */
-    height: 4px; /* Small dot height */
+    width: 4px;
+    height: 4px;
     min-width: 0;
     flex: 0 0 auto;
     background-color: var(--background-modifier-hover);
     box-shadow: none;
-    border-radius: 50%; /* Make them round dots */
+    border-radius: 50%;
     margin: auto 0;
 }
 
@@ -1565,27 +1761,100 @@ body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-h
     opacity: 0;
 }
 
-/* Ensure smooth transition for all button properties */
 body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header .nav-buttons-container,
 body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header .nav-buttons-container .nav-action-button,
 body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header .nav-buttons-container .nav-action-button svg {
-    transition: 
+    transition:
         opacity var(--ease-fast-smooth),
-        width var(--ease-moderate-smooth),
-        height var(--ease-moderate-smooth),
-        padding var(--ease-moderate-smooth),
-        margin var(--ease-moderate-smooth),
         background-color var(--ease-fast-smooth),
-        gap var(--ease-moderate-smooth);
+        color var(--ease-fast-smooth);
+}
+
+/* [09e] Window & Mobile States */
+body:not(.is-mobile) .app-container .mod-sidedock {
+    background-color: color-mix(in srgb, var(--layer-1) 96%, transparent);
+}
+
+body.is-tablet .workspace-drawer,
+body.is-mobile .workspace-drawer {
+    background-color: var(--background-secondary);
+}
+
+body.is-mobile .markdown-reading-view .markdown-preview-view {
+    max-width: calc(100vw - 1rem);
+    padding: var(--size-5);
+    margin-block: var(--size-3);
+    background: var(--background-primary);
+    border-radius: var(--scrip-reading-paper-radius);
+}
+
+body.is-phone .markdown-reading-view .markdown-preview-view {
+    max-width: 100%;
+    padding: var(--size-4);
+    margin-block: 0;
+    border-radius: 0;
+}
+
+@media (hover: none) {
+    body:not(.is-mobile) .app-container .status-bar {
+        max-width: var(--scrip-status-expanded-width);
+        justify-content: flex-start;
+        padding-inline: var(--size-3);
+        opacity: 0.82;
+    }
+
+    body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item {
+        position: static;
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body:not(.is-mobile) .app-container .status-bar::before {
+        display: none;
+    }
+
+    body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-switcher,
+    body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon,
+    body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header:not(:hover):not(:focus-within) .nav-buttons-container .nav-action-button {
+        opacity: 1;
+        max-width: none;
+        width: auto;
+        height: auto;
+        min-width: var(--clickable-icon-size, 28px);
+        padding: var(--size-1);
+        margin: 0;
+        pointer-events: auto;
+    }
+
+    body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header:not(:hover):not(:focus-within) .nav-buttons-container .nav-action-button svg {
+        width: var(--icon-size);
+        height: var(--icon-size);
+        opacity: 1;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms;
         animation-iteration-count: 1;
-        transition-duration: 0.01ms;
         transition-delay: 0ms;
         scroll-behavior: auto;
+    }
+
+    /* Reduced motion removes spatial movement but keeps color/opacity feedback
+       so controls remain legible and stateful. */
+    body:not(.is-mobile) .app-container .status-bar,
+    body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher,
+    body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon,
+    body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header .nav-buttons-container,
+    body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header .nav-buttons-container .nav-action-button,
+    body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-header .nav-buttons-container .nav-action-button svg {
+        transition-property: opacity, background-color, color, border-color, box-shadow;
+    }
+
+    .modal-container .modal {
+        animation: none;
     }
 }
 
@@ -1595,6 +1864,8 @@ body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type 
 }
 
 /* [10] Buttons */
+/* Buttons get tactile press feedback without hover translation; frequent
+   controls should not drift while browsing. */
 :where(button, .modal-button-container button) {
     border-radius: var(--radius-m);
     padding: var(--size-2) var(--size-4);
@@ -1631,7 +1902,7 @@ body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type 
 
 /* Suggestion rows stay flat so command/search lists remain dense and stable. */
 .suggestion-item {
-    border-radius: var(--radius-s);
+    border-radius: 0;
     padding: var(--size-2) var(--size-3);
     font-weight: var(--font-normal);
     transition:
@@ -1649,13 +1920,89 @@ body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type 
     box-shadow: none;
 }
 
+.suggestion-item.is-selected {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+}
+
+.suggestion-container,
+.menu,
+.modal-container .modal,
+.popover,
+.tooltip {
+    border-radius: var(--radius-m);
+    border-color: color-mix(in srgb, var(--border-subtle-1) 82%, transparent);
+}
+
+.suggestion-container,
+.menu {
+    box-shadow: var(--scrip-shadow-tactile);
+}
+
+.modal-container .modal {
+    box-shadow:
+        0 14px 34px rgba(var(--gray-100), 0.08),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.32);
+}
+
+.menu-item {
+    border-radius: var(--radius-s);
+    transition:
+        background-color var(--ease-fast-smooth),
+        color var(--ease-fast-smooth);
+}
+
+.menu-item:hover {
+    background-color: var(--background-hover);
+}
+
+/* Search uses a single-border model: the container draws the field, while the
+   inner input stays transparent to avoid nested round/square boxes. */
+.search-input-container {
+    border: var(--border-width) solid var(--border-subtle-1);
+    border-radius: var(--radius-m);
+    background-color: var(--layer-1);
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.search-input-container:focus-within {
+    border-color: color-mix(in srgb, var(--interactive) 72%, var(--border-subtle-1));
+    box-shadow: 0 0 0 2px rgba(var(--color-accent-rgb), 0.08);
+}
+
+.search-input-container input,
+.search-input-container input[type="search"],
+.search-input-container .search-input {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.search-input-container input:focus,
+.search-input-container input:focus-visible,
+.search-input-container .search-input:focus,
+.search-input-container .search-input:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+.search-result {
+    border-top: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 62%, transparent);
+}
+
+.search-result-file-matched-text {
+    color: var(--text-primary);
+}
+
 /* Primary CTA buttons */
 button.mod-cta,
 .modal-button-container button.mod-cta,
 .mod-cta:not(.workspace-leaf):not(.workspace-tab-header):not(.view-header) {
-    background-color: var(--interactive);
+    background-color: var(--interactive-accent);
     color: var(--text-on-accent);
-    border-color: var(--interactive);
+    border-color: var(--interactive-accent);
     --input-shadow: inset 0 0 0 var(--border-width) var(--interactive-accent);
     --input-shadow-hover: inset 0 0 0 var(--border-width) var(--interactive-accent-hover);
     box-shadow:
@@ -1745,22 +2092,25 @@ button.mod-cta,
     }
 }
 
-.modal-container .suggestion-item.is-selected {
-    background-color: var(--interactive);
-    color: var(--text-on-accent);
-}
-
 /* [11a] Floating Tooltips */
+/* Tooltips are high-frequency chrome, so they stay tighter than popovers. */
 .popover,
 .tooltip {
     border: var(--border-width) solid var(--border-subtle-2);
     box-shadow: var(--scrip-shadow-l);
     border-radius: var(--radius-m);
-    padding: var(--size-4);
     transition: var(--transition-fast-ease);
 }
 
-/* Writing Components ================================================== */
+.popover {
+    padding: var(--size-3);
+}
+
+.tooltip {
+    padding: var(--size-2) var(--size-3);
+}
+
+/* Writing Components ================================================= */
 
 
 /* [13] Callouts
@@ -1795,33 +2145,37 @@ button.mod-cta,
 
     --callout-radius: var(--radius-m);
     --callout-padding: var(--size-4);
-    --callout-bg-opacity: 0.04;
-    --callout-border-opacity: 0.22;
+    --callout-bg-opacity: 0.055;
+    --callout-border-opacity: 0.28;
     --callout-title-weight: var(--font-semibold);
     --callout-color: var(--callout-default-rgb);
     --callout-icon-column: calc(var(--icon-size) + var(--size-2));
+    /* Ordinary callouts stay flat; semantic warning/danger variants opt into
+       a very light shadow below in the style mapping section. */
+    --callout-shadow: none;
+    --callout-shadow-hover: none;
 
     background-color: color-mix(in srgb, var(--panel-surface) 95%, rgba(var(--callout-color), var(--callout-bg-opacity)));
-    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 82%, rgba(var(--callout-color), 0.18));
-    border-left: var(--indicator-width) solid rgba(var(--callout-color), var(--callout-border-opacity));
+    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 64%, rgba(var(--callout-color), 0.18));
+    border-left: var(--indicator-width-wide) solid rgba(var(--callout-color), var(--callout-border-opacity));
     border-radius: var(--callout-radius);
     padding: 0;
     margin: var(--size-5) 0;
     overflow: hidden;
     transition: border-color var(--ease-fast-smooth);
-    box-shadow: none;
+    box-shadow: var(--callout-shadow);
 }
 
 .callout:hover {
-    border-color: color-mix(in srgb, var(--paper-frame-border) 68%, rgba(var(--callout-color), 0.24));
-    box-shadow: none;
+    border-color: color-mix(in srgb, var(--paper-frame-border) 50%, rgba(var(--callout-color), 0.24));
+    box-shadow: var(--callout-shadow-hover);
 }
 
 /* Callout title line */
 .callout-title {
     display: flex;
     align-items: flex-start;
-    padding: var(--size-4) var(--callout-padding) 0;
+    padding: var(--size-1) var(--callout-padding);
     gap: var(--size-2);
     min-width: 0;
     line-height: var(--line-height-relaxed);
@@ -1829,8 +2183,11 @@ button.mod-cta,
     font-size: 1em;
     letter-spacing: 0;
     color: var(--scrip-ink-strong);
-    background-color: transparent;
-    border-bottom: none;
+    background:
+        linear-gradient(90deg,
+            rgba(var(--callout-color), 0.03),
+            transparent 82%);
+    border-bottom: var(--border-width) solid color-mix(in srgb, rgba(var(--callout-color), 0.12) 58%, transparent);
 }
 
 .callout-title .callout-icon {
@@ -1838,7 +2195,7 @@ button.mod-cta,
     width: var(--icon-size);
     margin-top: 0.36em;
     color: color-mix(in srgb, rgb(var(--callout-color)) 58%, var(--scrip-ink-soft));
-    opacity: 0.72;
+    opacity: 0.82;
 }
 
 .callout-title .callout-title-inner {
@@ -1869,7 +2226,7 @@ button.mod-cta,
 /* Callout content area */
 .callout-content {
     min-width: 0;
-    padding: var(--size-3) var(--callout-padding) var(--callout-padding) calc(var(--callout-padding) + var(--callout-icon-column));
+    padding: var(--size-2) var(--callout-padding) var(--callout-padding) calc(var(--callout-padding) + var(--callout-icon-column));
     color: var(--scrip-ink-strong);
     line-height: var(--line-height-relaxed);
     background: transparent;
@@ -1930,6 +2287,8 @@ button.mod-cta,
 .callout[data-callout="important"],
 .callout[data-callout="example"] {
     --callout-color: var(--callout-accent-rgb);
+    --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
+    --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
 
 /* Warning and caution variants */
@@ -1937,6 +2296,8 @@ button.mod-cta,
 .callout[data-callout="caution"],
 .callout[data-callout="attention"] {
     --callout-color: var(--callout-warning-rgb);
+    --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
+    --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
 
 /* Danger and error variants */
@@ -1947,6 +2308,8 @@ button.mod-cta,
 .callout[data-callout="fail"],
 .callout[data-callout="missing"] {
     --callout-color: var(--callout-danger-rgb);
+    --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
+    --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
 
 /* Quote variants */
@@ -1969,8 +2332,21 @@ button.mod-cta,
     border-left-width: var(--indicator-width);
 }
 
+/* [14] Embedded Notes */
+/* Embeds share the paper material without adding another shadow layer. */
+.markdown-embed,
+.markdown-preview-view .internal-embed {
+    border: var(--border-width) solid var(--scrip-native-rule);
+    border-radius: var(--radius-m);
+    background-color: var(--scrip-native-surface);
+    box-shadow: none;
+}
 
-/* [06e-override] Keep alignment scoped to actual prose blocks. */
+.markdown-embed-content {
+    padding: var(--size-3);
+}
+
+/* [14a] Embedded Context Alignment */
 .markdown-preview-view :is(li p, blockquote p, .callout-content p, .markdown-embed p, td p, th p) {
     text-align: start;
 }

@@ -23,7 +23,7 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 - 推奨フォント: IBM Plex Sans JP, IBM Plex Serif, IBM Plex Mono.
 - ドキュメント面は軽く保つ: 画像的な質感、影、アクセント色は意図的に抑えています。
 - ナビゲーション、検索、メニュー、タグ、callout、embed は静かに保ち、本文を中央に置きます。
-- 0.9.9 では、リンクの見やすさを調整しつつ、下線は Obsidian の標準スタイルを維持しています。
+- 0.10.0 は **GPT-5.6 Sol「极高」アップデート**です。ダークモードのコントラスト、ペイン幅に応じたタイポグラフィ、一貫した自動非表示、静かな見出し、フラットなタグ、軽いモバイル読書面を導入しました。
 - テーマは単一の `theme.css` として配布され、外部依存はありません。
 
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline). See [SCRIPT-MAINTENANCE.md](./SCRIPT-MAINTENANCE.md) for maintenance notes.

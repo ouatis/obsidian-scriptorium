@@ -18,19 +18,30 @@ It is designed as a coherent theme system rather than a small visual tweak.
 - `[01]` Design Tokens
 - `[02]` Shadows & Theme Colors
 - `[03]` Theme Mapping
-- `[04]` Global Semantics
-- `[05]` Typography
+- `[04]` App Canvas & Global Semantics
+- `[05]` Workspace Tokens & Typography
 - `[06]` Markdown Layout
 - `[07]` Markdown Elements
 - `[08]` Navigation
-- `[09]` Nav Button Container
+- `[09]` Workspace Auto-hide & Window States
 - `[10]` Buttons
 - `[11]` Modals
-- `[12]` Checkboxes & Tasks
+- `[12]` Reserved
 - `[13]` Callouts
 - `[14]` Embedded Notes
 
 ## Recent Maintenance Changes
+
+The 0.10.0 **GPT-5.6 Sol "极高" update** focused on making the theme more coherent across dark mode, split panes, keyboard navigation, and mobile reading:
+
+1. Dark-mode text accents were separated from CTA fill colors, raising body-link, heading, and secondary-color contrast without weakening white text on buttons.
+2. Workspace auto-hide behavior now follows one hover/focus recovery contract; status items remain in the focus order, and an empty compact status bar keeps a visible affordance.
+3. The strong editorial rule is reserved for the inline title, while H1 uses a quieter rule and H2 relies on typography and spacing.
+4. Viewport-scaled headings and paragraph spacing were replaced by a fixed scale plus a Markdown-pane container query for narrow splits.
+5. Unused SCRIPTORIUM variables and retired custom underline tokens were removed.
+6. Tags were flattened, mobile texture was disabled, and phone reading surfaces now use edge-to-edge geometry.
+
+Properties remain intentionally conservative: color and focus affordance may be tuned, but native layout and input controls should not be overridden.
 
 The 0.9.9 maintenance pass focused on keeping links readable without fighting Obsidian's native underline behavior:
 
