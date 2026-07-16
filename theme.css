@@ -1108,8 +1108,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     border: 1px solid color-mix(in srgb, var(--paper-frame-border) 50%, transparent);
     border-radius: var(--radius-s);
     padding: 0.08em 0.36em;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
 }
 
 .markdown-preview-view pre,
@@ -1594,8 +1592,8 @@ body:not(.is-mobile) {
 }
 
 /* [09b] Status Bar Hover Reveal */
-/* Keep the status bar compact, but avoid animating width/padding; this control
-   is glanced at often and should feel immediate. */
+/* Keep the status bar compact, but avoid animating width/padding; the pill
+   remains a visible affordance even when no sync status item is present. */
 body:not(.is-mobile) .app-container .status-bar {
     position: fixed;
     bottom: 12px;
@@ -1631,20 +1629,6 @@ body:not(.is-mobile) .app-container .status-bar:focus-within {
     box-shadow: var(--shadow-s);
     justify-content: flex-start;
     padding-inline: var(--size-3);
-}
-
-body:not(.is-mobile) .app-container .status-bar:not(:has(.status-bar-item.plugin-sync, .status-bar-item[class*="sync"]))::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    flex: 0 0 auto;
-    border-radius: 50%;
-    background-color: var(--icon-secondary);
-    opacity: 0.72;
-}
-
-body:not(.is-mobile) .app-container .status-bar:is(:hover, :focus-within)::before {
-    display: none;
 }
 
 /* Move sync status indicator to the left so it displays when collapsed */
@@ -1808,10 +1792,6 @@ body.is-phone .markdown-reading-view .markdown-preview-view {
         display: flex;
         opacity: 1;
         pointer-events: auto;
-    }
-
-    body:not(.is-mobile) .app-container .status-bar::before {
-        display: none;
     }
 
     body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-switcher,
