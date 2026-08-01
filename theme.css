@@ -2121,7 +2121,7 @@ button.mod-cta,
     --callout-quote-rgb: var(--gray-50);
 
     /* Questions use a golden brown accent. */
-    --callout-question-rgb: 190, 140, 80;
+    --callout-question-rgb: rgb(190, 140, 80);
 
     --callout-radius: var(--radius-m);
     --callout-padding: var(--size-4);
@@ -2135,9 +2135,9 @@ button.mod-cta,
     --callout-shadow: none;
     --callout-shadow-hover: none;
 
-    background-color: color-mix(in srgb, var(--panel-surface) 95%, rgba(var(--callout-color), var(--callout-bg-opacity)));
-    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 64%, rgba(var(--callout-color), 0.18));
-    border-left: var(--indicator-width-wide) solid rgba(var(--callout-color), var(--callout-border-opacity));
+    background-color: color-mix(in srgb, var(--panel-surface) 95%, color-mix(in srgb, var(--callout-color) calc(var(--callout-bg-opacity) * 100%), transparent));
+    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 64%, color-mix(in srgb, var(--callout-color) 18%, transparent));
+    border-left: var(--indicator-width-wide) solid color-mix(in srgb, var(--callout-color) calc(var(--callout-border-opacity) * 100%), transparent);
     border-radius: var(--callout-radius);
     padding: 0;
     margin: var(--size-5) 0;
@@ -2147,7 +2147,7 @@ button.mod-cta,
 }
 
 .callout:hover {
-    border-color: color-mix(in srgb, var(--paper-frame-border) 50%, rgba(var(--callout-color), 0.24));
+    border-color: color-mix(in srgb, var(--paper-frame-border) 50%, color-mix(in srgb, var(--callout-color) 24%, transparent));
     box-shadow: var(--callout-shadow-hover);
 }
 
@@ -2165,16 +2165,16 @@ button.mod-cta,
     color: var(--scrip-ink-strong);
     background:
         linear-gradient(90deg,
-            rgba(var(--callout-color), 0.03),
+            color-mix(in srgb, var(--callout-color) 3%, transparent),
             transparent 82%);
-    border-bottom: var(--border-width) solid color-mix(in srgb, rgba(var(--callout-color), 0.12) 58%, transparent);
+    border-bottom: var(--border-width) solid color-mix(in srgb, color-mix(in srgb, var(--callout-color) 12%, transparent) 58%, transparent);
 }
 
 .callout-title .callout-icon {
     flex: 0 0 auto;
     width: var(--icon-size);
     margin-top: 0.36em;
-    color: color-mix(in srgb, rgb(var(--callout-color)) 58%, var(--scrip-ink-soft));
+    color: color-mix(in srgb, var(--callout-color) 58%, var(--scrip-ink-soft));
     opacity: 0.82;
 }
 
