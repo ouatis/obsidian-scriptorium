@@ -33,6 +33,13 @@ It is designed as a coherent theme system rather than a small visual tweak.
 
 ## Recent Maintenance Changes
 
+The 0.10.3 **callout compatibility update** (PR #1 by @saberzero1, completed on merge) prepares Scriptorium for Obsidian 1.13+, which now provides `--callout-color` as a valid CSS color instead of a bare RGB triplet:
+
+1. Replaced `rgba(var(--callout-color), <alpha>)` with `color-mix(in srgb, var(--callout-color) <percent>, transparent)`.
+2. Simplified `rgb(var(--callout-color))` to `var(--callout-color)`.
+3. Wrapped all eight `--callout-color` variant assignments in `rgb()` so every callout resolves to a valid color on 1.13+; `--callout-question-rgb` stays a bare triplet to avoid `rgb(rgb(...))` nesting.
+4. `minAppVersion` remains 1.5.8 — the migration is fully backward-compatible.
+
 The 0.10.2 **DeepSeek-V4 Flash Max update** (tested as the local `test-patch` snippet) focused on pane-aware robustness, palette coherence, and tooling:
 
 1. Table overflow moved from viewport media queries into the markdown-pane container query, so wide tables scroll inside narrow split panes instead of clipping.
