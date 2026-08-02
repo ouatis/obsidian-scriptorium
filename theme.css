@@ -30,6 +30,7 @@
    [12] Reserved
    [13] Callouts
    [14] Embedded Notes
+   [15] Canvas & Graph
    ===================================================================== */
 
 /* [01] Design Tokens */
@@ -45,7 +46,7 @@
        - Version-specific design notes live next to the rules they explain. */
     /* Font Stacks */
     --scrip-font-mono-stack: "IBM Plex Mono", "SF Mono", "Consolas", "Monaco", "Menlo", "Roboto Mono", "Courier New", monospace;
-    --scrip-font-cjk-stack: "IBM Plex Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif;
+    --scrip-font-cjk-stack: "IBM Plex Sans", "IBM Plex Sans SC", "IBM Plex Sans JP", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif;
     /* Heading stack uses a serif-forward system to separate titles from sans body text. */
     --scrip-font-heading-stack: "Noto Serif SC", "Source Han Serif SC", "IBM Plex Serif", "Georgia", "Times New Roman", serif;
     --scrip-font-text: var(--font-text, var(--scrip-font-cjk-stack));
@@ -325,6 +326,8 @@
 
     /* Vault switcher mask tuning is defined at :root by default; override here only when theme-specific changes are needed. */
     --scrip-app-texture: var(--scrip-texture-noise);
+    /* Modal top-edge highlight: paper-like inner glow in light mode. */
+    --scrip-inset-highlight: rgba(255, 255, 255, 0.4);
 }
 
 .theme-dark {
@@ -396,6 +399,8 @@
     --color-warning-rgb: 240, 185, 90;
 
     --scrip-app-texture: var(--scrip-texture-noise-dark);
+    /* Modal top-edge highlight: dark mode avoids a bright white top edge. */
+    --scrip-inset-highlight: rgba(255, 255, 255, 0.07);
 }
 
 
@@ -800,6 +805,20 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
         --scrip-type-h3-size: 1.12rem;
         --paragraph-spacing-base: 1.08rem;
     }
+
+    /* Pane-aware table overflow: narrow split panes scroll wide tables
+       instead of clipping them (viewport media queries cannot see pane width). */
+    .markdown-preview-view table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .markdown-preview-view table th,
+    .markdown-preview-view table td {
+        min-width: 5rem;
+        word-break: break-word;
+    }
 }
 
 /* [06a] Editor Surface */
@@ -1078,21 +1097,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 .markdown-preview-view table tbody tr:hover {
     background-color: color-mix(in srgb, var(--table-hover) 72%, transparent);
     transition: background-color var(--ease-fast-smooth);
-}
-
-@media (max-width: 900px) {
-    .markdown-preview-view table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        box-shadow: none;
-    }
-
-    .markdown-preview-view table th,
-    .markdown-preview-view table td {
-        min-width: 5rem;
-        word-break: break-word;
-    }
 }
 
 /* [07b] Code Styles */
@@ -1664,7 +1668,8 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon:first-child,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"],
-body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"] {
+body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"],
+    [aria-label*="ヘルプ"] {
     opacity: 0;
     max-width: 0;
     padding-left: 0;
@@ -1686,7 +1691,8 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon:first-child,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"],
-body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"] {
+body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"],
+    [aria-label*="ヘルプ"] {
     display: inline-flex;
     transition:
         opacity var(--ease-fast-smooth),
@@ -1707,7 +1713,8 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon:first-child,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"],
-body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"] {
+body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"],
+    [aria-label*="ヘルプ"] {
     opacity: 1;
     max-width: 36px;
     padding-left: initial;
@@ -1922,7 +1929,7 @@ body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type 
 .modal-container .modal {
     box-shadow:
         0 14px 34px rgba(var(--gray-100), 0.08),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.32);
+        inset 0 1px 0 0 var(--scrip-inset-highlight);
 }
 
 .menu-item {
@@ -2326,7 +2333,62 @@ button.mod-cta,
     padding: var(--size-3);
 }
 
-/* [14a] Embedded Context Alignment */
-.markdown-preview-view :is(li p, blockquote p, .callout-content p, .markdown-embed p, td p, th p) {
-    text-align: start;
+/* [15] Canvas & Graph
+   Canvas cards and graph nodes inherit the paper material so the
+   visual language stays coherent outside the writing surface. */
+
+/* Canvas node cards */
+.canvas-node-container {
+    border-radius: var(--radius-m);
+    border-color: var(--border-subtle-1);
+    background-color: var(--layer-1);
+    box-shadow: var(--scrip-shadow-s);
+}
+
+.canvas-node.is-selected .canvas-node-container,
+.canvas-node:focus-within .canvas-node-container {
+    border-color: var(--interactive-accent);
+    box-shadow: 0 0 0 var(--focus-ring-width-large) color-mix(in srgb, var(--interactive-accent) 28%, transparent);
+}
+
+.canvas-node-label {
+    font-family: var(--font-headings);
+    color: var(--text-primary);
+}
+
+/* Embedded notes inside canvas nodes stay flush with the card surface. */
+.canvas-node .markdown-embed {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.canvas-node .markdown-embed-content {
+    padding: 0;
+}
+
+/* Graph view inherits the palette instead of the default accent set. */
+.graph-view.color-fill {
+    color: var(--color-secondary);
+}
+
+.graph-view.color-circle {
+    color: var(--color-accent);
+}
+
+.graph-view.color-line {
+    color: color-mix(in srgb, var(--text-muted) 55%, transparent);
+}
+
+.graph-view.color-text {
+    color: var(--text-primary);
+}
+
+.graph-view.color-fill-highlight {
+    color: var(--interactive-accent);
+}
+
+.graph-view.color-line-highlight {
+    color: var(--interactive-accent);
 }

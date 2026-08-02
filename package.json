@@ -1,0 +1,13 @@
+{
+  "name": "obsidian-scriptorium",
+  "version": "0.10.1",
+  "private": true,
+  "description": "A warm, minimal Obsidian theme for long-form reading and writing.",
+  "scripts": {
+    "lint": "stylelint \"theme.css\""
+  },
+  "devDependencies": {
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}

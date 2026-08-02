@@ -29,8 +29,19 @@ It is designed as a coherent theme system rather than a small visual tweak.
 - `[12]` Reserved
 - `[13]` Callouts
 - `[14]` Embedded Notes
+- `[15]` Canvas & Graph
 
 ## Recent Maintenance Changes
+
+The latest maintenance pass (currently tested as the local `test-patch` snippet) focused on pane-aware robustness, palette coherence, and tooling:
+
+1. Table overflow moved from viewport media queries into the markdown-pane container query, so wide tables scroll inside narrow split panes instead of clipping.
+2. Removed a duplicated `text-align: start` rule block ([14a] duplicated [06d]).
+3. Body font stack now starts with IBM Plex Sans / IBM Plex Sans SC / IBM Plex Sans JP so the README font recommendations actually apply; the Appearance font overrides remain by design and are now documented in the README.
+4. Vault-profile help-button auto-hide selectors extended with the Japanese aria-label (ヘルプ).
+5. Modal top inset highlight is now theme-aware: dark mode no longer draws a bright white top edge.
+6. Added Canvas node and Graph view styling so those surfaces share the paper material language.
+7. Added a stylelint setup and a GitHub Actions workflow; `npx stylelint theme.css` runs clean.
 
 The 0.10.0 **GPT-5.6 Sol "极高" update** focused on making the theme more coherent across dark mode, split panes, keyboard navigation, and mobile reading:
 
