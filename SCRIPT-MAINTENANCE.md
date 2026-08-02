@@ -33,7 +33,7 @@ It is designed as a coherent theme system rather than a small visual tweak.
 
 ## Recent Maintenance Changes
 
-The latest maintenance pass (currently tested as the local `test-patch` snippet) focused on pane-aware robustness, palette coherence, and tooling:
+The 0.10.2 **DeepSeek-V4 Flash Max update** (tested as the local `test-patch` snippet) focused on pane-aware robustness, palette coherence, and tooling:
 
 1. Table overflow moved from viewport media queries into the markdown-pane container query, so wide tables scroll inside narrow split panes instead of clipping.
 2. Removed a duplicated `text-align: start` rule block ([14a] duplicated [06d]).
