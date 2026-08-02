@@ -2135,16 +2135,16 @@ button.mod-cta,
     --callout-bg-opacity: 0.055;
     --callout-border-opacity: 0.28;
     --callout-title-weight: var(--font-semibold);
-    --callout-color: var(--callout-default-rgb);
+    --callout-color: rgb(var(--callout-default-rgb));
     --callout-icon-column: calc(var(--icon-size) + var(--size-2));
     /* Ordinary callouts stay flat; semantic warning/danger variants opt into
        a very light shadow below in the style mapping section. */
     --callout-shadow: none;
     --callout-shadow-hover: none;
 
-    background-color: color-mix(in srgb, var(--panel-surface) 95%, rgba(var(--callout-color), var(--callout-bg-opacity)));
-    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 64%, rgba(var(--callout-color), 0.18));
-    border-left: var(--indicator-width-wide) solid rgba(var(--callout-color), var(--callout-border-opacity));
+    background-color: color-mix(in srgb, var(--panel-surface) 95%, color-mix(in srgb, var(--callout-color) calc(var(--callout-bg-opacity) * 100%), transparent));
+    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 64%, color-mix(in srgb, var(--callout-color) 18%, transparent));
+    border-left: var(--indicator-width-wide) solid color-mix(in srgb, var(--callout-color) calc(var(--callout-border-opacity) * 100%), transparent);
     border-radius: var(--callout-radius);
     padding: 0;
     margin: var(--size-5) 0;
@@ -2154,7 +2154,7 @@ button.mod-cta,
 }
 
 .callout:hover {
-    border-color: color-mix(in srgb, var(--paper-frame-border) 50%, rgba(var(--callout-color), 0.24));
+    border-color: color-mix(in srgb, var(--paper-frame-border) 50%, color-mix(in srgb, var(--callout-color) 24%, transparent));
     box-shadow: var(--callout-shadow-hover);
 }
 
@@ -2172,16 +2172,16 @@ button.mod-cta,
     color: var(--scrip-ink-strong);
     background:
         linear-gradient(90deg,
-            rgba(var(--callout-color), 0.03),
+            color-mix(in srgb, var(--callout-color) 3%, transparent),
             transparent 82%);
-    border-bottom: var(--border-width) solid color-mix(in srgb, rgba(var(--callout-color), 0.12) 58%, transparent);
+    border-bottom: var(--border-width) solid color-mix(in srgb, color-mix(in srgb, var(--callout-color) 12%, transparent) 58%, transparent);
 }
 
 .callout-title .callout-icon {
     flex: 0 0 auto;
     width: var(--icon-size);
     margin-top: 0.36em;
-    color: color-mix(in srgb, rgb(var(--callout-color)) 58%, var(--scrip-ink-soft));
+    color: color-mix(in srgb, var(--callout-color) 58%, var(--scrip-ink-soft));
     opacity: 0.82;
 }
 
@@ -2258,7 +2258,7 @@ button.mod-cta,
 .callout[data-callout="summary"],
 .callout[data-callout="tldr"],
 .callout[data-callout="todo"] {
-    --callout-color: var(--callout-info-rgb);
+    --callout-color: rgb(var(--callout-info-rgb));
 }
 
 /* Success-oriented variants */
@@ -2267,13 +2267,13 @@ button.mod-cta,
 .callout[data-callout="success"],
 .callout[data-callout="check"],
 .callout[data-callout="done"] {
-    --callout-color: var(--callout-success-rgb);
+    --callout-color: rgb(var(--callout-success-rgb));
 }
 
 /* Important and example variants */
 .callout[data-callout="important"],
 .callout[data-callout="example"] {
-    --callout-color: var(--callout-accent-rgb);
+    --callout-color: rgb(var(--callout-accent-rgb));
     --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
     --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
@@ -2282,7 +2282,7 @@ button.mod-cta,
 .callout[data-callout="warning"],
 .callout[data-callout="caution"],
 .callout[data-callout="attention"] {
-    --callout-color: var(--callout-warning-rgb);
+    --callout-color: rgb(var(--callout-warning-rgb));
     --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
     --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
@@ -2294,7 +2294,7 @@ button.mod-cta,
 .callout[data-callout="failure"],
 .callout[data-callout="fail"],
 .callout[data-callout="missing"] {
-    --callout-color: var(--callout-danger-rgb);
+    --callout-color: rgb(var(--callout-danger-rgb));
     --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
     --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
@@ -2302,7 +2302,7 @@ button.mod-cta,
 /* Quote variants */
 .callout[data-callout="quote"],
 .callout[data-callout="cite"] {
-    --callout-color: var(--callout-quote-rgb);
+    --callout-color: rgb(var(--callout-quote-rgb));
     font-style: italic;
 }
 
@@ -2310,7 +2310,7 @@ button.mod-cta,
 .callout[data-callout="question"],
 .callout[data-callout="faq"],
 .callout[data-callout="help"] {
-    --callout-color: var(--callout-question-rgb);
+    --callout-color: rgb(var(--callout-question-rgb));
 }
 
 /* Nested callouts */
