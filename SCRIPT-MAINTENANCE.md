@@ -33,6 +33,14 @@ It is designed as a coherent theme system rather than a small visual tweak.
 
 ## Recent Maintenance Changes
 
+The 0.10.4 **bug-fix and chrome coverage update** (tested as the local `test-patch` snippet) repaired two regressions from 0.10.2 and extended the paper material to remaining default-looking surfaces:
+
+1. The Japanese help-button selectors (ヘルプ) were bare `[aria-label*=...]` entries inside long selector lists, which unconditionally hid every Japanese-labeled help control app-wide; they now carry the full vault-profile selector chain, matching the Help/help/帮助 rows.
+2. The modal top inset highlight fix was applied to a rule that a later same-specificity `.modal-container .modal` block fully overrode (dead code), so dark mode still drew a 40% white top edge; the winning rule now uses `--scrip-inset-highlight` and the dead block is removed.
+3. Pane-aware table overflow now covers embeds and hover popovers (`.markdown-rendered`) and live preview (CM6) in addition to reading view, so every surface scrolls wide tables consistently in narrow panes.
+4. New chrome coverage in the paper language: left ribbon ([08c]), backlinks/outgoing-link panels ([08d]), mobile navbar and toolbar ([09e]), floating canvas controls and card menu plus graph controls ([15]), and stacked tabs ([08b]).
+5. The shared `:focus-visible` ring now also covers `.clickable-icon`, `.nav-action-button`, and `.workspace-tab-header`, completing keyboard recovery for auto-hidden controls.
+
 The 0.10.3 **callout compatibility update** (PR #1 by @saberzero1, completed on merge) prepares Scriptorium for Obsidian 1.13+, which now provides `--callout-color` as a valid CSS color instead of a bare RGB triplet:
 
 1. Replaced `rgba(var(--callout-color), <alpha>)` with `color-mix(in srgb, var(--callout-color) <percent>, transparent)`.

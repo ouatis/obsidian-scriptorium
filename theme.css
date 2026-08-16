@@ -780,7 +780,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
 /* Shared focus ring lives at the semantic layer so navigation, links,
    buttons, and form fields inherit one accessibility treatment. */
-:is(button, input, textarea, select, a, .nav-file-title, .nav-folder-title, .tree-item-inner, [tabindex]:not([tabindex="-1"])):focus-visible {
+:is(button, input, textarea, select, a, .nav-file-title, .nav-folder-title, .tree-item-inner, .clickable-icon, .nav-action-button, .workspace-tab-header, [tabindex]:not([tabindex="-1"])):focus-visible {
     outline: var(--outline-width) solid var(--background-modifier-border-focus);
     outline-offset: var(--outline-offset);
 }
@@ -807,15 +807,17 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     }
 
     /* Pane-aware table overflow: narrow split panes scroll wide tables
-       instead of clipping them (viewport media queries cannot see pane width). */
-    .markdown-preview-view table {
+       instead of clipping them (viewport media queries cannot see pane width).
+       Covers reading view, embeds/hover popovers (.markdown-rendered),
+       and live preview (CM6) so every surface scrolls consistently. */
+    :is(.markdown-preview-view, .markdown-rendered, .markdown-source-view.mod-cm6) table {
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
 
-    .markdown-preview-view table th,
-    .markdown-preview-view table td {
+    :is(.markdown-preview-view, .markdown-rendered, .markdown-source-view.mod-cm6) table th,
+    :is(.markdown-preview-view, .markdown-rendered, .markdown-source-view.mod-cm6) table td {
         min-width: 5rem;
         word-break: break-word;
     }
@@ -1572,6 +1574,49 @@ body:not(.is-mobile, .view-header-title-always) .view-header:is(:hover, :focus-w
     padding-inline: 1px;
 }
 
+/* Stacked tabs read as paper sheets layered behind the active sheet. */
+.workspace-tab-header.is-stacked:not(.is-active) {
+    background-color: color-mix(in srgb, var(--layer-2) 72%, transparent);
+    border: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 55%, transparent);
+}
+
+/* [08c] Left Ribbon */
+/* The ribbon shares the sidedock's quiet surface; icons stay muted until used. */
+.workspace-ribbon {
+    background-color: color-mix(in srgb, var(--layer-1) 96%, transparent);
+    border-right: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 60%, transparent);
+    padding-block: var(--size-3) 0;
+}
+
+.workspace-ribbon .clickable-icon {
+    color: var(--text-secondary);
+    transition: var(--transition-state);
+}
+
+.workspace-ribbon .clickable-icon:hover {
+    color: var(--text-primary);
+    background-color: var(--background-hover);
+}
+
+/* [08d] Link Panels (Backlinks / Outgoing Links) */
+/* Link panels reuse the navigation rows above; only headers and count
+   flairs need quieting so they do not read as interactive chips. */
+.workspace-leaf-content[data-type="backlink"] .backlink-pane,
+.workspace-leaf-content[data-type="outgoing-link"] .outgoing-link-pane {
+    padding: var(--size-3);
+}
+
+.workspace-leaf-content[data-type="backlink"] .pane-empty,
+.workspace-leaf-content[data-type="outgoing-link"] .pane-empty {
+    color: var(--text-faint);
+}
+
+.workspace-leaf-content[data-type="backlink"] .tree-item-flair,
+.workspace-leaf-content[data-type="outgoing-link"] .tree-item-flair {
+    color: var(--text-faint);
+    background-color: transparent;
+}
+
 /* [09] Workspace Auto-hide & Window States */
 /* Auto-hidden controls remain in the focus order and recover through the
    same hover/focus-within contract across the workspace. */
@@ -1669,7 +1714,7 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"],
-    [aria-label*="ヘルプ"] {
+body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover):not(:focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="ヘルプ"] {
     opacity: 0;
     max-width: 0;
     padding-left: 0;
@@ -1692,7 +1737,7 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"],
-    [aria-label*="ヘルプ"] {
+body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="ヘルプ"] {
     display: inline-flex;
     transition:
         opacity var(--ease-fast-smooth),
@@ -1714,7 +1759,7 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"],
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"],
-    [aria-label*="ヘルプ"] {
+body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-actions .clickable-icon[aria-label*="ヘルプ"] {
     opacity: 1;
     max-width: 36px;
     padding-left: initial;
@@ -1784,6 +1829,30 @@ body.is-phone .markdown-reading-view .markdown-preview-view {
     padding: var(--size-4);
     margin-block: 0;
     border-radius: 0;
+}
+
+/* Mobile chrome keeps the paper surface with a quiet rule instead of the
+   default heavy bar. */
+body.is-mobile .mobile-navbar {
+    background-color: var(--layer-1);
+    border-top: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 70%, transparent);
+    box-shadow: none;
+}
+
+body.is-mobile .mobile-navbar .navbar-button {
+    color: var(--text-secondary);
+}
+
+body.is-mobile .mobile-navbar .navbar-button:active,
+body.is-mobile .mobile-navbar .navbar-button:hover {
+    color: var(--text-primary);
+    background-color: var(--background-hover);
+}
+
+body.is-mobile .mobile-toolbar {
+    background-color: var(--layer-1);
+    border-top: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 70%, transparent);
+    box-shadow: none;
 }
 
 @media (hover: none) {
@@ -1926,12 +1995,6 @@ body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type 
     box-shadow: var(--scrip-shadow-tactile);
 }
 
-.modal-container .modal {
-    box-shadow:
-        0 14px 34px rgba(var(--gray-100), 0.08),
-        inset 0 1px 0 0 var(--scrip-inset-highlight);
-}
-
 .menu-item {
     border-radius: var(--radius-s);
     transition:
@@ -2067,10 +2130,11 @@ button.mod-cta,
 .modal-container .modal {
     border: var(--border-width) solid var(--border-subtle-1);
     border-radius: var(--radius-l);
-    /* Multi-layered ambient shadow plus inner highlight for depth. */
+    /* Multi-layered ambient shadow plus inner highlight for depth;
+       the highlight token keeps the top edge dim in dark mode. */
     box-shadow:
         var(--scrip-shadow-l),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+        inset 0 1px 0 0 var(--scrip-inset-highlight);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -2391,4 +2455,38 @@ button.mod-cta,
 
 .graph-view.color-line-highlight {
     color: var(--interactive-accent);
+}
+
+/* Floating canvas and graph controls follow the tactile paper panel
+   language instead of the default unframed icon strip. */
+.canvas-controls {
+    background-color: var(--layer-1);
+    border: var(--border-width) solid var(--border-subtle-1);
+    border-radius: var(--radius-m);
+    box-shadow: var(--scrip-shadow-tactile);
+    padding: var(--size-1);
+}
+
+.canvas-controls .canvas-control-item {
+    color: var(--text-secondary);
+    border-radius: var(--radius-s);
+}
+
+.canvas-controls .canvas-control-item:hover {
+    color: var(--text-primary);
+    background-color: var(--background-hover);
+}
+
+.canvas-card-menu {
+    background-color: var(--layer-1);
+    border: var(--border-width) solid var(--border-subtle-1);
+    border-radius: var(--radius-m);
+    box-shadow: var(--scrip-shadow-l);
+}
+
+.graph-controls {
+    background-color: var(--layer-1);
+    border: var(--border-width) solid var(--border-subtle-1);
+    border-radius: var(--radius-m);
+    box-shadow: var(--scrip-shadow-tactile);
 }
