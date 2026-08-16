@@ -26,4 +26,17 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 - ナビゲーション、検索、メニュー、タグ、callout、embed は静かに保ち、本文を中央に置きます。
 - テーマは単一の `theme.css` として配布され、外部依存はありません。
 
+## デザイン原則
+
+テーマ編集時に守る指針として、以下を維持します:
+
+- 温かい紙のパレットは抑制的に保つ。
+- 面は清潔に保ち、質感はページを支え、本文と競合しない。
+- 重いクロームよりもタイポグラフィの階層を優先する。
+- 自動非表示の挙動は限定的で予測可能に保つ。
+- 本文サイズのテキストで意味を持つアクセント色は慎重に使う。
+- callout、embed、フローティング UI は同じマテリアル言語に揃えるが、日常の操作 UI を積み重なったカードのようにしない。
+- タグは静かに保ち、見出しやリンクと競合させない。
+- 読み心地を装飾的な新しさより優先する。
+
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).

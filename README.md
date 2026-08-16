@@ -26,4 +26,17 @@ Manual install: copy `theme.css` and `manifest.json` into `.obsidian/themes/Scri
 - Navigation, search, menus, tags, callouts, and embeds stay quiet so prose remains central.
 - The theme ships as a single `theme.css` with no external dependencies.
 
+## Design Principles
+
+Guidelines the theme is edited against, kept for future maintenance:
+
+- Keep the warm paper palette restrained.
+- Keep the surface clean enough that texture supports the page instead of competing with it.
+- Prefer typographic hierarchy over heavy chrome.
+- Keep auto-hide behavior limited, predictable, and easy to ignore when reading.
+- Use accent colors carefully when they carry semantic meaning in body-sized text.
+- Keep callouts, embeds, and floating UI aligned with the same material language, but avoid making routine operational UI feel like stacked cards.
+- Keep tags quiet enough to annotate prose without competing with headings or links.
+- Treat reading comfort as more important than decorative novelty.
+
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).
