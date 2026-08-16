@@ -24,7 +24,6 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 - Scriptorium 使用内置字体栈（IBM Plex 家族 + 中文字体回退），外观设置里的字体选项不会生效。
 - 阅读面保持轻：纹理、阴影和强调色都刻意压低。
 - 导航、搜索、菜单、标签、callout 和 embed 尽量安静，让正文居中。
-- 版本发布说明见 [SCRIPT-MAINTENANCE.md](./SCRIPT-MAINTENANCE.md)。
 - 主题以单一 `theme.css` 发布，无外部依赖。
 
-由 [@ouatis](https://github.com/ouatis/) 制作。受 [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) 与 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 启发。维护说明见 [SCRIPT-MAINTENANCE.md](./SCRIPT-MAINTENANCE.md)。
+由 [@ouatis](https://github.com/ouatis/) 制作。受 [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) 与 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 启发。
