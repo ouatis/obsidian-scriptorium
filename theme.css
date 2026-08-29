@@ -1358,8 +1358,9 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     margin-inline: -0.08em;
     background-color: var(--highlight-subtle);
     border-radius: var(--radius-s);
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+    /* Chromium honours only the prefixed form for inline boxes; the bare
+       property is dead code inside Obsidian and is not shipped. */
+    -webkit-box-decoration-break: clone; /* stylelint-disable-line */
 }
 
 /* Search hits keep the animated accent bar so found text reads as
@@ -1436,18 +1437,20 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
 /* Reading links draw the hover underline in rather than stamping it: the
    line sits transparent at rest (no layout shift, prose keeps its ink) and
-   the color transition is paint-only. */
+   the color transition is paint-only. text-decoration-* has been fully
+   supported by Obsidian's Chromium since well before 1.5.8; the
+   browser-feature linter's data is stale, hence the inline exemptions. */
 .markdown-rendered :is(.internal-link, .external-link) {
-    text-decoration-line: underline;
-    text-decoration-thickness: 1px;
-    text-decoration-color: transparent;
+    text-decoration-line: underline; /* stylelint-disable-line */
+    text-decoration-thickness: 1px; /* stylelint-disable-line */
+    text-decoration-color: transparent; /* stylelint-disable-line */
     transition:
         color var(--ease-fast-smooth),
         opacity var(--ease-fast-smooth),
         text-decoration-color var(--ease-fast-smooth);
 
     &:hover {
-        text-decoration-color: currentcolor;
+        text-decoration-color: currentcolor; /* stylelint-disable-line */
     }
 }
 
@@ -2851,12 +2854,14 @@ button.mod-cta,
         widows: 2;
     }
 
-    /* Keep blocks whole and headings attached to what follows. */
+    /* Keep blocks whole and headings attached to what follows. Fragmentation
+       hints are print-only progressive enhancement; engines without them
+       simply paginate without the hints. */
     .markdown-preview-view :is(h1, h2, h3, h4, h5, h6) {
-        break-after: avoid;
+        break-after: avoid; /* stylelint-disable-line */
     }
 
     .markdown-preview-view :is(pre, .callout, table, blockquote, .markdown-embed) {
-        break-inside: avoid;
+        break-inside: avoid; /* stylelint-disable-line */
     }
 }
