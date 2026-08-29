@@ -23,6 +23,7 @@
         [07g] Horizontal Rules
         [07h] Tags
         [07i] Native Properties
+        [07j] Footnotes & Mermaid
    [08] Navigation
    [09] Workspace Auto-hide & Window States
    [10] Buttons
@@ -31,6 +32,7 @@
    [13] Callouts
    [14] Embedded Notes
    [15] Canvas & Graph
+   [16] Print & PDF Export
    ===================================================================== */
 
 /* [01] Design Tokens */
@@ -47,21 +49,24 @@
     /* Font Stacks */
     --scrip-font-mono-stack: "IBM Plex Mono", "SF Mono", "Consolas", "Monaco", "Menlo", "Roboto Mono", "Courier New", monospace;
     --scrip-font-cjk-stack: "IBM Plex Sans", "IBM Plex Sans SC", "IBM Plex Sans JP", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif;
-    /* Heading stack uses a serif-forward system to separate titles from sans body text. */
-    --scrip-font-heading-stack: "Noto Serif SC", "Source Han Serif SC", "IBM Plex Serif", "Georgia", "Times New Roman", serif;
+    /* Heading stack: Latin runs in IBM Plex Serif first so English titles
+       pair with the IBM Plex Sans body; CJK falls through to Noto Serif SC. */
+    --scrip-font-heading-stack: "IBM Plex Serif", "Noto Serif SC", "Source Han Serif SC", "Georgia", "Times New Roman", serif;
     --scrip-font-text: var(--font-text, var(--scrip-font-cjk-stack));
 
-    /* Typographic scale: CJK-heavy headings stay tighter with zero tracking. */
-    --scrip-type-inline-title-size: 2.08rem;
+    /* Typographic scale: CJK-heavy headings stay tighter with zero tracking.
+       Sizes derive from --font-text-size so the Appearance font-size slider
+       scales the whole hierarchy, not only body text. */
+    --scrip-type-inline-title-size: calc(var(--font-text-size, 16px) * 2.08);
     --scrip-type-inline-title-leading: 1.18;
     --scrip-type-inline-title-tracking: 0;
-    --scrip-type-h1-size: 2.16rem;
+    --scrip-type-h1-size: calc(var(--font-text-size, 16px) * 2.16);
     --scrip-type-h1-leading: 1.16;
     --scrip-type-h1-tracking: 0;
-    --scrip-type-h2-size: 1.62rem;
+    --scrip-type-h2-size: calc(var(--font-text-size, 16px) * 1.62);
     --scrip-type-h2-leading: 1.22;
     --scrip-type-h2-tracking: 0;
-    --scrip-type-h3-size: 1.24rem;
+    --scrip-type-h3-size: calc(var(--font-text-size, 16px) * 1.24);
     --scrip-type-h3-leading: 1.34;
     --scrip-type-h3-tracking: 0;
 
@@ -69,9 +74,9 @@
     --font-size-h1: var(--scrip-type-h1-size);
     --font-size-h2: var(--scrip-type-h2-size);
     --font-size-h3: var(--scrip-type-h3-size);
-    --font-size-h4: 1.08rem;
-    --font-size-h5: 0.98rem;
-    --font-size-h6: 0.9rem;
+    --font-size-h4: calc(var(--font-text-size, 16px) * 1.08);
+    --font-size-h5: calc(var(--font-text-size, 16px) * 0.98);
+    --font-size-h6: calc(var(--font-text-size, 16px) * 0.9);
 
     /* Font Weights */
     --font-weight-regular: 400;
@@ -91,7 +96,7 @@
     --density-modifier: 1;
 
     /* Focus Ring */
-    --outline-width: 3px;
+    --outline-width: 2px;
     --outline-offset: 2px;
     --focus-ring-width: 2px;
     --focus-ring-width-large: 4px;
@@ -165,9 +170,11 @@
     --opacity-strong: 0.65;
     --opacity-glass: 0.82;
 
-    /* Texture System: SVG micro-noise */
-    --scrip-texture-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-    --scrip-texture-noise-dark: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
+    /* Texture System: SVG micro-noise. Opacity is baked into the data URI;
+       0.032/0.024 is the lowest band where the grain is actually perceivable
+       without dirtying the surface. */
+    --scrip-texture-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.032'/%3E%3C/svg%3E");
+    --scrip-texture-noise-dark: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.024'/%3E%3C/svg%3E");
 
     /* Responsive Breakpoints */
     --size-max-width-reading: 65ch;
@@ -175,7 +182,9 @@
     --size-max-width-mobile: 90vw;
 
     /* Color Palette */
-    --white: 253, 254, 254;
+    /* Warm paper white: a cool 253,254,254 reads bluish next to the beige
+       background; layers, fields, and modals inherit this tint. */
+    --white: 254, 252, 246;
 
     /* Gray Scale */
     --gray-10: 252, 248, 239;
@@ -203,9 +212,11 @@
 
     /* Heading accents */
     --h4-color-rgb-light: 188, 80, 26;
-    --h4-color-rgb-dark: 186, 90, 24;
+    /* Dark variants sit above the ink-wash mix, so they are lifted toward
+       the dark accent family just enough to stay legible on dark paper. */
+    --h4-color-rgb-dark: 208, 106, 44;
     --h5-color-rgb-light: 80, 124, 78;
-    --h5-color-rgb-dark: 85, 130, 82;
+    --h5-color-rgb-dark: 98, 142, 95;
 
     /* Borders */
     --border-width: 1px;
@@ -399,6 +410,10 @@
     --color-warning-rgb: 240, 185, 90;
 
     --scrip-app-texture: var(--scrip-texture-noise-dark);
+    /* Amber mark wash runs lighter on dark paper so it glows, not glares. */
+    --highlight: rgba(var(--color-warning-rgb), 0.22);
+    --highlight-subtle: rgba(var(--color-warning-rgb), 0.16);
+    --highlight-strong: rgba(var(--color-warning-rgb), 0.34);
     /* Modal top-edge highlight: dark mode avoids a bright white top edge. */
     --scrip-inset-highlight: rgba(255, 255, 255, 0.07);
 }
@@ -455,9 +470,11 @@
     --interactive-accent-hover: color-mix(in srgb, var(--interactive-accent) 90%, rgb(var(--gray-100)));
     --interactive-accent-active: color-mix(in srgb, var(--interactive-accent) 82%, rgb(var(--gray-100)));
     --interactive-accent-rgb: var(--color-accent-fill-rgb);
-    --highlight: rgba(var(--color-accent-rgb), var(--opacity-strong));
-    --highlight-subtle: rgba(var(--color-accent-rgb), var(--opacity-medium));
-    --highlight-strong: rgba(var(--color-accent-rgb), 0.9);
+    /* Highlight belongs to marks (amber), not to interaction (accent orange).
+       Reuses the existing warning amber; no fourth hue is introduced. */
+    --highlight: rgba(var(--color-warning-rgb), 0.38);
+    --highlight-subtle: rgba(var(--color-warning-rgb), 0.3);
+    --highlight-strong: rgba(var(--color-warning-rgb), 0.55);
     --text-highlight-bg: var(--highlight);
     --text-highlight-bg-active: var(--highlight);
     --highlight-color: var(--highlight);
@@ -762,7 +779,9 @@ html {
     border-radius: var(--scrollbar-radius);
     border: 4px solid transparent;
     background-clip: content-box;
-    transition: background-color var(--ease-fast-smooth), border-width 0.2s;
+    /* Color only; the border-width grow on hover stays instant — animating
+       border-width would run a layout pass per frame for no visible gain. */
+    transition: background-color var(--ease-fast-smooth);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -799,10 +818,10 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
 @container scriptorium-note (max-width: 34rem) {
     :is(.markdown-source-view, .markdown-preview-view, .inline-title) {
-        --scrip-type-inline-title-size: 1.78rem;
-        --scrip-type-h1-size: 1.86rem;
-        --scrip-type-h2-size: 1.4rem;
-        --scrip-type-h3-size: 1.12rem;
+        --scrip-type-inline-title-size: calc(var(--font-text-size, 16px) * 1.78);
+        --scrip-type-h1-size: calc(var(--font-text-size, 16px) * 1.86);
+        --scrip-type-h2-size: calc(var(--font-text-size, 16px) * 1.4);
+        --scrip-type-h3-size: calc(var(--font-text-size, 16px) * 1.12);
         --paragraph-spacing-base: 1.08rem;
     }
 
@@ -859,6 +878,9 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "palt" 1;
+    /* CJK/Latin mixed prose: auto-insert inter-script spacing where supported
+       (Chromium 128+); older engines ignore the declaration harmlessly. */
+    text-autospace: normal;
 
     @media (max-width: 900px) {
         max-width: var(--size-max-width-mobile);
@@ -939,6 +961,13 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     background-size: min(28rem, 68%) var(--border-width-thick);
 }
 
+/* A file whose filename already renders as the inline title would draw two
+   editorial rules in a row (title + first h1); suppress the h1 one. */
+.markdown-preview-view .inline-title:not(:empty) + h1 {
+    background-image: none;
+    padding-bottom: 0;
+}
+
 /* [06g] Shared Typographic Refinements */
 .markdown-preview-view p,
 .markdown-source-view .cm-line {
@@ -1007,6 +1036,24 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     text-wrap: balance;
     margin-top: calc(var(--paragraph-spacing) * 0.9);
     margin-bottom: calc(var(--paragraph-spacing-tight) * 0.64);
+}
+
+/* h4/h5 carry the mapped heading accents (--text-title-h4/h5 already point
+   here); h6 stays quiet ink. Both are ink-washed with the same grammar as
+   h3 so loudness descends with level instead of spiking at h4. Sizes come
+   from the slider-aware tokens. */
+.markdown-preview-view h4 {
+    font-size: var(--font-size-h4);
+    color: color-mix(in srgb, var(--h4-color) 78%, var(--text-primary));
+}
+
+.markdown-preview-view h5 {
+    font-size: var(--font-size-h5);
+    color: color-mix(in srgb, var(--h5-color) 86%, var(--text-primary));
+}
+
+.markdown-preview-view h6 {
+    font-size: var(--font-size-h6);
     color: var(--scrip-ink-soft);
 }
 
@@ -1031,6 +1078,13 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     letter-spacing: var(--scrip-type-h1-tracking);
     margin-top: calc(var(--paragraph-spacing) * 0.85);
     margin-bottom: calc(var(--paragraph-spacing-tight) * 0.9);
+    /* Mirror the reading view's editorial rule; min() pins the bar to 22rem
+       here too, so both surfaces draw the same line. */
+    padding-bottom: var(--size-2);
+    background-image: var(--scrip-editorial-rule);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: min(22rem, 68%) var(--border-width-thick);
 }
 
 .markdown-source-view.mod-cm6 .HyperMD-header-2.cm-line {
@@ -1047,6 +1101,27 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     margin-top: calc(var(--paragraph-spacing) * 0.4);
 }
 
+/* Editor heading sync for h4-h6: mirror the reading-view accents and
+   slider-aware sizes so source mode matches what preview shows. */
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-4, .HyperMD-header-5, .HyperMD-header-6).cm-line {
+    line-height: var(--line-height-tight);
+    letter-spacing: 0;
+    font-weight: var(--font-semibold);
+    margin-top: calc(var(--paragraph-spacing) * 0.9);
+    margin-bottom: calc(var(--paragraph-spacing-tight) * 0.64);
+    color: var(--scrip-ink-soft);
+}
+
+.markdown-source-view.mod-cm6 .HyperMD-header-4.cm-line {
+    font-size: var(--font-size-h4);
+    color: color-mix(in srgb, var(--h4-color) 78%, var(--text-primary));
+}
+
+.markdown-source-view.mod-cm6 .HyperMD-header-5.cm-line {
+    font-size: var(--font-size-h5);
+    color: color-mix(in srgb, var(--h5-color) 86%, var(--text-primary));
+}
+
 /* [06j] Active Line Indicator */
 .markdown-source-view.mod-cm6 .cm-active:not(.HyperMD-header, .HyperMD-codeblock)::before,
 .markdown-source-view.mod-cm6 .cm-active.HyperMD-quote::before {
@@ -1060,12 +1135,30 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     pointer-events: none;
 }
 
+/* The rail fades in as the cursor crosses lines. The pseudo-element persists
+   while typing within a line, so this fires only on line changes — one small
+   compositor-only fade, never per keystroke. */
+@media (prefers-reduced-motion: no-preference) {
+    .markdown-source-view.mod-cm6 .cm-active:not(.HyperMD-header, .HyperMD-codeblock)::before,
+    .markdown-source-view.mod-cm6 .cm-active.HyperMD-quote::before {
+        animation: scrip-bar-in var(--duration-fast) var(--motion-apple);
+    }
+}
+
+@keyframes scrip-bar-in {
+    from {
+        opacity: 0;
+    }
+}
+
 /* [07] Markdown Elements */
 /* Element-local variables stay near their component blocks on purpose:
    preview/table/list scopes are easier to maintain when the token and the rule
    live together inside the same markdown element section. */
-/* [07a] Tables */
-.markdown-preview-view table {
+/* [07a] Tables — one material everywhere: the same rules seat live preview
+   widgets (.cm-table-widget) on the reading view's paper table, so editing
+   and reading no longer show two different tables. */
+:is(.markdown-preview-view, .markdown-source-view.mod-cm6 .cm-table-widget) table {
     --table-border-radius: var(--radius-l);
     --table-border-width: var(--border-width);
     --table-border-color: var(--border-subtle-1);
@@ -1080,7 +1173,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     box-shadow: none;
 }
 
-.markdown-preview-view table th {
+:is(.markdown-preview-view, .markdown-source-view.mod-cm6 .cm-table-widget) table th {
     background-color: color-mix(in srgb, var(--layer-2) 96%, var(--panel-surface));
     font-weight: var(--font-semibold);
     padding: var(--size-2) var(--size-4);
@@ -1088,15 +1181,15 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     border-bottom: var(--border-width) solid var(--border-subtle-1);
 }
 
-.markdown-preview-view table td {
+:is(.markdown-preview-view, .markdown-source-view.mod-cm6 .cm-table-widget) table td {
     padding: var(--size-2) var(--size-4);
 }
 
-.markdown-preview-view table tbody tr:nth-child(even) {
+:is(.markdown-preview-view, .markdown-source-view.mod-cm6 .cm-table-widget) table tbody tr:nth-child(even) {
     background-color: color-mix(in srgb, var(--table-zebra) 72%, transparent);
 }
 
-.markdown-preview-view table tbody tr:hover {
+:is(.markdown-preview-view, .markdown-source-view.mod-cm6 .cm-table-widget) table tbody tr:hover {
     background-color: color-mix(in srgb, var(--table-hover) 72%, transparent);
     transition: background-color var(--ease-fast-smooth);
 }
@@ -1142,6 +1235,18 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 .markdown-source-view.mod-cm6 .cm-formatting-code {
     color: var(--text-muted);
     opacity: 0.72;
+}
+
+/* Keyboard keys read as small keycaps: paper chip, thicker bottom edge. */
+.markdown-rendered kbd {
+    font-family: var(--font-monospace);
+    font-size: 0.86em;
+    color: var(--text-secondary);
+    background-color: color-mix(in srgb, var(--layer-2) 55%, var(--panel-surface));
+    border: 1px solid color-mix(in srgb, var(--paper-frame-border) 62%, transparent);
+    border-bottom-width: 2px;
+    border-radius: calc(var(--radius-s) + 1px);
+    padding: 0.1em 0.42em;
 }
 
 /* Source mode gets a quiet left rail so code reads as structure while editing. */
@@ -1195,14 +1300,75 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     list-style-type: decimal;
 }
 
+/* Task checkboxes: ink-line paper chips instead of the stock accent square.
+   Checked fills with the accent and a warm-white check; Obsidian's own
+   strikethrough on completed lines stays. */
+.markdown-preview-view .task-list-item-checkbox,
+.markdown-source-view.mod-cm6 .task-list-item-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    width: 1.02em;
+    height: 1.02em;
+    margin-block: 0.18em;
+    border: 1.5px solid color-mix(in srgb, var(--border-strong-1) 72%, transparent);
+    border-radius: calc(var(--radius-s) - 1px);
+    background-color: color-mix(in srgb, var(--panel-surface) 92%, transparent);
+    box-shadow: none;
+    cursor: pointer;
+    transition:
+        background-color var(--ease-fast-smooth),
+        border-color var(--ease-fast-smooth),
+        box-shadow var(--ease-fast-smooth);
+}
+
+.markdown-preview-view .task-list-item-checkbox:hover,
+.markdown-source-view.mod-cm6 .task-list-item-checkbox:hover {
+    border-color: var(--interactive);
+}
+
+.markdown-preview-view .task-list-item-checkbox:active,
+.markdown-source-view.mod-cm6 .task-list-item-checkbox:active {
+    transform: scale(var(--transform-scale-pressed));
+}
+
+.markdown-preview-view .task-list-item-checkbox:checked,
+.markdown-source-view.mod-cm6 .task-list-item-checkbox:checked {
+    border-color: var(--interactive-accent);
+    background-color: var(--interactive-accent);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.5l3 3 6-7' stroke='%23fffcf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size: 0.78em;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Completed reading lines fade to soft ink; editing keeps full contrast. */
+.markdown-preview-view li.task-list-item.is-checked {
+    color: var(--scrip-ink-soft);
+}
+
 /* [07d] Highlight Styles */
-.search-result-file-matched-text,
+/* ==mark== reads as a highlighter wash: amber belongs to marks alone, the
+   accent orange stays with interaction. Flat fill, no animation — a mark is
+   a state, not a transition. */
 .markdown-rendered mark,
 .cm-s-obsidian span.cm-highlight {
+    color: var(--text-normal);
+    padding: 0.05em 0.08em;
+    margin-inline: -0.08em;
+    background-color: var(--highlight-subtle);
+    border-radius: var(--radius-s);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+/* Search hits keep the animated accent bar so found text reads as
+   "pointed at right now", distinct from a lasting amber mark. */
+.search-result-file-matched-text {
     --scrip-highlight-dir: to right;
     color: var(--text-normal);
     padding: 0.05em 0;
-    background: linear-gradient(var(--scrip-highlight-dir), var(--highlight-subtle), var(--highlight-subtle));
+    background: linear-gradient(var(--scrip-highlight-dir), rgba(var(--color-accent-rgb), 0.2), rgba(var(--color-accent-rgb), 0.2));
     background-size: 100% 5px, 0 5px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
@@ -1215,7 +1381,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 /* RTL highlight direction override */
-[dir="rtl"] :is(.search-result-file-matched-text, .markdown-rendered mark, .cm-s-obsidian span.cm-highlight) {
+[dir="rtl"] .search-result-file-matched-text {
     --scrip-highlight-dir: to left;
 }
 
@@ -1265,6 +1431,23 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
         &:hover {
             color: var(--link-visited-color-hover);
         }
+    }
+}
+
+/* Reading links draw the hover underline in rather than stamping it: the
+   line sits transparent at rest (no layout shift, prose keeps its ink) and
+   the color transition is paint-only. */
+.markdown-rendered :is(.internal-link, .external-link) {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    transition:
+        color var(--ease-fast-smooth),
+        opacity var(--ease-fast-smooth),
+        text-decoration-color var(--ease-fast-smooth);
+
+    &:hover {
+        text-decoration-color: currentcolor;
     }
 }
 
@@ -1363,7 +1546,8 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     color: var(--tag-color-subtle);
     border-radius: var(--radius-s);
     padding: 0.06em 0.42em;
-    font-size: 0.76rem;
+    /* em, not rem: tags scale with the note's font-size setting. */
+    font-size: 0.92em;
     font-weight: var(--font-medium);
     line-height: var(--line-height-tight);
     transition:
@@ -1389,6 +1573,40 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
         color: var(--tag-color-active);
         box-shadow: none;
     }
+}
+
+/* Live preview renders a tag as begin (#) + end (word) spans; style them as
+   one joined pill so editing matches the reading view's chip. em-based
+   padding keeps CM6 line metrics stable. */
+.markdown-source-view.mod-cm6 :is(.cm-hashtag-begin, .cm-hashtag-end) {
+    color: var(--tag-color-subtle);
+    font-weight: var(--font-medium);
+    line-height: var(--line-height-tight);
+    background-color: color-mix(in srgb, var(--tag-background) 44%, var(--panel-surface));
+    transition:
+        background-color var(--ease-fast-smooth),
+        border-color var(--ease-fast-smooth),
+        color var(--ease-fast-smooth);
+}
+
+.markdown-source-view.mod-cm6 .cm-hashtag-begin {
+    border: 1px solid color-mix(in srgb, var(--tag-border-color) 46%, transparent);
+    border-right: 0;
+    border-radius: var(--radius-s) 0 0 var(--radius-s);
+    padding: 0.06em 0 0.06em 0.42em;
+}
+
+.markdown-source-view.mod-cm6 .cm-hashtag-end {
+    border: 1px solid color-mix(in srgb, var(--tag-border-color) 46%, transparent);
+    border-left: 0;
+    border-radius: 0 var(--radius-s) var(--radius-s) 0;
+    padding: 0.06em 0.42em 0.06em 0;
+}
+
+.markdown-source-view.mod-cm6 :is(.cm-hashtag-begin, .cm-hashtag-end):hover {
+    background-color: color-mix(in srgb, var(--tag-background-hover) 54%, transparent);
+    border-color: var(--tag-border-color-hover);
+    color: var(--tag-color-hover);
 }
 
 /* [07i] Native Properties */
@@ -1431,6 +1649,56 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     color: var(--scrip-ink-faint);
     opacity: 0.74;
 }
+
+/* [07j] Footnotes & Mermaid */
+/* Footnote markers stay faint ink; the list reads as small print at the end
+   of the page, separated by a quiet rule. */
+.markdown-rendered :is(.footnotes-list, section.footnotes) {
+    font-size: 0.86em;
+    color: var(--scrip-ink-soft);
+    border-top: var(--border-width) solid var(--scrip-rule-soft);
+    padding-top: var(--size-3);
+}
+
+.markdown-rendered .footnotes-list p {
+    margin-block-end: calc(var(--paragraph-spacing-tight) * 0.4);
+}
+
+.markdown-rendered :is(.footnote-ref, .footnote-backref),
+.markdown-source-view.mod-cm6 .cm-footref {
+    color: var(--text-secondary-accent);
+    text-decoration: none;
+}
+
+.markdown-source-view.mod-cm6 .cm-footref {
+    font-size: 0.8em;
+}
+
+/* Hover preview for footnote refs follows the paper material. */
+.markdown-rendered .footnote-ref .markdown-embed,
+.hover-editor .markdown-embed {
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+/* Mermaid diagrams default to a white stage; on dark paper that glare is
+   harsh. Keep the diagram legible by seating it in a light paper card —
+   it reads as a plate pasted onto the page instead of a raw white box. */
+.theme-dark .markdown-preview-view :is(svg[id^="mermaid"], div.mermaid),
+.theme-dark .markdown-rendered :is(svg[id^="mermaid"], div.mermaid) {
+    background-color: rgb(var(--white));
+    border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 56%, transparent);
+    border-radius: var(--radius-m);
+    padding: var(--size-3);
+}
+
+.theme-dark .markdown-preview-view svg[id^="mermaid"],
+.theme-dark .markdown-rendered svg[id^="mermaid"] {
+    max-width: 100%;
+    height: auto;
+}
+
 
 /* Workspace Chrome ==================================================== */
 /* [08] Navigation */
@@ -2141,6 +2409,21 @@ button.mod-cta,
     .modal-container .modal {
         animation: modal-entrance var(--duration-moderate) var(--motion-apple);
     }
+
+    /* Menus and hover popovers join the modal's pop-in: one-shot, transform
+       and opacity only, so the chrome feels placed rather than stamped.
+       Tooltips and typing-adjacent suggestion boxes stay instant on purpose. */
+    .menu,
+    .popover {
+        animation: scrip-pop-in 160ms var(--motion-apple);
+    }
+}
+
+@keyframes scrip-pop-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px) scale(0.98);
+    }
 }
 
 /* [11a] Floating Tooltips */
@@ -2272,6 +2555,12 @@ button.mod-cta,
 
 .callout-title:hover .callout-fold {
     opacity: 0.8;
+}
+
+/* Collapsed callouts turn their chevron aside; the transform transition is
+   already on the fold, so this rides the compositor. */
+.callout.is-collapsed .callout-fold {
+    transform: rotate(-90deg);
 }
 
 /* Callout content area */
@@ -2489,4 +2778,85 @@ button.mod-cta,
     border: var(--border-width) solid var(--border-subtle-1);
     border-radius: var(--radius-m);
     box-shadow: var(--scrip-shadow-tactile);
+}
+
+
+/* [16] Print & PDF Export
+   Exported PDFs should read like printed paper: no texture, no shadows,
+   no floating-card chrome, and a full-width text column. Dark mode exports
+   are forced back onto light paper by re-pointing the -rgb inputs; every
+   downstream token in [02]/[03] recomputes from them automatically. */
+@media print {
+    .theme-light,
+    .theme-dark {
+        --scrip-app-texture: none;
+    }
+
+    .theme-dark {
+        color-scheme: light;
+        --background-base-rgb: var(--gray-10);
+        --layer-1-rgb: var(--white);
+        --layer-2-rgb: var(--gray-10);
+        --field-1-rgb: var(--white);
+        --text-primary-rgb: var(--gray-100);
+        --text-secondary-rgb: var(--gray-80);
+        --text-placeholder-rgb: var(--gray-70);
+        --text-muted-rgb: var(--gray-70);
+        --icon-primary-rgb: var(--gray-100);
+        --icon-secondary-rgb: var(--gray-70);
+        --icon-inverse-rgb: var(--white);
+        --border-subtle-0-rgb: var(--gray-20);
+        --border-subtle-1-rgb: var(--gray-20);
+        --border-subtle-2-rgb: var(--gray-20);
+        --border-strong-1-rgb: var(--gray-50);
+        --border-strong-2-rgb: var(--gray-50);
+        --color-accent-rgb: var(--color-accent-rgb-light);
+        --color-accent-fill-rgb: var(--color-accent-fill-rgb-light);
+        --color-secondary-rgb: var(--color-secondary-rgb-light);
+        --h4-color-rgb: var(--h4-color-rgb-light);
+        --h5-color-rgb: var(--h5-color-rgb-light);
+        --table-zebra: var(--table-zebra-light);
+        --table-hover: var(--table-hover-light);
+        --scrip-shadow-color: 28deg 15% 35%;
+        --scrip-inset-highlight: rgba(255, 255, 255, 0.4);
+    }
+
+    body {
+        background-color: rgb(var(--gray-10));
+        background-image: none;
+    }
+
+    /* Unframe the reading paper: print carries its own margins. */
+    .markdown-reading-view .markdown-preview-view {
+        max-width: none;
+        margin-block: 0;
+        padding: 0;
+        background: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Drop elevation from components that keep it on screen. */
+    .markdown-preview-view pre,
+    .callout,
+    .markdown-embed,
+    table {
+        box-shadow: none;
+    }
+
+    /* Keep paragraphs from splitting awkwardly across pages. */
+    .markdown-preview-view p {
+        orphans: 2;
+        widows: 2;
+    }
+
+    /* Keep blocks whole and headings attached to what follows. */
+    .markdown-preview-view :is(h1, h2, h3, h4, h5, h6) {
+        break-after: avoid;
+    }
+
+    .markdown-preview-view :is(pre, .callout, table, blockquote, .markdown-embed) {
+        break-inside: avoid;
+    }
 }
