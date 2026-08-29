@@ -24,6 +24,7 @@
         [07h] Tags
         [07i] Native Properties
         [07j] Footnotes & Mermaid
+        [07k] Media & PDF (dark glare)
    [08] Navigation
    [09] Workspace Auto-hide & Window States
    [10] Buttons
@@ -33,6 +34,7 @@
    [14] Embedded Notes
    [15] Canvas & Graph
    [16] Print & PDF Export
+   [17] Bases
    ===================================================================== */
 
 /* [01] Design Tokens */
@@ -1616,6 +1618,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 /* Keep native Properties close to Obsidian's layout; only tune surface,
    color, and focus affordance. */
 .metadata-container {
+    --metadata-divider-width: 0;
     border-block-color: var(--scrip-native-rule);
     background-color: color-mix(in srgb, var(--scrip-native-surface-muted) 24%, transparent);
     color: var(--scrip-ink-soft);
@@ -1700,6 +1703,35 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 .theme-dark .markdown-rendered svg[id^="mermaid"] {
     max-width: 100%;
     height: auto;
+}
+
+/* [07k] Media & PDF — dark-mode glare control
+   White-background images and PDF pages glare on dark paper. Borrowed from
+   Baseline: non-hovered media dims to 70% ink and brightens on hover, PDF
+   page corners round. Scoped to @media screen so exports keep
+   full-strength images. */
+@media screen {
+    .theme-dark :is(.markdown-preview-sizer, .cm-content, .markdown-embed) :is(img, video):not(.emoji) {
+        transition: opacity var(--ease-moderate-smooth);
+    }
+
+    .theme-dark :is(.markdown-preview-sizer, .cm-content, .markdown-embed) :is(img, video):not(.emoji):not(:hover) {
+        opacity: 0.7;
+    }
+
+    .pdf-container .pdfViewer .canvasWrapper {
+        contain: content;
+        border-radius: var(--radius-s);
+        overflow: hidden;
+    }
+
+    .theme-dark .pdf-container .pdfViewer .page {
+        transition: opacity var(--ease-moderate-smooth);
+    }
+
+    .theme-dark .pdf-container .pdfViewer .page:not(:hover) {
+        opacity: 0.7;
+    }
 }
 
 
@@ -2781,6 +2813,46 @@ button.mod-cta,
     border: var(--border-width) solid var(--border-subtle-1);
     border-radius: var(--radius-m);
     box-shadow: var(--scrip-shadow-tactile);
+}
+
+
+/* [17] Bases
+   Quiet the stock chrome so base views read as paper tables: transparent
+   sidedock surfaces, unified radius, headers that brighten on hover, and
+   embedded views framed like every other embed. */
+.bases-view {
+    border-radius: var(--radius-s);
+}
+
+.mod-sidedock .bases-table-container,
+.mod-sidedock .bases-tbody {
+    background-color: transparent;
+}
+
+.bases-thead .bases-td {
+    box-shadow: none;
+    border-radius: var(--radius-s);
+    overflow: visible;
+}
+
+.bases-thead .bases-td:hover {
+    --bases-table-header-color: var(--text-normal);
+}
+
+.bases-table-cell > * {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.bases-cards-label {
+    color: var(--text-faint);
+}
+
+.workspace-leaf-content[data-type="markdown"] .bases-embed .bases-view {
+    border: var(--border-width) solid var(--scrip-native-rule);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    box-shadow: none;
 }
 
 
