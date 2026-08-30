@@ -124,10 +124,6 @@
     --ease-fast-smooth: var(--duration-fast) var(--motion-apple);
     --ease-moderate-smooth: var(--duration-moderate) var(--motion-apple);
 
-    /* Spring Animation */
-    --motion-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --ease-spring: 300ms var(--motion-spring);
-
     /* Common Transitions */
     /* Fast Transform */
     --transition-fast-ease: transform var(--ease-fast-smooth), opacity var(--ease-fast-smooth);
@@ -151,17 +147,11 @@
     /* High-frequency controls avoid hover lift; press feedback stays visible
        through scale instead. */
     --transform-scale-pressed: 0.97;
-    --transform-scale-checked: 1.05;
-    --transform-scale-hidden: 0.85;
     --transform-translate-hover: 0;
-    --transform-translate-hidden: -12px;
 
     /* Spacing Multipliers */
     --multiplier-tight: 0.8;
     --multiplier-relaxed: 1.2;
-
-    /* Color Mix Percentages */
-    --percentage-color-mix-low: 20%;
 
     /* Opacity System */
     --opacity-minimal: 0.04;
@@ -573,7 +563,9 @@ html {
     --text-normal: var(--text-primary);
     --scrip-ink-strong: var(--text-primary);
     --scrip-ink-soft: color-mix(in srgb, var(--text-primary) 74%, var(--text-muted));
-    --scrip-ink-faint: color-mix(in srgb, var(--text-muted) 78%, var(--background));
+    /* The faintest rung that still passes WCAG AA on both papers
+       (6.6:1 light / 9.8:1 dark); the older double-faded mix failed at 2:1. */
+    --scrip-ink-faint: var(--text-muted);
 
     /* Text selection colors using richer color mixing */
     --text-selection: color-mix(in srgb, var(--interactive) 25%, transparent);
