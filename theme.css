@@ -793,7 +793,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
 /* Shared focus ring lives at the semantic layer so navigation, links,
    buttons, and form fields inherit one accessibility treatment. */
-:is(button, input, textarea, select, a, .nav-file-title, .nav-folder-title, .tree-item-inner, .clickable-icon, .nav-action-button, .workspace-tab-header, [tabindex]:not([tabindex="-1"])):focus-visible {
+:is(button, input, textarea, select, a, .nav-file-title, .nav-folder-title, .tree-item-inner, .clickable-icon, .nav-action-button, .workspace-tab-header, .bases-td, [tabindex]:not([tabindex="-1"])):focus-visible {
     outline: var(--outline-width) solid var(--background-modifier-border-focus);
     outline-offset: var(--outline-offset);
 }
@@ -1701,7 +1701,8 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
    White-background images and PDF pages glare on dark paper. Borrowed from
    Baseline: non-hovered media dims to 70% ink and brightens on hover, PDF
    page corners round. Scoped to @media screen so exports keep
-   full-strength images. */
+   full-strength images. Images also join the theme's radius language —
+   every other visual element rounds; hard-cornered screenshots broke it. */
 @media screen {
     .theme-dark :is(.markdown-preview-sizer, .cm-content, .markdown-embed) :is(img, video):not(.emoji) {
         transition: opacity var(--ease-moderate-smooth);
@@ -1709,6 +1710,10 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 
     .theme-dark :is(.markdown-preview-sizer, .cm-content, .markdown-embed) :is(img, video):not(.emoji):not(:hover) {
         opacity: 0.7;
+    }
+
+    :is(.markdown-preview-view, .markdown-rendered) :is(img, video):not(.emoji) {
+        border-radius: var(--radius-s);
     }
 
     .pdf-container .pdfViewer .canvasWrapper {
