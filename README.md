@@ -4,6 +4,8 @@ A warm, minimal Obsidian theme for long-form reading and writing.
 
 [Chinese](./README.zh-CN.md) | [Japanese](./README.ja.md)
 
+<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Open Scriptorium in Obsidian" width="150"></a>
+
 ![Scriptorium screenshot](./screenshot.png)
 
 Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed CJK and Latin notes.

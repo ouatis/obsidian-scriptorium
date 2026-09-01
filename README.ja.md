@@ -4,6 +4,8 @@
 
 [English](./README.md) | [Chinese](./README.zh-CN.md)
 
+<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Obsidian で Scriptorium を開く" width="150"></a>
+
 ![Scriptorium screenshot](./screenshot.png)
 
 Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑えたコントラスト、静かなワークスペースのクローム、よりフラットなタグと callout、そして CJK とラテン文字の混在ノートに合わせたタイポグラフィを備えています。

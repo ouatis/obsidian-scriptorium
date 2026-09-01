@@ -4,6 +4,8 @@
 
 [English](./README.md) | [Japanese](./README.ja.md)
 
+<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="在 Obsidian 中打开 Scriptorium" width="150"></a>
+
 ![Scriptorium screenshot](./screenshot.png)
 
 Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工作区界面、更平的标签与 callout，以及针对中英文混排调过的字体层级。
