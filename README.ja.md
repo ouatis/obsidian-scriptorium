@@ -4,6 +4,12 @@
 
 [English](./README.md) | [Chinese](./README.zh-CN.md)
 
+<p>
+  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e24" alt="Latest release">
+  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=e3a33b" alt="Downloads">
+  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
+</p>
+
 <a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Obsidian で Scriptorium を開く" width="150"></a>
 
 ![Scriptorium screenshot](./screenshot.png)
