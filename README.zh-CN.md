@@ -1,8 +1,12 @@
+<div align="center">
+
 # Scriptorium 主题
 
-一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
+_一张安静的书桌。_
 
 [English](./README.md) | [Japanese](./README.ja.md)
+
+<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="在 Obsidian 中打开 Scriptorium" width="150"></a>
 
 <p>
   <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e24" alt="Latest release">
@@ -10,9 +14,11 @@
   <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
 </p>
 
-<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="在 Obsidian 中打开 Scriptorium" width="150"></a>
+<img src="./screenshot.png" alt="Scriptorium screenshot" width="720">
 
-![Scriptorium screenshot](./screenshot.png)
+</div>
+
+一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
 
 Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工作区界面、更平的标签与 callout，以及针对中英文混排调过的字体层级。
 

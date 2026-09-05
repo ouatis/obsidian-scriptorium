@@ -1,8 +1,12 @@
+<div align="center">
+
 # Scriptorium
 
-長文の読書と執筆のための、温かくミニマルな Obsidian テーマです。
+_長い思考のための、静かな机。_
 
 [English](./README.md) | [Chinese](./README.zh-CN.md)
+
+<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Obsidian で Scriptorium を開く" width="150"></a>
 
 <p>
   <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e24" alt="Latest release">
@@ -10,9 +14,11 @@
   <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
 </p>
 
-<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Obsidian で Scriptorium を開く" width="150"></a>
+<img src="./screenshot.png" alt="Scriptorium screenshot" width="720">
 
-![Scriptorium screenshot](./screenshot.png)
+</div>
+
+長文の読書と執筆のための、温かくミニマルな Obsidian テーマです。
 
 Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑えたコントラスト、静かなワークスペースのクローム、よりフラットなタグと callout、そして CJK とラテン文字の混在ノートに合わせたタイポグラフィを備えています。
 

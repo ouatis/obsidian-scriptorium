@@ -1,8 +1,12 @@
+<div align="center">
+
 # Scriptorium
 
-A warm, minimal Obsidian theme for long-form reading and writing.
+_A quiet desk for long thoughts._
 
 [Chinese](./README.zh-CN.md) | [Japanese](./README.ja.md)
+
+<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Open Scriptorium in Obsidian" width="150"></a>
 
 <p>
   <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e24" alt="Latest release">
@@ -10,9 +14,11 @@ A warm, minimal Obsidian theme for long-form reading and writing.
   <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
 </p>
 
-<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Open Scriptorium in Obsidian" width="150"></a>
+<img src="./screenshot.png" alt="Scriptorium screenshot" width="720">
 
-![Scriptorium screenshot](./screenshot.png)
+</div>
+
+A warm, minimal Obsidian theme for long-form reading and writing.
 
 Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed CJK and Latin notes.
 
