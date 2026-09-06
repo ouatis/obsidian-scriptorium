@@ -231,6 +231,9 @@
     /* Status Bar Dimensions & Opacity */
     --scrip-chrome-muted-opacity: 0.72;
     --scrip-status-expanded-width: min(28rem, calc(100vw - var(--size-8)));
+
+    /* Icon stroke weight multiplier (core draws at 1.0; see [04c]) */
+    --scrip-icon-stroke-modifier: 0.8;
 }
 
 
@@ -673,6 +676,20 @@ html {
     --scrollbar-thumb-color: rgba(var(--gray-65), var(--opacity-medium));
     --scrollbar-thumb-color-hover: rgba(var(--color-secondary-rgb), var(--opacity-half));
     --scrollbar-track-color: transparent;
+}
+
+/* [04c] Icon Refinement */
+/* Core 1.14 has no stroke-modifier hook (Baseline redefines the whole chain
+   itself), so the five rungs are re-pointed through one multiplier here.
+   Hairline-ink weight sits closer to the pen-on-paper voice; core's own
+   0.85 rest / 1 hover opacity already carries the quiet/loud contrast, so
+   opacity is left alone. */
+body {
+    --icon-xs-stroke-width: calc(2px * var(--scrip-icon-stroke-modifier));
+    --icon-s-stroke-width: calc(2px * var(--scrip-icon-stroke-modifier));
+    --icon-m-stroke-width: calc(2px * var(--scrip-icon-stroke-modifier));
+    --icon-l-stroke-width: calc(1.75px * var(--scrip-icon-stroke-modifier));
+    --icon-xl-stroke-width: calc(1.25px * var(--scrip-icon-stroke-modifier));
 }
 
 /* [05a] Workspace Tokens */
@@ -2402,10 +2419,6 @@ body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type 
 
 .search-result {
     border-top: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 62%, transparent);
-}
-
-.search-result-file-matched-text {
-    color: var(--text-primary);
 }
 
 /* Primary CTA buttons */
