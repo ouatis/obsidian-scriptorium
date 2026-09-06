@@ -115,10 +115,14 @@
 
     /* Easing Functions */
     --motion-apple: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Baseline's spring settle for arrivals (transform entrances only):
+       fast rise, ~3% overshoot, quiet land. Colors stay on the decel
+       curve above so state changes can never visibly overshoot. */
+    --motion-spring: cubic-bezier(0.1, 0, 0.1, 1.25);
 
     /* Animation Duration */
-    --duration-fast: 140ms;
-    --duration-moderate: 220ms;
+    --duration-fast: 160ms;
+    --duration-moderate: 320ms;
 
     /* Animation Shorthands */
     --ease-fast-smooth: var(--duration-fast) var(--motion-apple);
@@ -1789,9 +1793,8 @@ body:not(.is-mobile, .view-header-title-always) .view-header {
 body:not(.is-mobile, .view-header-title-always) .view-header :is(.view-header-left, .view-header-title-container > div, .view-actions) {
     transition:
         opacity var(--ease-fast-smooth),
-        transform var(--ease-moderate-smooth),
+        transform var(--ease-fast-smooth),
         color var(--ease-fast-smooth);
-    transform-origin: center left;
 }
 
 body:not(.is-mobile, .view-header-title-always) .view-header-title-parent {
@@ -1800,12 +1803,24 @@ body:not(.is-mobile, .view-header-title-always) .view-header-title-parent {
 
 body:not(.is-mobile, .view-header-title-always) .view-header:not(:hover):not(:focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions):not(:focus-within) {
     opacity: var(--scrip-chrome-muted-opacity);
-    transform: none;
+    transform: translateY(-4px);
 }
 
 body:not(.is-mobile, .view-header-title-always) .view-header:is(:hover, :focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions) {
     opacity: 1;
     transform: none;
+}
+
+/* Reveal choreography: chrome settles 4px down into place while brightening
+   (moderate); retreat lifts away quickly on the base transition. The slide
+   is enhancement-scoped so reduced motion gets opacity-only feedback. */
+@media (prefers-reduced-motion: no-preference) {
+    body:not(.is-mobile, .view-header-title-always) .view-header:is(:hover, :focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions) {
+        transition:
+            opacity var(--ease-moderate-smooth),
+            transform var(--ease-moderate-smooth),
+            color var(--ease-fast-smooth);
+    }
 }
 
 /* [08b] Workspace Tabs */
@@ -1968,7 +1983,10 @@ body:not(.is-mobile) .app-container .status-bar {
     transition:
         opacity var(--ease-fast-smooth),
         box-shadow var(--ease-fast-smooth),
-        background-color var(--ease-fast-smooth);
+        background-color var(--ease-fast-smooth),
+        max-width var(--ease-fast-smooth),
+        padding-left var(--ease-fast-smooth),
+        padding-right var(--ease-fast-smooth);
 }
 
 body:not(.is-mobile) .app-container .status-bar:hover,
@@ -1978,6 +1996,23 @@ body:not(.is-mobile) .app-container .status-bar:focus-within {
     box-shadow: var(--shadow-s);
     justify-content: flex-start;
     padding-inline: var(--size-3);
+}
+
+/* Reveal geometry glides at moderate speed so the pill opens like a drawer
+   (the justify-content switch lands inside that motion, masked); collapse
+   rides the faster base transition. Scoped to no-preference: reduced-motion
+   users keep instant geometry via the reduce block's property list. */
+@media (prefers-reduced-motion: no-preference) {
+    body:not(.is-mobile) .app-container .status-bar:hover,
+    body:not(.is-mobile) .app-container .status-bar:focus-within {
+        transition:
+            opacity var(--ease-fast-smooth),
+            box-shadow var(--ease-fast-smooth),
+            background-color var(--ease-fast-smooth),
+            max-width var(--ease-moderate-smooth),
+            padding-left var(--ease-moderate-smooth),
+            padding-right var(--ease-moderate-smooth);
+    }
 }
 
 /* Move sync status indicator to the left so it displays when collapsed */
@@ -2030,8 +2065,8 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
 }
 
 /* Keep hidden profile controls recoverable through hover or keyboard focus.
-   Layout changes are intentionally not animated; only opacity/color should
-   carry the reveal. */
+   Opacity leads the reveal; geometry glides behind it (collapse rides the
+   faster base transition). */
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon:first-child,
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"],
@@ -2042,7 +2077,10 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
     transition:
         opacity var(--ease-fast-smooth),
         background-color var(--ease-fast-smooth),
-        color var(--ease-fast-smooth);
+        color var(--ease-fast-smooth),
+        max-width var(--ease-fast-smooth),
+        padding-left var(--ease-fast-smooth),
+        padding-right var(--ease-fast-smooth);
 }
 
 body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) .workspace-drawer-vault-switcher {
@@ -2067,6 +2105,25 @@ body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-side
     margin-left: initial;
     margin-right: initial;
     pointer-events: auto;
+}
+
+/* Reveal-direction timing: geometry glides at moderate while opacity leads;
+   collapse uses the faster base transition. Scoped to no-preference so the
+   reduce block's property list keeps geometry instant for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+    body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :focus-within) :is(.workspace-drawer-vault-switcher, .workspace-drawer-vault-actions .clickable-icon:first-child, .workspace-drawer-vault-actions .clickable-icon[aria-label*="Help"], .workspace-drawer-vault-actions .clickable-icon[aria-label*="help"], .workspace-drawer-vault-actions .clickable-icon[aria-label*="帮助"], .workspace-drawer-vault-actions .clickable-icon[aria-label*="ヘルプ"]) {
+        transition:
+            opacity var(--ease-fast-smooth),
+            background-color var(--ease-fast-smooth),
+            color var(--ease-fast-smooth),
+            max-width var(--ease-moderate-smooth),
+            padding-left var(--ease-moderate-smooth),
+            padding-right var(--ease-moderate-smooth);
+    }
+
+    body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions {
+        transition: gap var(--ease-fast-smooth);
+    }
 }
 
 /* [09d] Sidebar Panel Header Hover Reveal */
@@ -2103,7 +2160,11 @@ body:not(.is-mobile) .app-container .mod-sidedock .workspace-leaf-content .nav-h
     transition:
         opacity var(--ease-fast-smooth),
         background-color var(--ease-fast-smooth),
-        color var(--ease-fast-smooth);
+        color var(--ease-fast-smooth),
+        gap var(--ease-fast-smooth),
+        width var(--ease-fast-smooth),
+        height var(--ease-fast-smooth),
+        padding var(--ease-fast-smooth);
 }
 
 /* [09e] Window & Mobile States */
@@ -2200,6 +2261,7 @@ body.is-mobile .mobile-toolbar {
 
     /* Reduced motion removes spatial movement but keeps color/opacity feedback
        so controls remain legible and stateful. */
+    body:not(.is-mobile, .view-header-title-always) .view-header :is(.view-header-left, .view-header-title-container > div, .view-actions),
     body:not(.is-mobile) .app-container .status-bar,
     body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher,
     body:not(.is-mobile) .app-container .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon,
@@ -2439,7 +2501,7 @@ button.mod-cta,
 
 @media (prefers-reduced-motion: no-preference) {
     .modal-container .modal {
-        animation: modal-entrance var(--duration-moderate) var(--motion-apple);
+        animation: modal-entrance var(--duration-moderate) var(--motion-spring);
     }
 
     /* Menus and hover popovers join the modal's pop-in: one-shot, transform
@@ -2447,7 +2509,7 @@ button.mod-cta,
        Tooltips and typing-adjacent suggestion boxes stay instant on purpose. */
     .menu,
     .popover {
-        animation: scrip-pop-in 160ms var(--motion-apple);
+        animation: scrip-pop-in var(--duration-moderate) var(--motion-spring);
     }
 }
 
@@ -2581,7 +2643,7 @@ button.mod-cta,
     margin-inline-start: auto;
     margin-top: 0.36em;
     opacity: var(--opacity-half);
-    transition: transform var(--ease-moderate-smooth),
+    transition: transform var(--duration-moderate) var(--motion-spring),
         opacity var(--ease-fast-smooth);
 }
 
