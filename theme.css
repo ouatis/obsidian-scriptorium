@@ -54,7 +54,7 @@
     /* Heading stack: Latin runs in IBM Plex Serif first so English titles
        pair with the IBM Plex Sans body; CJK falls through to Noto Serif SC. */
     --scrip-font-heading-stack: "IBM Plex Serif", "Noto Serif SC", "Source Han Serif SC", "Georgia", "Times New Roman", serif;
-    --scrip-font-text: var(--font-text, var(--scrip-font-cjk-stack));
+    --scrip-font-text: var(--font-text), var(--scrip-font-cjk-stack);
 
     /* Typographic scale: CJK-heavy headings stay tighter with zero tracking.
        Sizes derive from --font-text-size so the Appearance font-size slider
