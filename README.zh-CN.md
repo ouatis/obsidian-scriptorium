@@ -53,4 +53,8 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 - 标签保持安静：标注正文，而不与标题、链接竞争。
 - 阅读舒适优先于装饰新奇。
 
+## 开发
+
+可读源码在 `src/theme.css`。修改后运行 `npm run build`，由 esbuild 压缩生成发布的 `theme.css`，保持文件轻量以通过社区商店的体积检查。`npm run lint` 对源码运行 stylelint。
+
 由 [@ouatis](https://github.com/ouatis/) 制作。受 [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) 与 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 启发。

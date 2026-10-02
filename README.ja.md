@@ -53,4 +53,8 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 - タグは静かに保ち、見出しやリンクと競合させない。
 - 読み心地を装飾的な新しさより優先する。
 
+## 開発
+
+可読ソースは `src/theme.css` にあります。編集後に `npm run build` を実行すると、esbuild が配布用の `theme.css` を生成し、ストアのサイズチェックに向けた軽量さを保ちます。`npm run lint` でソースに stylelint を実行します。
+
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).

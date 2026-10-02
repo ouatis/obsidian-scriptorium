@@ -53,4 +53,8 @@ Guidelines the theme is edited against, kept for future maintenance:
 - Keep tags quiet enough to annotate prose without competing with headings or links.
 - Treat reading comfort as more important than decorative novelty.
 
+## Development
+
+The readable source lives in `src/theme.css`. Edit it, then run `npm run build` — esbuild minifies it into the shipped `theme.css`, which keeps the file lean for the community-store size check. `npm run lint` runs stylelint against the source.
+
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).
