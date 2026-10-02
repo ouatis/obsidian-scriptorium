@@ -1207,6 +1207,9 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     border-radius: var(--table-border-radius);
     overflow: hidden;
     width: 100%;
+    /* Tabular figures by default: page refs, counts, and dates align
+       vertically down a column — a paper table reads as a ledger. */
+    font-variant-numeric: tabular-nums;
     margin-block: var(--size-6);
     box-shadow: none;
 }
