@@ -3,6 +3,7 @@ name: lint
 on:
   push:
     paths:
+      - "src/theme.css"
       - "theme.css"
       - "package.json"
       - "package-lock.json"
