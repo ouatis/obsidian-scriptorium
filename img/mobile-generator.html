@@ -1,0 +1,134 @@
+<!doctype html><html class="theme-light"><head><meta charset="utf-8">
+<style>
+  html, body { margin: 0; }
+  body { --font-text-theme: '??'; --font-text-override: '??'; --font-default: sans-serif;
+         --font-text: var(--font-text-override), var(--font-text-theme), var(--font-default);
+         --font-text-size: 16px; }
+  .stage { width: 900px; height: 1600px; position: relative; overflow: hidden;
+           background: var(--background-secondary); }
+  .bar { border-radius: 6px; background: currentColor; }
+  /* brand band */
+  .band { position: absolute; top: 0; left: 0; right: 0; height: 168px;
+          background: rgb(32, 28, 19); color: rgb(252, 248, 239);
+          padding: 30px 40px 0; box-sizing: border-box; }
+  .status { position: absolute; top: 22px; left: 44px; right: 44px; display: flex;
+            justify-content: space-between; }
+  .schip { height: 9px; border-radius: 5px; background: rgba(252, 248, 239, 0.4); }
+  .wordrow { display: flex; align-items: center; justify-content: space-between; margin-top: 34px; }
+  .wordmark { font-family: var(--font-headings, serif); font-weight: var(--font-semibold, 600);
+              font-size: 40px; letter-spacing: -0.01em; }
+  .dots { display: flex; gap: 10px; align-items: center; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  /* paper */
+  .paper { position: absolute; left: 18px; right: 18px; top: 192px; bottom: -20px;
+           background: var(--background-primary); border-radius: 14px 14px 0 0;
+           border: 1px solid color-mix(in srgb, var(--paper-frame-border) 40%, transparent);
+           border-bottom: 0; padding: 46px 42px; box-sizing: border-box;
+           box-shadow: 0 10px 26px rgba(28, 24, 19, 0.08); }
+  .grp { margin-bottom: 52px; }
+  .row { display: flex; gap: 16px; margin-bottom: 18px; }
+  .b { height: 14px; }
+  .blk { height: 34px; border-radius: 8px; }
+  .task { display: flex; align-items: center; gap: 17px; margin-bottom: 19px; }
+  .chip { width: 23px; height: 23px; border-radius: 7px; flex: none;
+          border: 1.5px solid color-mix(in srgb, var(--border-strong-1) 72%, transparent); }
+  .chip.on { background: var(--interactive-accent); border-color: var(--interactive-accent); }
+  .bcard { border: 1px solid color-mix(in srgb, var(--paper-frame-border) 64%, transparent);
+           border-left: 5px solid color-mix(in srgb, rgb(var(--color-secondary-rgb)) 55%, transparent);
+           border-radius: 12px; background: color-mix(in srgb, var(--panel-surface) 95%, transparent);
+           padding: 22px 26px; }
+  mark { background-color: var(--highlight); color: var(--scrip-ink-strong); border-radius: 6px; padding: 4px 9px; }
+  /* navbar floats over content */
+  .navbar { position: absolute; left: 18px; right: 18px; bottom: 26px; height: 76px;
+            background: var(--layer-1); border-radius: 38px;
+            border: 1px solid color-mix(in srgb, var(--paper-frame-border) 45%, transparent);
+            box-shadow: 0 10px 26px rgba(28, 24, 19, 0.16);
+            display: flex; align-items: center; justify-content: space-around; padding: 0 30px; }
+  .nb { width: 24px; height: 24px; border-radius: 8px; background: var(--text-muted); opacity: 0.75; }
+  .nb.active { background: var(--interactive-accent); opacity: 1; }
+</style>
+<link rel="stylesheet" href="file:///C:/Users/louxi/AppData/Local/Temp/cover/app.css">
+<link rel="stylesheet" href="file:///C:/Users/louxi/Documents/github/obsidian-scriptorium/src/theme.css">
+</head><body class="show-inline-title">
+<div class="stage">
+  <div class="band">
+    <div class="status">
+      <div class="schip" style="width: 74px;"></div>
+      <div style="display: flex; gap: 12px;">
+        <div class="schip" style="width: 24px;"></div>
+        <div class="schip" style="width: 40px;"></div>
+      </div>
+    </div>
+    <div class="wordrow">
+      <div class="wordmark">Scriptorium</div>
+      <div class="dots">
+        <div class="dot" style="background: var(--interactive-accent);"></div>
+        <div class="dot" style="background: rgb(var(--color-secondary-rgb));"></div>
+        <div class="dot" style="background: rgb(227, 163, 59);"></div>
+      </div>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="grp" style="margin-bottom: 40px;">
+      <div class="bar blk" style="width: 76%; background: var(--scrip-ink-strong);"></div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 44%;"></div><div class="bar b" style="width: 36%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 58%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 24%;"></div><mark><div class="bar b" style="width: 140px; background: var(--scrip-ink-strong);"></div></mark></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 52%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="bcard">
+      <div class="row" style="margin-bottom: 16px;"><div class="bar b" style="width: 62%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 38%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp" style="margin-top: 52px;">
+      <div class="task"><div class="chip"></div><div class="bar b" style="width: 48%;"></div></div>
+      <div class="task" style="margin-bottom: 0;"><div class="chip on"></div><div class="bar b" style="width: 38%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 40%;"></div><div class="bar b" style="width: 30%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 52%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 34%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 56%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 30%;"></div><div class="bar b" style="width: 38%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 54%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp" style="margin-bottom: 52px;">
+      <div class="bcard" style="border-left-color: color-mix(in srgb, rgb(var(--color-secondary-rgb)) 55%, transparent);">
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 58%;"></div></div>
+      </div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 26%;"></div><div class="bar b" style="width: 40%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 48%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 42%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 56%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp">
+      <div class="row"><div class="bar b" style="width: 36%;"></div><div class="bar b" style="width: 28%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 50%; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="grp" style="margin-bottom: 0;">
+      <div class="row"><div class="bar b" style="width: 44%;"></div></div>
+      <div class="row" style="margin-bottom: 0;"><div class="bar b" style="width: 30%; background: var(--text-muted);"></div></div>
+    </div>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="nb" style="border-radius: 50%; border: 1.5px solid var(--text-muted); background: transparent;"></div>
+    <div class="nb"></div>
+    <div class="nb active" style="border-radius: 50%;"></div>
+    <div class="nb"></div>
+    <div class="nb" style="border-radius: 50%; border: 1.5px solid var(--text-muted); background: transparent;"></div>
+  </div>
+</div>
+</body></html>
