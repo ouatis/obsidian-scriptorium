@@ -29,7 +29,7 @@
    [09] Workspace Auto-hide & Window States
    [10] Buttons
    [11] Modals
-   [12] Reserved
+   [12] Settings Surface
    [13] Callouts
    [14] Embedded Notes
    [15] Canvas & Graph
@@ -1003,10 +1003,16 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
    the CJK font's tall ideographic metrics) so glyph ink meets the box edge
    - the title settles onto the paper and headings sit at their true visual
    distance from surrounding text. Chromium 133+/Safari 18.2+; older
-   engines keep the current spacing. HyperMD editor lines are excluded:
-   trimming .cm-line boxes risks CM6 cursor-measure drift. */
+   engines keep the current spacing.
+   Editor headings join the experiment: CM6 measures line boxes through the
+   DOM (it already absorbs the theme's variable heading line-heights), so a
+   trimmed line is one more height variation - but this rides behind a real
+   machine check of cursor placement (wrapped headings, widget-adjacent
+   lines, first/last lines) before it ships. */
 .inline-title,
-:is(.markdown-preview-view, .markdown-rendered) :is(h1, h2, h3, h4, h5, h6) {
+:is(.markdown-preview-view, .markdown-rendered) :is(h1, h2, h3, h4, h5, h6),
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-1, .HyperMD-header-2, .HyperMD-header-3,
+  .HyperMD-header-4, .HyperMD-header-5, .HyperMD-header-6).cm-line {
     text-box: trim-both cap alphabetic;
 }
 
@@ -2612,6 +2618,69 @@ button.mod-cta,
 
 /* Writing Components ================================================= */
 
+
+/* [12] Settings Surface */
+/* Core 1.14 groups setting items into cards; the paper material rides the
+   same structure through core's own variable hooks - no geometry changes.
+   Group cards take the warm panel frame, dividers drop to the soft rule
+   tone, the slider track becomes a quiet ink line, and the vertical nav's
+   active row carries the inset accent bar the file nav uses. Toggles are
+   already on-language through the accent token and stay untouched. */
+body {
+    --setting-items-background: color-mix(in srgb, var(--panel-surface) 96%, var(--background-primary));
+    --setting-items-divider-color: color-mix(in srgb, var(--border-subtle-1) 58%, transparent);
+    --slider-track-background: color-mix(in srgb, var(--text-muted) 38%, transparent);
+}
+
+.setting-group {
+    border: 1px solid color-mix(in srgb, var(--paper-frame-border) 45%, transparent);
+    border-radius: var(--radius-m);
+}
+
+.vertical-tab-nav-item.is-active {
+    box-shadow: inset 3px 0 0 0 var(--interactive-accent);
+}
+
+.vertical-tab-nav-item.is-active {
+    box-shadow: inset 3px 0 0 0 var(--interactive-accent);
+}
+
+/* Group headings read as editorial section labels; hotkey chips borrow the
+   keycap language from [07b]; community plugin cards take the same paper
+   frame as everything else in the settings surface. */
+.setting-group .setting-item-heading .setting-item-name {
+    font-family: var(--font-interface);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.setting-hotkey {
+    font-family: var(--font-monospace);
+    font-size: 0.86em;
+    color: var(--text-secondary);
+    background-color: color-mix(in srgb, var(--layer-2) 55%, var(--panel-surface));
+    border: 1px solid color-mix(in srgb, var(--paper-frame-border) 62%, transparent);
+    border-bottom-width: 2px;
+    border-radius: calc(var(--radius-s) + 1px);
+    padding: 0.1em 0.42em;
+}
+
+.community-item {
+    border: 1px solid color-mix(in srgb, var(--paper-frame-border) 45%, transparent);
+    border-radius: var(--radius-m);
+    background-color: var(--background-primary);
+}
+
+.community-item:hover {
+    border-color: color-mix(in srgb, var(--interactive-accent) 40%, var(--paper-frame-border));
+}
+
+.modal.mod-settings .setting-item .pickr button.pcr-button {
+    border-radius: var(--radius-s);
+    border: 1px solid color-mix(in srgb, var(--paper-frame-border) 55%, transparent);
+}
 
 /* [13] Callouts
    Custom Obsidian callouts follow SCRIPTORIUM's paper metaphor,
