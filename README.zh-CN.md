@@ -34,8 +34,8 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 
 ## 设计
 
-- 推荐字体：IBM Plex Sans SC（适合中英混排笔记）、IBM Plex Serif、IBM Plex Mono。
-- Scriptorium 使用内置字体栈（IBM Plex 家族 + 中文字体回退），外观设置里的字体选项不会生效。
+- Scriptorium 以 IBM Plex 家族排印——安装 [IBM Plex Sans SC](https://fonts.google.com/specimen/IBM+Plex+Sans+SC)（中英混排）、[IBM Plex Serif](https://fonts.google.com/specimen/IBM+Plex+Serif) 与 [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) 即自动生效；Google Fonts 不可达时可用 [IBM Plex 官方发布包](https://github.com/IBM/plex/releases)。
+- 在外观设置里选择自己的字体会领先字体栈，IBM Plex 与中文回退紧随其后。
 - 阅读面保持轻：纹理、阴影和强调色都刻意压低。
 - 导航、搜索、菜单、标签、callout 和 embed 尽量安静，让正文居中。
 - 主题以单一 `theme.css` 发布，无外部依赖。

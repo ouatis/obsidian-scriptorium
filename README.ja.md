@@ -34,8 +34,8 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 
 ## 設計
 
-- 推奨フォント: IBM Plex Sans JP, IBM Plex Serif, IBM Plex Mono.
-- Scriptorium は独自のフォントスタック（IBM Plex 系 + CJK フォールバック）を適用するため、外観設定のフォント選択は反映されません。
+- Scriptorium は IBM Plex ファミリーで組まれています。[IBM Plex Sans JP](https://fonts.google.com/specimen/IBM+Plex+Sans+JP)、[IBM Plex Serif](https://fonts.google.com/specimen/IBM+Plex+Serif)、[IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) を導入すると自動で適用されます（Google Fonts が利用できない場合は [IBM Plex 公式リリース](https://github.com/IBM/plex/releases)）。
+- 外観設定で別のフォントを選ぶとそのフォントが優先され、IBM Plex と CJK フォールバックが続きます。
 - ドキュメント面は軽く保つ: 画像的な質感、影、アクセント色は意図的に抑えています。
 - ナビゲーション、検索、メニュー、タグ、callout、embed は静かに保ち、本文を中央に置きます。
 - テーマは単一の `theme.css` として配布され、外部依存はありません。
