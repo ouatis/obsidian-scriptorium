@@ -1004,11 +1004,10 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
    - the title settles onto the paper and headings sit at their true visual
    distance from surrounding text. Chromium 133+/Safari 18.2+; older
    engines keep the current spacing.
-   Editor headings join the experiment: CM6 measures line boxes through the
-   DOM (it already absorbs the theme's variable heading line-heights), so a
-   trimmed line is one more height variation - but this rides behind a real
-   machine check of cursor placement (wrapped headings, widget-adjacent
-   lines, first/last lines) before it ships. */
+   Editor headings share the same seating: CM6 measures line boxes through
+   the DOM and absorbs the trim like any other height variation - verified
+   in live preview across cursor placement, wrapped headings,
+   widget-adjacent lines, rail alignment and scroll (2026-10-03). */
 .inline-title,
 :is(.markdown-preview-view, .markdown-rendered) :is(h1, h2, h3, h4, h5, h6),
 .markdown-source-view.mod-cm6 :is(.HyperMD-header-1, .HyperMD-header-2, .HyperMD-header-3,
