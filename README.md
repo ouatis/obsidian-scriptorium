@@ -57,4 +57,6 @@ Guidelines the theme is edited against, kept for future maintenance:
 
 The readable source lives in `src/theme.css`. Edit it, then run `npm run build` — esbuild minifies it into the shipped `theme.css`, which keeps the file lean for the community-store size check. `npm run lint` runs stylelint against the source.
 
+Personal adjustments go through CSS snippets — [snippet-example.css](snippet-example.css) is a commented tour of the tokens a snippet may safely touch, with the palette ramps and the override tiers explained.
+
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).

@@ -57,4 +57,6 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 
 可读源码在 `src/theme.css`。修改后运行 `npm run build`，由 esbuild 压缩生成发布的 `theme.css`，保持文件轻量以通过社区商店的体积检查。`npm run lint` 对源码运行 stylelint。
 
+个人微调走 CSS snippet——[snippet-example.css](snippet-example.css) 是一份带注释的 token 导览：哪些变量可以放心覆盖、色阶斜坡怎么重调、三层覆盖关系，都在里面。
+
 由 [@ouatis](https://github.com/ouatis/) 制作。受 [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) 与 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 启发。

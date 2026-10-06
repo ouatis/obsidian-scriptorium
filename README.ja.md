@@ -57,4 +57,6 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 
 可読ソースは `src/theme.css` にあります。編集後に `npm run build` を実行すると、esbuild が配布用の `theme.css` を生成し、ストアのサイズチェックに向けた軽量さを保ちます。`npm run lint` でソースに stylelint を実行します。
 
+個人的な調整は CSS スニペットで行います——[snippet-example.css](snippet-example.css) は、安全に上書きできるトークンを一つずつ注釈付きで案内するファイルです。パレットのランプと上書きの三層構造も説明しています。
+
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).
