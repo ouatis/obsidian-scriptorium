@@ -1,4 +1,4 @@
-name: lint
+name: lint-and-build
 
 on:
   push:
@@ -22,3 +22,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - name: Build theme.css from src
+        run: npm run build
+      - name: Fail if the committed theme.css drifted from src
+        run: git diff --exit-code theme.css
