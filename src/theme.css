@@ -2037,8 +2037,8 @@ body:not(.is-mobile) {
 }
 
 /* [09b] Status Bar Hover Reveal */
-/* Keep the status bar compact, but avoid animating width/padding; the pill
-   remains a visible affordance even when no sync status item is present. */
+/* The rightmost sync slot stays under the pointer while the other items
+   reveal to its left. Keep a visible pill even without a sync item. */
 body:not(.is-mobile) .app-container .status-bar {
     position: fixed;
     bottom: 12px;
@@ -2052,7 +2052,7 @@ body:not(.is-mobile) .app-container .status-bar {
     white-space: nowrap;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     
     background-color: var(--layer-1);
     border: var(--border-width) solid var(--border-subtle-1);
@@ -2066,8 +2066,7 @@ body:not(.is-mobile) .app-container .status-bar {
         box-shadow var(--ease-fast-smooth),
         background-color var(--ease-fast-smooth),
         max-width var(--ease-fast-smooth),
-        padding-left var(--ease-fast-smooth),
-        padding-right var(--ease-fast-smooth);
+        padding-left var(--ease-fast-smooth);
 }
 
 body:not(.is-mobile) .app-container .status-bar:hover,
@@ -2075,13 +2074,11 @@ body:not(.is-mobile) .app-container .status-bar:focus-within {
     max-width: var(--scrip-status-expanded-width);
     opacity: 1;
     box-shadow: var(--shadow-s);
-    justify-content: flex-start;
-    padding-inline: var(--size-3);
+    padding-left: var(--size-3);
 }
 
-/* Reveal geometry glides at moderate speed so the pill opens like a drawer
-   (the justify-content switch lands inside that motion, masked); collapse
-   rides the faster base transition. Scoped to no-preference: reduced-motion
+/* Reveal to the left at moderate speed; collapse uses the faster base
+   transition. The right edge and sync slot never animate. Reduced-motion
    users keep instant geometry via the reduce block's property list. */
 @media (prefers-reduced-motion: no-preference) {
     body:not(.is-mobile) .app-container .status-bar:hover,
@@ -2091,15 +2088,22 @@ body:not(.is-mobile) .app-container .status-bar:focus-within {
             box-shadow var(--ease-fast-smooth),
             background-color var(--ease-fast-smooth),
             max-width var(--ease-moderate-smooth),
-            padding-left var(--ease-moderate-smooth),
-            padding-right var(--ease-moderate-smooth);
+            padding-left var(--ease-moderate-smooth);
     }
 }
 
-/* Move sync status indicator to the left so it displays when collapsed */
+/* Reserve the same right-edge hit target in both collapsed and open states.
+   Do not reverse the other items or replace the native sync tooltip. */
 body:not(.is-mobile) .app-container .status-bar .status-bar-item.plugin-sync,
 body:not(.is-mobile) .app-container .status-bar .status-bar-item[class*="sync"] {
-    order: -1;
+    order: 1;
+    flex: 0 0 auto;
+    width: calc(36px - 2 * var(--border-width));
+    height: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Collapsed items stay keyboard-reachable without affecting pill geometry. */
@@ -2300,8 +2304,7 @@ body.is-mobile .mobile-toolbar {
 @media (hover: none) {
     body:not(.is-mobile) .app-container .status-bar {
         max-width: var(--scrip-status-expanded-width);
-        justify-content: flex-start;
-        padding-inline: var(--size-3);
+        padding-left: var(--size-3);
         opacity: 0.82;
     }
 
