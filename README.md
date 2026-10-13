@@ -9,21 +9,29 @@ _A quiet desk for long thoughts._
 <a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Open Scriptorium in Obsidian" width="150"></a>
 
 <p>
-  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=ad3e32" alt="Latest release">
-  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=d0a85c" alt="Downloads">
-  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=2f6754" alt="MIT License">
+  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e18" alt="Latest release">
+  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=6d665d" alt="Downloads">
+  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
 </p>
 
-<img src="./screenshot.png" alt="Scriptorium screenshot" width="720">
-
 </div>
+
+![Scriptorium: paper, type and thought. Concept illustration, not an Obsidian screenshot.](img/cover.svg)
 
 A warm, minimal Obsidian theme for long-form reading and writing.
 
 Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed CJK and Latin notes.
 
+Paper, light and connections: Scriptorium shares quiet shapes and a visual rhythm with Desk Lamp and Skill Switchboard. Each product works independently; neither plugin is required to use the theme.
+
 > [!NOTE]
 > Scriptorium is a personal aesthetic. It does not aim to support the `Style Settings` plugin.
+
+## Preview
+
+<img src="./screenshot.png" alt="Scriptorium layout illustration showing a paper surface, links, tasks, a table and a callout. Not an in-app screenshot." width="720">
+
+Layout illustration, not an in-app screenshot. The cover above is also concept artwork; the active theme, fonts and your settings determine the appearance inside Obsidian.
 
 ## Install
 

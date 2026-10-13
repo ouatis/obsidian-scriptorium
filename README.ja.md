@@ -9,21 +9,29 @@ _長い思考のための、静かな机。_
 <a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Obsidian で Scriptorium を開く" width="150"></a>
 
 <p>
-  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=ad3e32" alt="Latest release">
-  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=d0a85c" alt="Downloads">
-  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=2f6754" alt="MIT License">
+  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e18" alt="Latest release">
+  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=6d665d" alt="Downloads">
+  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
 </p>
 
-<img src="./screenshot.png" alt="Scriptorium screenshot" width="720">
-
 </div>
+
+![Scriptorium：紙、組版、思考。Obsidian のスクリーンショットではなく、コンセプトイラストです。](img/cover.svg)
 
 長文の読書と執筆のための、温かくミニマルな Obsidian テーマです。
 
 Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑えたコントラスト、静かなワークスペースのクローム、よりフラットなタグと callout、そして CJK とラテン文字の混在ノートに合わせたタイポグラフィを備えています。
 
+紙、光、つながり。Scriptorium は Desk Lamp、Skill Switchboard と静かな輪郭と視覚リズムを共有します。各製品は独立して動作し、テーマを使うために二つのプラグインを導入する必要はありません。
+
 > [!NOTE]
 > Scriptorium は個人的な美意識を前提にしたテーマであり、`Style Settings` プラグインの対応を目的としていません。
+
+## プレビュー
+
+<img src="./screenshot.png" alt="Scriptorium のレイアウト図：紙の面、リンク、タスク、表、callout。実際のアプリ画面ではありません。" width="720">
+
+レイアウトのイラストであり、実際のアプリ画面ではありません。上のカバーもコンセプトイラストです。Obsidian 内の見た目は、使用中のテーマ、フォント、設定によって変わります。
 
 ## インストール
 

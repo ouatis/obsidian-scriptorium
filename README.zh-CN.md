@@ -9,21 +9,29 @@ _一张安静的书桌。_
 <a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="在 Obsidian 中打开 Scriptorium" width="150"></a>
 
 <p>
-  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=ad3e32" alt="Latest release">
-  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=d0a85c" alt="Downloads">
-  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=2f6754" alt="MIT License">
+  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e18" alt="Latest release">
+  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=6d665d" alt="Downloads">
+  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
 </p>
 
-<img src="./screenshot.png" alt="Scriptorium screenshot" width="720">
-
 </div>
+
+![Scriptorium：纸页、排印与思考。这是概念插画，不是 Obsidian 截图。](img/cover.svg)
 
 一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
 
 Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工作区界面、更平的标签与 callout，以及针对中英文混排调过的字体层级。
 
+纸页、光与连接：Scriptorium 与小台灯、技能接线台共享安静的轮廓和视觉节奏。三款产品各自独立，使用主题不需要安装另外两个插件。
+
 > [!NOTE]
 > Scriptorium 是偏个人审美的主题，不以支持 `Style Settings` 插件为目标。
+
+## 预览
+
+<img src="./screenshot.png" alt="Scriptorium 布局示意：纸页面、链接、任务、表格与 callout。不是实际应用截图。" width="720">
+
+这是布局示意，不是实际应用截图；上方封面也属于概念插画。Obsidian 内的实际外观取决于启用的主题、字体和你的设置。
 
 ## 安装
 
