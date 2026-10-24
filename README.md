@@ -22,7 +22,7 @@ A warm, minimal Obsidian theme for long-form reading and writing.
 
 Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed CJK and Latin notes.
 
-Paper, light and connections: Scriptorium shares quiet shapes and a visual rhythm with Desk Lamp and Skill Switchboard. Each product works independently; neither plugin is required to use the theme.
+Paper, light and connections: Scriptorium shares quiet shapes and a visual rhythm with Desk Lamp, Skill Switchboard and Collate. Each product works independently; the theme does not require any of the plugins.
 
 > [!NOTE]
 > Scriptorium is a personal aesthetic. It does not aim to support the `Style Settings` plugin.
