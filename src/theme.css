@@ -882,6 +882,13 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
         min-width: 5rem;
         word-break: break-word;
     }
+
+    /* Narrow panes fall back to ragged-right: full justification needs a
+       comfortable measure, otherwise CJK prose opens visible rivers.
+       Higher specificity than the base paragraph rule (which comes later). */
+    .markdown-reading-view .markdown-preview-view p {
+        text-align: start;
+    }
 }
 
 /* [06a] Editor Surface */
