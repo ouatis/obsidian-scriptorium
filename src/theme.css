@@ -584,7 +584,11 @@ body.is-mobile {
 }
 
 /* [04b] Semantic Aliases */
-html {
+/* body, not html: every alias below resolves against the theme-layer tokens
+   (--text-primary, --text-muted, --layer-1, ...), which Obsidian defines via
+   .theme-light/.theme-dark on <body>. On <html> those references are invalid
+   at computed-value time and inherit as guaranteed-invalid. */
+body {
     /* Text colors */
     --text-on-accent: rgb(var(--white));
     --text-on-accent-inverted: rgb(var(--gray-100));
