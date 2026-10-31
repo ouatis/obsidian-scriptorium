@@ -2004,12 +2004,12 @@ body:not(.is-mobile, .view-header-title-always) .view-header:is(:hover, :focus-w
 
 .workspace-leaf-content[data-type="backlink"] .pane-empty,
 .workspace-leaf-content[data-type="outgoing-link"] .pane-empty {
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 .workspace-leaf-content[data-type="backlink"] .tree-item-flair,
 .workspace-leaf-content[data-type="outgoing-link"] .tree-item-flair {
-    color: var(--text-faint);
+    color: var(--text-muted);
     background-color: transparent;
 }
 
@@ -3058,7 +3058,7 @@ body {
 }
 
 .bases-cards-label {
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 .workspace-leaf-content[data-type="markdown"] .bases-embed .bases-view {
