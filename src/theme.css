@@ -2938,6 +2938,19 @@ body {
     line-height: inherit;
 }
 
+/* Hover previews already draw the popover card frame; the embed they render
+   must not add a second frame or padding. Mirrors the canvas-node flatten below. */
+.popover .markdown-embed {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.popover .markdown-embed-content {
+    padding: 0;
+}
+
 /* [15] Canvas & Graph
    Canvas cards and graph nodes inherit the paper material so the
    visual language stays coherent outside the writing surface. */
