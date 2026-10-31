@@ -2923,6 +2923,17 @@ body {
     padding: var(--size-3);
 }
 
+.markdown-embed .markdown-preview-view {
+    max-width: none;
+    margin-block: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    line-height: inherit;
+}
+
 /* [15] Canvas & Graph
    Canvas cards and graph nodes inherit the paper material so the
    visual language stays coherent outside the writing surface. */
