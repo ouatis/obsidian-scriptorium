@@ -20,7 +20,7 @@ _長い思考のための、静かな机。_
 
 長文の読書と執筆のための、温かくミニマルな Obsidian テーマです。
 
-![Scriptorium で読書ノートを表示：セリフ見出し、暖かいハイライト、静かな引用ルール、縞模様のテーブル。実際のスクリーンショット。](img/screenshot-reading.png)
+![ライトとダークの読書：セリフ見出し、暖かいハイライト、静かな引用ルール、縞模様のテーブル。](img/screenshot-reading-split.png)
 
 Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑えたコントラスト、静かなワークスペースのクローム、よりフラットなタグと callout、そして CJK とラテン文字の混在ノートに合わせたタイポグラフィを備えています。
 
@@ -28,16 +28,6 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 
 > [!NOTE]
 > Scriptorium は個人的な美意識を前提にしたテーマです。`Style Settings` プラグインには厳選した項目だけを公開し、それ以外の調整は token 契約にあります（[snippet-example.css](snippet-example.css) 参照）。
-
-## スクリーンショット
-
-![ライトモードの読書：セリフ見出し、暖かいハイライト、静かな引用ルール、縞模様のテーブル。](img/screenshot-reading.png)
-
-![ダークモード：同じ声が暖かい暗い紙に。](img/screenshot-reading-dark.png)
-
-![ライブプレビュー編集：ソースマーカー、インタラクティブなチェックボックス、表がくっきり。](img/screenshot-editor.png)
-
-![13 種類すべての callout に Phosphor アイコン。各 callout のアクセント色で着色。](img/screenshot-callouts.png)
 
 ## インストール
 

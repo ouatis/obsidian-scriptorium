@@ -20,7 +20,7 @@ _一张安静的书桌。_
 
 一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
 
-![Scriptorium 渲染的阅读页：衬线标题、暖色高亮、安静的引用线与条纹表格。真实截图。](img/screenshot-reading.png)
+![亮暗双纸阅读：衬线标题、暖色高亮、安静的引用线与条纹表格——两种纸面，同一种声音。](img/screenshot-reading-split.png)
 
 Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工作区界面、更平的标签与 callout，以及针对中英文混排调过的字体层级。
 
@@ -30,14 +30,6 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 > Scriptorium 是偏个人审美的主题。`Style Settings` 插件中开放了一小组精选控制项；其余一切可调项都在 token 契约里（见 [snippet-example.css](snippet-example.css)）。
 
 ## 截图
-
-![亮色阅读：衬线标题、暖色高亮、安静的引用线与条纹表格。](img/screenshot-reading.png)
-
-![暗色模式：同一声音落在暖暗纸面上。](img/screenshot-reading-dark.png)
-
-![实时预览编辑：源码标记、可交互复选框与表格保持清晰。](img/screenshot-editor.png)
-
-![十三种 callout 全部使用 Phosphor 图标，随各自的语义色着色。](img/screenshot-callouts.png)
 
 ## 安装
 

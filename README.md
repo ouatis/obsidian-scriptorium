@@ -20,7 +20,7 @@ _A quiet desk for long thoughts._
 
 A warm, minimal Obsidian theme for long-form reading and writing.
 
-![Scriptorium rendering a reading note: serif headings, warm highlight, quiet quote rule and a striped table. Real screenshot.](img/screenshot-reading.png)
+![Light and dark reading views: serif headings, warm highlight, a quiet quote rule and a striped table — the same voice on both papers.](img/screenshot-reading-split.png)
 
 Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed CJK and Latin notes.
 
@@ -28,16 +28,6 @@ Paper, light and connections: Scriptorium shares quiet shapes and a visual rhyth
 
 > [!NOTE]
 > Scriptorium is a personal aesthetic. A small curated surface is exposed through the `Style Settings` plugin; everything else stays in the token contract (see [snippet-example.css](snippet-example.css)).
-
-## Screenshots
-
-![Reading in light mode: serif headings, warm highlight, a quiet quote rule and a striped table.](img/screenshot-reading.png)
-
-![Dark mode: the same voice on warm dark paper.](img/screenshot-reading-dark.png)
-
-![Editing in live preview: source markers, interactive checkboxes and tables stay legible.](img/screenshot-editor.png)
-
-![All thirteen callout types carry Phosphor icons, tinted by each callout's own accent.](img/screenshot-callouts.png)
 
 ## Install
 
