@@ -77,6 +77,7 @@ Per-file helper classes go in the `cssClasses` frontmatter key and compose:
 | `table-nowrap` | No wrapping in cells |
 | `table-fixed` | Equalized column widths |
 | `table-compact` | Smaller, tighter tables |
+| `[!]` `[?]` `[>]` `[-]` in tasks | Semantic task markers: amber, green, copper, and struck-muted chips — in reading and live preview |
 
 ## Plugin support
 
