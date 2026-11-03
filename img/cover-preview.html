@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scriptorium — cover preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 24px; background: #f5f0e6; color: #201c13; font-family: "IBM Plex Sans", "Noto Sans SC", sans-serif; }
+    body[data-mode="dark"] { background: #201d18; color: #f5f0e4; }
+    .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 auto 16px; max-width: 1200px; }
+    h1 { font-size: 16px; font-weight: 500; margin: 0 auto 0 0; }
+    button { background: transparent; color: inherit; border: 1px solid #6d665d; border-radius: 8px; padding: 8px 12px; font: inherit; cursor: pointer; }
+    button[aria-pressed="true"] { background: #201c13; color: #fefcf6; }
+    body[data-mode="dark"] button[aria-pressed="true"] { background: #f5f0e4; color: #201c13; }
+    button:focus-visible { outline: 2px solid #c24e18; outline-offset: 2px; }
+    body[data-mode="dark"] button:focus-visible { outline-color: #eda16c; }
+    figure { width: 100%; max-width: 1200px; margin: 0 auto; }
+    .cover { width: 100%; overflow: hidden; }
+    .cover svg { display: block; width: 100%; height: auto; }
+    figcaption { margin-top: 12px; font-size: 14px; line-height: 1.5; }
+    body[data-mode="light"] .cover .paper { fill: #fefcf6; }
+    body[data-mode="light"] .cover .soft { fill: #f5f0e6; }
+    body[data-mode="light"] .cover .ink { fill: #201c13; }
+    body[data-mode="light"] .cover .muted { fill: #6d665d; }
+    body[data-mode="light"] .cover .rule { stroke: #d8d0c2; }
+    body[data-mode="light"] .cover .accent { stroke: #c24e18; }
+    body[data-mode="light"] .cover .green { fill: #406e40; }
+    body[data-mode="dark"] .cover .paper { fill: #29261f; }
+    body[data-mode="dark"] .cover .soft { fill: #201d18; }
+    body[data-mode="dark"] .cover .ink { fill: #f5f0e4; }
+    body[data-mode="dark"] .cover .muted { fill: #b4ad9f; }
+    body[data-mode="dark"] .cover .rule { stroke: #4e473b; }
+    body[data-mode="dark"] .cover .accent { stroke: #eda16c; }
+    body[data-mode="dark"] .cover .green { fill: #7e9e77; }
+    @media (max-width: 480px) { body { padding: 12px; } h1 { width: 100%; margin-bottom: 4px; } }
+  </style>
+</head>
+<body data-mode="light">
+  <div class="toolbar" aria-label="Preview controls">
+    <h1>Scriptorium · cover preview</h1>
+    <button type="button" data-mode="light" aria-pressed="true">Light</button>
+    <button type="button" data-mode="dark" aria-pressed="false">Dark</button>
+    <button type="button" data-width="1200" aria-pressed="true">Full</button>
+    <button type="button" data-width="390" aria-pressed="false">390 px</button>
+    <button type="button" data-width="320" aria-pressed="false">320 px</button>
+  </div>
+  <figure>
+    <div class="cover" aria-busy="true"></div>
+    <figcaption>Concept illustration, not an Obsidian screenshot. The controls preview the cover's light/dark colors and image width; they do not change Obsidian.</figcaption>
+  </figure>
+  <script>
+    for (const button of document.querySelectorAll("button[data-mode]")) {
+      button.addEventListener("click", () => {
+        document.body.dataset.mode = button.dataset.mode;
+        for (const sibling of document.querySelectorAll("button[data-mode]")) {
+          sibling.setAttribute("aria-pressed", String(sibling === button));
+        }
+      });
+    }
+    for (const button of document.querySelectorAll("button[data-width]")) {
+      button.addEventListener("click", () => {
+        document.querySelector("figure").style.maxWidth = `${button.dataset.width}px`;
+        for (const sibling of document.querySelectorAll("button[data-width]")) {
+          sibling.setAttribute("aria-pressed", String(sibling === button));
+        }
+      });
+    }
+    fetch("cover.svg").then(response => {
+      if (!response.ok) throw new Error("Cover could not be loaded.");
+      return response.text();
+    }).then(source => {
+      const svg = new DOMParser().parseFromString(source, "image/svg+xml").documentElement;
+      if (svg.localName !== "svg" || svg.querySelector("parsererror")) throw new Error("Invalid cover SVG.");
+      const cover = document.querySelector(".cover");
+      cover.appendChild(document.importNode(svg, true));
+      cover.setAttribute("aria-busy", "false");
+    }).catch(error => {
+      const cover = document.querySelector(".cover");
+      cover.textContent = error.message;
+      cover.setAttribute("aria-busy", "false");
+    });
+  </script>
+</body>
+</html>

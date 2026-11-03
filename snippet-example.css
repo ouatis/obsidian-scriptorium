@@ -1,0 +1,188 @@
+/* =====================================================================
+   SCRIPTORIUM — snippet example
+   ---------------------------------------------------------------------
+   A documented tour of the tokens a personal snippet may safely touch.
+
+   How to use
+   - Save this file as `snippet-example.css` inside `<vault>/.obsidian/snippets/`.
+   - Enable it under Settings → Appearance → CSS snippets.
+   - Everything below is commented out, so the snippet is a no-op until
+     you uncomment a block. Uncomment one block at a time; the effects
+     stack, and the last declaration wins.
+
+   The contract, in three tiers
+   - Tier 1 — `--scrip-*` tokens: the semantic layer Scriptorium itself
+     is built from (paper, ink, rules, shadows, type scale). Overriding
+     these is the intended way to adjust the theme.
+   - Tier 2 — the palette ramps in `:root` (`--white`, `--gray-*`,
+     `--color-accent-rgb-*`): the bedrock every mapping derives from.
+     Re-inking the whole theme means touching these.
+   - Tier 3 — Obsidian's own controls: the accent color picker under
+     Appearance drives `--color-accent`, and `--font-text-size` (or the
+     Text size slider) drives the type scale. The theme respects both.
+
+   Stability
+   - Scriptorium keeps no frozen API contract. If a future release
+     renames a token your snippet relies on, the snippet quietly stops
+     applying. Pin the release you tuned against (`versions.json`).
+   ===================================================================== */
+/* =====================================================================
+   [A] Flat paper — remove the texture and the shadows
+   ---------------------------------------------------------------------
+   Scriptorium's tactility comes from a grain overlay plus layered
+   ambient shadows. Turning both off leaves pure tonal paper.
+   =====================================================================
+
+.theme-light,
+.theme-dark {
+    --scrip-app-texture: none;
+    --scrip-shadow-s: none;
+    --scrip-shadow-l: none;
+    --scrip-shadow-tactile: none;
+    --scrip-inset-highlight: none;
+    --scrip-chrome-muted-opacity: 1;
+}
+
+===================================================================== */
+
+
+/* =====================================================================
+   [B] Type scale nudge
+   ---------------------------------------------------------------------
+   Heading sizes derive from the text size: `--scrip-type-h1-size` is
+   `calc(var(--font-text-size, 16px) * 2.16)`, and so on down the ramp.
+   Override either the whole expression or the resulting size. Leading
+   (`*-leading`, unitless) and tracking (`*-tracking`, em) sit beside
+   each size, so one heading can be retuned without touching the rest.
+   =====================================================================
+
+.theme-light,
+.theme-dark {
+    --scrip-type-h1-size: calc(var(--font-text-size, 16px) * 1.9);
+    --scrip-type-h1-tracking: -0.01em;
+    --scrip-type-h2-size: calc(var(--font-text-size, 16px) * 1.5);
+    --scrip-type-inline-title-size: calc(var(--font-text-size, 16px) * 1.9);
+}
+
+===================================================================== */
+
+
+/* =====================================================================
+   [C] Swap the heading serif
+   ---------------------------------------------------------------------
+   The heading stack is one token. Set a font you have installed and it
+   leads the stack; the bundled IBM Plex Serif and CJK fallbacks follow.
+   (Fonts themselves are installed in Appearance → Quick font loader or
+   your system — the theme only names them.)
+   =====================================================================
+
+.theme-light,
+.theme-dark {
+    --scrip-font-heading-stack: "Iowan Old Style", "Noto Serif SC", Georgia, serif;
+}
+
+===================================================================== */
+
+
+/* =====================================================================
+   [D] Re-ink the paper (Tier 2 — the whole palette)
+   ---------------------------------------------------------------------
+   Every mapping derives from the ramp below, so a small change here
+   re-tints the entire theme. The stock ramp is warm: paper 254 252 246,
+   ink 32 28 19, accent 194 78 24 (light) / 218 114 56 (dark).
+   This example moves light mode to cool stock — keep the three hues in
+   agreement (paper warm-neutral, ink its complement) or shadows and the
+   grain, which stay calibrated for warm tones, will read slightly off.
+   Dark ramps live in `.theme-dark` and follow the same shape.
+   =====================================================================
+
+.theme-light {
+    --white: 246, 248, 252;
+    --gray-10: 239, 243, 251;
+    --gray-100: 19, 28, 32;
+    --color-accent-rgb-light: 24, 110, 194;
+}
+
+===================================================================== */
+
+
+/* =====================================================================
+   [E] Reading paper — the page inside the app
+   ---------------------------------------------------------------------
+   The reading surface is drawn as a physical sheet: radius, hairline
+   frame, and a layered shadow. Flatten it into the canvas, or square
+   it off; mobile already runs flat and transparent (the theme does
+   that itself — see `body.is-mobile` in the source).
+   =====================================================================
+
+.theme-light,
+.theme-dark {
+    --scrip-reading-paper-radius: 0px;
+    --scrip-reading-paper-border: transparent;
+    --scrip-reading-paper-shadow: none;
+}
+
+===================================================================== */
+
+
+/* =====================================================================
+   Token reference
+   ---------------------------------------------------------------------
+   One line per token, grouped by family. Values shown are the stock
+   defaults; anything not listed here is internal and may change
+   without notice.
+
+   Texture & chrome
+     --scrip-app-texture           texture layered over the app canvas (noise | none)
+     --scrip-texture-noise         the light-mode grain tile
+     --scrip-texture-noise-dark    the dark-mode grain tile
+     --scrip-chrome-muted-opacity  resting opacity of quiet chrome (0.72)
+     --scrip-inset-highlight       modal top-edge inner glow
+     --scrip-icon-stroke-modifier  icon stroke multiplier (0.8 thins core icons)
+
+   Paper & surfaces
+     --scrip-surface-paper         primary paper surface
+     --scrip-surface-paper-muted   secondary paper surface
+     --scrip-native-surface        native panel surface (settings, modals)
+     --scrip-native-surface-muted  muted native panel surface
+     --scrip-reading-paper-radius  reading sheet corner radius
+     --scrip-reading-paper-border  reading sheet hairline frame
+     --scrip-reading-paper-shadow  reading sheet shadow
+
+   Ink
+     --scrip-ink-strong            primary text ink
+     --scrip-ink-soft              secondary ink (captions, meta)
+     --scrip-ink-faint             faintest ink (placeholders, whispers)
+
+   Rules
+     --scrip-editorial-rule        the editorial horizontal rule (gradient)
+     --scrip-editorial-rule-strong heavier editorial rule variant
+     --scrip-rule-soft             softest separator (78% border mix)
+     --scrip-rule-strong           firmer separator (88% border mix)
+     --scrip-rule-accent           separator tinted toward the accent
+     --scrip-native-rule           native panel separator
+     --scrip-heading-accent        accent behind headings
+
+   Shadows
+     --scrip-shadow-color          shadow hue as an HSL triplet (deg sat% light%)
+     --scrip-shadow-ambient        multi-layer soft light source
+     --scrip-shadow-key            the key light pass
+     --scrip-shadow-s              small composite (key + ambient)
+     --scrip-shadow-l              large composite, six stacked layers
+     --scrip-shadow-tactile        pressed-control shadow
+
+   Type
+     --scrip-type-h1-size          h1, derived from text size (x2.16)
+     --scrip-type-h1-leading       h1 line height (1.16, unitless)
+     --scrip-type-h1-tracking      h1 letter spacing (em)
+     --scrip-type-h2-size          h2 (x1.62) — plus -leading / -tracking
+     --scrip-type-h3-size          h3 (x1.24) — plus -leading / -tracking
+     --scrip-type-inline-title-size inline titles (x2.08) — plus -leading / -tracking
+     --scrip-font-heading-stack    heading serif stack
+     --scrip-font-cjk-stack        CJK sans stack (UI & body fallback)
+     --scrip-font-mono-stack       code stack
+
+   Odds & ends
+     --scrip-highlight-dir         search-hit highlight sweep direction (RTL: flip it)
+     --scrip-status-expanded-width expanded status bar width (min(28rem, …))
+   ===================================================================== */

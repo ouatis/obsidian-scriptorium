@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" role="img" aria-labelledby="cover-title cover-desc">
+  <title id="cover-title">Scriptorium — a quiet desk for long thoughts</title>
+  <desc id="cover-desc">A paper-and-ink illustration of a calm writing page, with a bookmark and a short marginal note. Concept artwork, not an Obsidian screenshot.</desc>
+  <style>
+    .paper{fill:#fefcf6}.soft{fill:#f5f0e6}.ink{fill:#201c13}.muted{fill:#6d665d}.rule{stroke:#d8d0c2}.accent{stroke:#c24e18}.green{fill:#406e40}.serif{font-family:"IBM Plex Serif","Noto Serif SC",Georgia,serif}.mono{font-family:"IBM Plex Mono",Consolas,monospace;font-size:12px;letter-spacing:1.5px}.copy{font-family:"IBM Plex Sans","Noto Sans SC",sans-serif;font-size:15px}
+    @media(prefers-color-scheme:dark){.paper{fill:#29261f}.soft{fill:#201d18}.ink{fill:#f5f0e4}.muted{fill:#b4ad9f}.rule{stroke:#4e473b}.accent{stroke:#eda16c}.green{fill:#7e9e77}}
+  </style>
+  <rect width="1200" height="480" class="paper"/>
+  <text x="40" y="36" class="mono muted">OUATIS / OBSIDIAN</text>
+  <text x="1160" y="36" text-anchor="end" class="mono muted">01 / PAPER</text>
+  <path d="M40 56H1160M40 424H1160" class="rule" fill="none"/>
+  <text x="60" y="160" class="serif ink" font-size="60">Scriptorium</text>
+  <text x="60" y="224" class="serif ink" font-size="30">A quiet desk</text>
+  <text x="60" y="263" class="serif ink" font-size="30">for long thoughts.</text>
+  <text x="60" y="323" class="copy muted">Give the page room. Keep the writing close.</text>
+  <text x="60" y="374" class="mono muted">PAPER / TYPE / THOUGHT</text>
+  <rect x="628" y="95" width="516" height="285" rx="12" class="soft"/>
+  <rect x="674" y="112" width="430" height="251" rx="8" class="paper"/>
+  <rect x="674" y="112" width="430" height="251" rx="8" fill="none" class="rule"/>
+  <rect x="658" y="124" width="430" height="239" rx="8" class="paper"/>
+  <rect x="658" y="124" width="430" height="239" rx="8" fill="none" class="rule"/>
+  <path d="M1032 112H1046V166L1039 160L1032 166Z" class="green"/>
+  <text x="689" y="171" class="serif ink" font-size="23">A quieter page</text>
+  <path d="M689 186H834" class="accent" stroke-width="1.5"/>
+  <g class="serif ink" font-size="16">
+    <text x="689" y="218">Give the sentence room to breathe.</text>
+    <text x="689" y="246">Keep the page quiet and the thought clear.</text>
+  </g>
+  <path d="M689 269V297" class="rule" stroke-width="2"/>
+  <text x="703" y="288" class="serif muted" font-size="15">A note worth returning to.</text>
+  <path d="M689 321H1057" class="rule" fill="none"/>
+  <text x="689" y="344" class="mono muted">READ / WRITE / RETURN</text>
+  <text x="1057" y="344" text-anchor="end" class="mono muted">01</text>
+  <text x="40" y="453" class="mono muted">SCRIPTORIUM · READING &amp; WRITING</text>
+  <text x="1160" y="453" text-anchor="end" class="copy muted" font-size="12">Concept illustration · not a screenshot</text>
+</svg>

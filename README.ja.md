@@ -1,0 +1,99 @@
+<div align="center">
+
+# Scriptorium
+
+_長い思考のための、静かな机。_
+
+[English](./README.md) | [Chinese](./README.zh-CN.md)
+
+<a href="https://community.obsidian.md/themes/scriptorium"><img src="img/open-in-obsidian-button.svg" alt="Obsidian で Scriptorium を開く" width="150"></a>
+
+<p>
+  <img src="https://img.shields.io/github/v/release/ouatis/obsidian-scriptorium?style=flat-square&label=version&color=c24e18" alt="Latest release">
+  <img src="https://img.shields.io/github/downloads/ouatis/obsidian-scriptorium/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=6d665d" alt="Downloads">
+  <img src="https://img.shields.io/github/license/ouatis/obsidian-scriptorium?style=flat-square&label=license&color=406e40" alt="MIT License">
+</p>
+
+</div>
+
+![Scriptorium：紙、組版、思考。Obsidian のスクリーンショットではなく、コンセプトイラストです。](img/cover.svg)
+
+長文の読書と執筆のための、温かくミニマルな Obsidian テーマです。
+
+![Scriptorium で読書ノートを表示：セリフ見出し、暖かいハイライト、静かな引用ルール、縞模様のテーブル。実際のスクリーンショット。](img/screenshot-reading.png)
+
+Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑えたコントラスト、静かなワークスペースのクローム、よりフラットなタグと callout、そして CJK とラテン文字の混在ノートに合わせたタイポグラフィを備えています。
+
+紙、光、つながり。Scriptorium は Desk Lamp、Skill Switchboard、Collate と静かな輪郭と視覚リズムを共有します。各製品は独立して動作し、テーマを使うためにプラグインを導入する必要はありません。
+
+> [!NOTE]
+> Scriptorium は個人的な美意識を前提にしたテーマです。`Style Settings` プラグインには厳選した項目だけを公開し、それ以外の調整は token 契約にあります（[snippet-example.css](snippet-example.css) 参照）。
+
+## スクリーンショット
+
+![ライトモードの読書：セリフ見出し、暖かいハイライト、静かな引用ルール、縞模様のテーブル。](img/screenshot-reading.png)
+
+![ダークモード：同じ声が暖かい暗い紙に。](img/screenshot-reading-dark.png)
+
+![ライブプレビュー編集：ソースマーカー、インタラクティブなチェックボックス、表がくっきり。](img/screenshot-editor.png)
+
+![13 種類すべての callout に Phosphor アイコン。各 callout のアクセント色で着色。](img/screenshot-callouts.png)
+
+## インストール
+
+1. Obsidian の Community Themes で `Scriptorium` を検索します。
+2. **Install and use** をクリックします。
+
+手動インストール: `theme.css` と `manifest.json` を `.obsidian/themes/Scriptorium/` にコピーし、Appearance -> Themes で `Scriptorium` を選択します。
+
+## 設計
+
+- Scriptorium は IBM Plex ファミリーで組まれています。[IBM Plex Sans JP](https://fonts.google.com/specimen/IBM+Plex+Sans+JP)、[IBM Plex Serif](https://fonts.google.com/specimen/IBM+Plex+Serif)、[IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) を導入すると自動で適用されます（Google Fonts が利用できない場合は [IBM Plex 公式リリース](https://github.com/IBM/plex/releases)）。
+- 外観設定で別のフォントを選ぶとそのフォントが優先され、IBM Plex と CJK フォールバックが続きます。
+- ドキュメント面は軽く保つ: 画像的な質感、影、アクセント色は意図的に抑えています。
+- ナビゲーション、検索、メニュー、タグ、callout、embed は静かに保ち、本文を中央に置きます。
+- テーマは単一の `theme.css` として配布され、外部依存はありません。
+- クイックスイッチャー、グラフ、カレンダー、キャンバス、データベース、設定、検索などのインターフェースアイコンと callout アイコンは Phosphor の線言語で描きます。同形のアイコン、プラグインのアイコン、方向記号はネイティブのままです。
+
+## デザイン原則
+
+テーマ編集時に守る指針として、以下を維持します:
+
+- 温かい紙のパレットは抑制的に保つ。
+- 面は清潔に保ち、質感はページを支え、本文と競合しない。
+- 重いクロームよりもタイポグラフィの階層を優先する。
+- 自動非表示の挙動は限定的で予測可能に保つ。
+- 本文サイズのテキストで意味を持つアクセント色は慎重に使う。
+- callout、embed、フローティング UI は同じマテリアル言語に揃えるが、日常の操作 UI を積み重なったカードのようにしない。
+- タグは静かに保ち、見出しやリンクと競合させない。
+- 読み心地を装飾的な新しさより優先する。
+
+## カスタマイズ
+
+opt-in の面は二つだけ。どちらもなければ表示はバイト単位で同一です。
+
+[Style Settings](https://github.com/mgmeyers/obsidian-style-settings) プラグインを入れると、読書に関わる 4 つの項目が現れます：行幅、本文の行間、段落の間隔、見出しの書体。既定値はテーマ自身の値と同じです。
+
+ファイル単位のヘルパークラスは `cssClasses` frontmatter に書き、自由に組み合わせられます：
+
+| クラス | 効果 |
+| --- | --- |
+| `cards` | Dataview の表をカードグリッドに（`cards-cols-1/3/4` で列数固定） |
+| `row-lines` / `col-lines` / `table-lines` | セルの罫線：行・列・全グリッド |
+| `row-alt` | 表の行の縞模様 |
+| `table-tabular` | 数値列に tabular 数字 |
+| `table-nowrap` | セル内で折り返さない |
+| `table-fixed` | 列幅を均等に |
+| `table-compact` | 小さく引き締めた表 |
+
+## プラグイン対応
+
+構造的な揃えのみ——[Dataview](https://github.com/blacksmithgu/obsidian-dataview)、[Tasknotes](https://github.com/alangrainger/obsidian-task-notes)、[Quiet Outline](https://github.com/guopenghui/obsidian-quiet-outline)、[Advanced Table Editor](https://github.com/dromar56/obsidian-advanced-table-editor) のペインとカードはテーマの面と罫線を引き継ぎます。再配色も再レイアウトもしません。
+
+## 開発
+
+可読ソースは `src/theme.css` にあります。編集後に `npm run build` を実行すると、esbuild が配布用の `theme.css` を生成し、ストアのサイズチェックに向けた軽量さを保ちます。`npm run lint` でソースに stylelint を実行します。
+
+個人的な調整は CSS スニペットで行います——[snippet-example.css](snippet-example.css) は、安全に上書きできるトークンを一つずつ注釈付きで案内するファイルです。パレットのランプと上書きの三層構造も説明しています。
+
+Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).
