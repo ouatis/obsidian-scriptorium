@@ -1494,6 +1494,52 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     color: var(--scrip-ink-soft);
 }
 
+/* [07c.1] Alternate task markers — semantic checkboxes, Minimal-style.
+   Opt-in by syntax: the character inside the brackets carries the meaning,
+   the chip just voices it. Four high-frequency semantics; everything else
+   keeps the default chip. Canceled is the only type that touches the text
+   (strike + fade — the reading-mode voice for a withdrawn item). */
+:is(.markdown-preview-view li[data-task="!"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="!"]) .task-list-item-checkbox {
+    border-color: rgba(var(--color-warning-rgb), 0.7);
+}
+:is(.markdown-preview-view li[data-task="!"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="!"]) .task-list-item-checkbox:checked {
+    background-color: rgb(var(--color-warning-rgb));
+    border-color: rgb(var(--color-warning-rgb));
+}
+
+:is(.markdown-preview-view li[data-task="?"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="?"]) .task-list-item-checkbox {
+    border-color: color-mix(in srgb, var(--color-secondary) 70%, transparent);
+}
+:is(.markdown-preview-view li[data-task="?"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="?"]) .task-list-item-checkbox:checked {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
+:is(.markdown-preview-view li[data-task=">"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task=">"]) .task-list-item-checkbox {
+    border-color: color-mix(in srgb, var(--interactive) 70%, transparent);
+}
+:is(.markdown-preview-view li[data-task=">"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task=">"]) .task-list-item-checkbox:checked {
+    background-color: var(--interactive);
+    border-color: var(--interactive);
+}
+
+:is(.markdown-preview-view li[data-task="-"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"]) .task-list-item-checkbox {
+    border-color: var(--border-subtle-1);
+    background-color: transparent;
+}
+:is(.markdown-preview-view li[data-task="-"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"]) {
+    text-decoration: line-through;
+    color: var(--text-faint);
+}
+
 /* [07d] Highlight Styles */
 /* ==mark== reads as a highlighter wash: amber belongs to marks alone, the
    accent orange stays with interaction. Flat fill, no animation — a mark is
@@ -3383,6 +3429,26 @@ svg.lucide-trash-2 {
 	background-color: currentcolor;
 	-webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M216%2C48H40a8%2C8%2C0%2C0%2C0%2C0%2C16h8V208a16%2C16%2C0%2C0%2C0%2C16%2C16H192a16%2C16%2C0%2C0%2C0%2C16-16V64h8a8%2C8%2C0%2C0%2C0%2C0-16ZM192%2C208H64V64H192ZM80%2C24a8%2C8%2C0%2C0%2C1%2C8-8h80a8%2C8%2C0%2C0%2C1%2C0%2C16H88A8%2C8%2C0%2C0%2C1%2C80%2C24Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
 	mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M216%2C48H40a8%2C8%2C0%2C0%2C0%2C0%2C16h8V208a16%2C16%2C0%2C0%2C0%2C16%2C16H192a16%2C16%2C0%2C0%2C0%2C16-16V64h8a8%2C8%2C0%2C0%2C0%2C0-16ZM192%2C208H64V64H192ZM80%2C24a8%2C8%2C0%2C0%2C1%2C8-8h80a8%2C8%2C0%2C0%2C1%2C0%2C16H88A8%2C8%2C0%2C0%2C1%2C80%2C24Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+}
+
+svg.lucide-tags > * {
+	visibility: hidden;
+}
+
+svg.lucide-tags {
+	background-color: currentcolor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M246.66%2C123.56%2C201%2C55.13A15.94%2C15.94%2C0%2C0%2C0%2C187.72%2C48H40A16%2C16%2C0%2C0%2C0%2C24%2C64V192a16%2C16%2C0%2C0%2C0%2C16%2C16H187.72A16%2C16%2C0%2C0%2C0%2C201%2C200.88l45.63-68.44A8%2C8%2C0%2C0%2C0%2C246.66%2C123.56ZM187.72%2C192H40V64H187.72l42.66%2C64Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M246.66%2C123.56%2C201%2C55.13A15.94%2C15.94%2C0%2C0%2C0%2C187.72%2C48H40A16%2C16%2C0%2C0%2C0%2C24%2C64V192a16%2C16%2C0%2C0%2C0%2C16%2C16H187.72A16%2C16%2C0%2C0%2C0%2C201%2C200.88l45.63-68.44A8%2C8%2C0%2C0%2C0%2C246.66%2C123.56ZM187.72%2C192H40V64H187.72l42.66%2C64Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+}
+
+svg.lucide-edit-3 > * {
+	visibility: hidden;
+}
+
+svg.lucide-edit-3 {
+	background-color: currentcolor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M227.32%2C73.37%2C182.63%2C28.69a16%2C16%2C0%2C0%2C0-22.63%2C0L36.69%2C152A15.86%2C15.86%2C0%2C0%2C0%2C32%2C163.31V208a16%2C16%2C0%2C0%2C0%2C16%2C16H216a8%2C8%2C0%2C0%2C0%2C0-16H115.32l112-112A16%2C16%2C0%2C0%2C0%2C227.32%2C73.37ZM136%2C75.31%2C152.69%2C92%2C68%2C176.69%2C51.31%2C160ZM48%2C208V179.31L76.69%2C208Zm48-3.31L79.32%2C188%2C164%2C103.31%2C180.69%2C120Zm96-96L147.32%2C64l24-24L216%2C84.69Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M227.32%2C73.37%2C182.63%2C28.69a16%2C16%2C0%2C0%2C0-22.63%2C0L36.69%2C152A15.86%2C15.86%2C0%2C0%2C0%2C32%2C163.31V208a16%2C16%2C0%2C0%2C0%2C16%2C16H216a8%2C8%2C0%2C0%2C0%2C0-16H115.32l112-112A16%2C16%2C0%2C0%2C0%2C227.32%2C73.37ZM136%2C75.31%2C152.69%2C92%2C68%2C176.69%2C51.31%2C160ZM48%2C208V179.31L76.69%2C208Zm48-3.31L79.32%2C188%2C164%2C103.31%2C180.69%2C120Zm96-96L147.32%2C64l24-24L216%2C84.69Z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
 }
 
 /* — end of generated chrome icons */
