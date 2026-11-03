@@ -16,11 +16,13 @@ _A quiet desk for long thoughts._
 
 </div>
 
-![Scriptorium: paper, type and thought. Concept illustration, not an Obsidian screenshot.](img/cover.svg)
+![](img/hero.png)
 
 A warm, minimal Obsidian theme for long-form reading and writing.
 
-![Light and dark reading views: serif headings, warm highlight, a quiet quote rule and a striped table — the same voice on both papers.](img/screenshot-reading-split.png)
+![Light and dark: the same voice on both papers.](img/colors.png)
+
+![On mobile: the reading view folds into a single quiet column.](img/mobile.png)
 
 Scriptorium keeps the writing surface primary: soft paper tones, restrained contrast, quiet workspace chrome, flatter tags and callouts, and typography tuned for mixed CJK and Latin notes.
 

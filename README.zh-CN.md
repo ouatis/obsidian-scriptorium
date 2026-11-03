@@ -16,11 +16,13 @@ _一张安静的书桌。_
 
 </div>
 
-![Scriptorium：纸页、排印与思考。这是概念插画，不是 Obsidian 截图。](img/cover.svg)
+![](img/hero.png)
 
 一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
 
-![亮暗双纸阅读：衬线标题、暖色高亮、安静的引用线与条纹表格——两种纸面，同一种声音。](img/screenshot-reading-split.png)
+![亮与暗：两种纸面，同一种声音。](img/colors.png)
+
+![移动端：阅读视图折成一列安静的正文。](img/mobile.png)
 
 Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工作区界面、更平的标签与 callout，以及针对中英文混排调过的字体层级。
 
