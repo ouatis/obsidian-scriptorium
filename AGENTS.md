@@ -21,9 +21,10 @@ row-alt/table-tabular/table-nowrap/table-fixed/table-compact)——能力藏在
 ```bash
 npm run lint    # stylelint 检查 src/theme.css
 npm run build   # esbuild 压缩 src/theme.css → theme.css
+npm run audit:contrast  # 解析亮/暗令牌链，校验 WCAG 对比度矩阵（失败即 exit 1）
 ```
 
-CI(lint.yml)跑 lint + build,并用 `git diff --exit-code theme.css`
+CI(lint.yml)跑 lint + build + audit:contrast,并用 `git diff --exit-code theme.css`
 守住**源与产物的同步**:改了 src 忘了 build,CI 直接红。
 
 ## 地图

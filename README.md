@@ -77,7 +77,7 @@ Per-file helper classes go in the `cssClasses` frontmatter key and compose:
 | `table-nowrap` | No wrapping in cells |
 | `table-fixed` | Equalized column widths |
 | `table-compact` | Smaller, tighter tables |
-| `[!]` `[?]` `[>]` `[-]` in tasks | Semantic task markers: amber, green, copper, and struck-muted chips — in reading and live preview |
+| `[!]` `[?]` `[>]` `[-]` in tasks | Semantic task markers: amber, green, copper, and struck-muted chips, each with its own glyph (! ? > and an empty box) — in reading and live preview |
 
 ## Plugin support
 
@@ -85,7 +85,7 @@ Structural styling only — panes and cards from [Dataview](https://github.com/b
 
 ## Development
 
-The readable source lives in `src/theme.css`. Edit it, then run `npm run build` — esbuild minifies it into the shipped `theme.css`, which keeps the file lean for the community-store size check. `npm run lint` runs stylelint against the source.
+The readable source lives in `src/theme.css`. Edit it, then run `npm run build` — esbuild minifies it into the shipped `theme.css`, which keeps the file lean for the community-store size check. `npm run lint` runs stylelint against the source, and `npm run audit:contrast` resolves the token graph in both modes and fails when a text/surface pair drops under its WCAG threshold.
 
 Personal adjustments go through CSS snippets — [snippet-example.css](snippet-example.css) is a commented tour of the tokens a snippet may safely touch, with the palette ramps and the override tiers explained.
 

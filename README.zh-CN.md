@@ -79,7 +79,7 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 | `table-nowrap` | 单元格不换行 |
 | `table-fixed` | 等宽列 |
 | `table-compact` | 更小更紧的表格 |
-| 任务语法 `[!]` `[?]` `[>]` `[-]` | 语义复选框：琥珀、苔绿、铜橙、删除线淡墨——阅读与实时预览都生效 |
+| 任务语法 `[!]` `[?]` `[>]` `[-]` | 语义复选框：琥珀、苔绿、铜橙、删除线淡墨，每种各有自己的字形（! ? > 与空框）——阅读与实时预览都生效 |
 
 ## 插件适配
 
@@ -87,7 +87,7 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 
 ## 开发
 
-可读源码在 `src/theme.css`。修改后运行 `npm run build`，由 esbuild 压缩生成发布的 `theme.css`，保持文件轻量以通过社区商店的体积检查。`npm run lint` 对源码运行 stylelint。
+可读源码在 `src/theme.css`。修改后运行 `npm run build`，由 esbuild 压缩生成发布的 `theme.css`，保持文件轻量以通过社区商店的体积检查。`npm run lint` 对源码运行 stylelint，`npm run audit:contrast` 会解析亮暗两套令牌链，任一对文本/表面组合跌破 WCAG 阈值即失败。
 
 个人微调走 CSS snippet——[snippet-example.css](snippet-example.css) 是一份带注释的 token 导览：哪些变量可以放心覆盖、色阶斜坡怎么重调、三层覆盖关系，都在里面。
 
