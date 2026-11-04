@@ -261,7 +261,9 @@ settings:
     --color-accent-rgb-light: 194, 78, 24;
     --color-accent-rgb-dark: 218, 114, 56;
     --color-accent-fill-rgb-light: 194, 78, 24;
-    --color-accent-fill-rgb-dark: 197, 82, 18;
+    /* Deeper than the accent ramp on purpose: the warm-white label that sits
+       on this fill must clear 4.5:1, and 197,82,18 only reached 4.46. */
+    --color-accent-fill-rgb-dark: 188, 76, 16;
 
     /* Secondary color: muted green family */
     --color-secondary-rgb-light: 64, 110, 64;
@@ -487,6 +489,9 @@ body {
     --color-success-rgb: 142, 186, 142;
     --color-warning-rgb: 240, 185, 90;
 
+    /* Tags paint their label on a wash of the same green; lifting the ink 10%
+       toward the body colour keeps AA (4.2:1 -> 4.7:1) inside the ramp. */
+    --tag-color: color-mix(in srgb, var(--color-secondary) 90%, var(--text-primary));
     --scrip-app-texture: var(--scrip-texture-noise-dark);
     /* Amber mark wash runs lighter on dark paper so it glows, not glares. */
     --highlight: rgba(var(--color-warning-rgb), 0.22);
@@ -1495,50 +1500,76 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 /* [07c.1] Alternate task markers — semantic checkboxes, Minimal-style.
-   Opt-in by syntax: the character inside the brackets carries the meaning,
-   the chip just voices it. Four high-frequency semantics; everything else
-   keeps the default chip. Canceled is the only type that touches the text
-   (strike + fade — the reading-mode voice for a withdrawn item). */
+   Opt-in by syntax: the character inside the brackets carries the meaning.
+   Each chip voices it twice — fill colour plus a distinct glyph — so the
+   semantics survive greyscale and colour-vision deficiency instead of
+   resting on hue alone (WCAG 1.4.1, use of colour). The glyph reuses the
+   stock mechanism (an SVG background on the checked chip), so no
+   pseudo-element or icon font is involved. Canceled is the only type that
+   touches the text (strike + fade — the reading-mode voice for a withdrawn
+   item), and it carries no glyph at all. */
 :is(.markdown-preview-view li[data-task="!"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="!"]) .task-list-item-checkbox {
     border-color: rgba(var(--color-warning-rgb), 0.7);
 }
+
+/* Amber is the lightest fill in the set: a warm-white mark on it collapses to
+   2.1:1, so the exclamation is drawn in the body ink (7.7:1 light, 9.5:1 dark). */
 :is(.markdown-preview-view li[data-task="!"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="!"]) .task-list-item-checkbox:checked {
-    background-color: rgb(var(--color-warning-rgb));
     border-color: rgb(var(--color-warning-rgb));
+    background-color: rgb(var(--color-warning-rgb));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M8 3.6v6.3M8 12.4v.6' stroke='%23201c13' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
+/* The question chip's fill flips between a deep green (light mode) and a pale
+   one (dark mode), so its glyph ink flips with it — the dark-mode variant sits
+   at the end of this block. */
 :is(.markdown-preview-view li[data-task="?"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="?"]) .task-list-item-checkbox {
     border-color: color-mix(in srgb, var(--color-secondary) 70%, transparent);
 }
+
 :is(.markdown-preview-view li[data-task="?"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="?"]) .task-list-item-checkbox:checked {
-    background-color: var(--color-secondary);
     border-color: var(--color-secondary);
+    background-color: var(--color-secondary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 6.1a2.1 2.1 0 1 1 2.9 1.9c-.6.3-1 .9-1 1.6M8 12.4v.6' stroke='%23fefcf6' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 :is(.markdown-preview-view li[data-task=">"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task=">"]) .task-list-item-checkbox {
     border-color: color-mix(in srgb, var(--interactive) 70%, transparent);
 }
+
 :is(.markdown-preview-view li[data-task=">"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task=">"]) .task-list-item-checkbox:checked {
-    background-color: var(--interactive);
     border-color: var(--interactive);
+    background-color: var(--interactive);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 4.5l4 3.5-4 3.5' stroke='%23fefcf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 :is(.markdown-preview-view li[data-task="-"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"]) .task-list-item-checkbox {
     border-color: var(--border-subtle-1);
     background-color: transparent;
+    /* A withdrawn item keeps the empty chip: the strikethrough is its mark. */
+    background-image: none;
 }
+
 :is(.markdown-preview-view li[data-task="-"],
     .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"]) {
     text-decoration: line-through;
     color: var(--text-faint);
 }
+
+/* Pale green fill in dark mode: the warm-white glyph drops to 2.9:1 there,
+   the body ink holds 5.7:1. */
+.theme-dark :is(.markdown-preview-view li[data-task="?"],
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="?"]) .task-list-item-checkbox:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 6.1a2.1 2.1 0 1 1 2.9 1.9c-.6.3-1 .9-1 1.6M8 12.4v.6' stroke='%23201c13' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
 
 /* [07d] Highlight Styles */
 /* ==mark== reads as a highlighter wash: amber belongs to marks alone, the
