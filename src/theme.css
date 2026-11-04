@@ -3862,6 +3862,30 @@ svg.lucide-edit-3 {
     }
 }
 
+/* Prose-level helpers. The rules above restyle objects inside the page; these
+   two restyle the page itself, so they only move the variables the rest of the
+   theme already reads �� no rule is restated at a second specificity. */
+:is(.markdown-preview-view.wide,
+    .markdown-source-view.mod-cm6.wide) {
+    --file-line-width: 56em;
+    --size-max-width-reading-paper: min(96ch, calc(100vw - 3rem));
+}
+
+@media (max-width: 900px) {
+    :is(.markdown-preview-view.wide,
+        .markdown-source-view.mod-cm6.wide) {
+        --size-max-width-reading-paper: var(--size-max-width-mobile);
+    }
+}
+
+:is(.markdown-preview-view.plain,
+    .markdown-source-view.mod-cm6.plain) {
+    --scrip-reading-paper-border: transparent;
+    --scrip-reading-paper-shadow: none;
+    --scrip-editorial-rule: none;
+    --scrip-editorial-rule-strong: none;
+}
+
 /* [19] Plugin Support
    Quiet, structural alignment only: panes and cards from popular plugins
    inherit the theme's surfaces, borders and type — never re-colored, never
