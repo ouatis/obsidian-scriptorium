@@ -27,5 +27,7 @@ jobs:
         run: npm run build
       - name: Check generated CSS parses and comment markers are balanced
         run: npm run check:css
+      - name: Audit WCAG contrast of the token pairs
+        run: npm run audit:contrast
       - name: Fail if the committed theme.css drifted from src
         run: git diff --exit-code theme.css

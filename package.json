@@ -7,7 +7,8 @@
     "lint": "stylelint \"src/theme.css\"",
     "build": "esbuild src/theme.css --minify --outfile=theme.css",
     "icons": "node scripts/build-callout-icons.mjs",
-    "check:css": "node scripts/check-css.mjs"
+    "check:css": "node scripts/check-css.mjs",
+    "audit:contrast": "node scripts/audit-contrast.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
