@@ -424,6 +424,11 @@ const PAIRS = [
     min: 4.5,
   },
   { id: "on-accent/accent", fg: "--text-on-accent", bg: "--interactive-accent", min: 4.5 },
+  { id: "code-keyword/code", fg: "--scrip-syntax-keyword", bg: "--scrip-syntax-surface", min: 4.5 },
+  { id: "code-string/code", fg: "--scrip-syntax-string", bg: "--scrip-syntax-surface", min: 4.5 },
+  { id: "code-number/code", fg: "--scrip-syntax-number", bg: "--scrip-syntax-surface", min: 4.5 },
+  { id: "code-comment/code", fg: "--scrip-syntax-comment", bg: "--scrip-syntax-surface", min: 4.5 },
+  { id: "code-function/code", fg: "--scrip-syntax-function", bg: "--scrip-syntax-surface", min: 4.5 },
 ];
 
 /* ------------------------------------------- semantic chips, read back out */

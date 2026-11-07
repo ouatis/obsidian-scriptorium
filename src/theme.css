@@ -257,6 +257,13 @@ settings:
     --gray-90: 50, 45, 35;
     --gray-100: 32, 28, 19;
 
+    /* 语法令牌:暖纸调校的五色,与三色芯片同一克制(审计锁 AA) */
+    --scrip-syntax-keyword: #9c4512;
+    --scrip-syntax-string: #56653a;
+    --scrip-syntax-number: #8a6a1e;
+    --scrip-syntax-function: #3d5a80;
+    --scrip-syntax-comment: #61594f;
+
     /* Accent color: warm orange family */
     --color-accent-rgb-light: 194, 78, 24;
     --color-accent-rgb-dark: 218, 114, 56;
@@ -499,6 +506,13 @@ body {
     --highlight-strong: rgba(var(--color-warning-rgb), 0.34);
     /* Modal top-edge highlight: dark mode avoids a bright white top edge. */
     --scrip-inset-highlight: rgba(255, 255, 255, 0.07);
+
+    /* 语法令牌:暗纸上的提亮五色 */
+    --scrip-syntax-keyword: #d98a6a;
+    --scrip-syntax-string: #9db27f;
+    --scrip-syntax-number: #d0a85c;
+    --scrip-syntax-function: #8fb0cc;
+    --scrip-syntax-comment: #9c9684;
 }
 
 
@@ -716,6 +730,7 @@ body {
     --interactive-bg-medium: color-mix(in srgb, var(--interactive) 26%, var(--background));
     --interactive-bg-strong: color-mix(in srgb, var(--interactive) 34%, var(--background));
     --scrip-surface-paper: color-mix(in srgb, var(--layer-1) 90%, var(--background));
+    --scrip-syntax-surface: color-mix(in srgb, var(--panel-surface) 92%, var(--layer-2));
     --scrip-surface-paper-muted: color-mix(in srgb, var(--layer-1) 80%, var(--background));
     --scrip-rule-soft: color-mix(in srgb, var(--border-subtle-1) 78%, transparent);
     --scrip-rule-strong: color-mix(in srgb, var(--border-subtle-1) 88%, var(--background));
@@ -1364,7 +1379,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 .markdown-preview-view pre,
 .markdown-rendered pre {
     font-family: var(--font-monospace);
-    background-color: color-mix(in srgb, var(--panel-surface) 92%, var(--layer-2));
+    background-color: var(--scrip-syntax-surface);
     border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 56%, transparent);
     border-radius: var(--radius-m);
     padding: var(--size-3) var(--size-4);
@@ -1408,6 +1423,56 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     background-color: color-mix(in srgb, var(--layer-2) 34%, transparent);
     border-left: var(--border-width-thick) solid color-mix(in srgb, var(--paper-frame-border) 48%, transparent);
     padding-inline-start: var(--size-3);
+}
+
+
+/* 语法令牌:编辑器(CodeMirror)与阅读视图(Prism)双面同色。
+   五色皆降饱和与暖纸同族;注释斜体;等宽的账簿性留给表格。 */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock .cm-keyword {
+    color: var(--scrip-syntax-keyword);
+    font-weight: 600;
+}
+.markdown-source-view.mod-cm6 .HyperMD-codeblock :is(.cm-string, .cm-string-2) {
+    color: var(--scrip-syntax-string);
+}
+.markdown-source-view.mod-cm6 .HyperMD-codeblock .cm-comment {
+    color: var(--scrip-syntax-comment);
+    font-style: italic;
+}
+.markdown-source-view.mod-cm6 .HyperMD-codeblock :is(.cm-number, .cm-atom) {
+    color: var(--scrip-syntax-number);
+}
+.markdown-source-view.mod-cm6 .HyperMD-codeblock .cm-def {
+    color: var(--scrip-syntax-function);
+}
+.markdown-source-view.mod-cm6 .HyperMD-codeblock :is(.cm-tag, .cm-attribute) {
+    color: var(--scrip-syntax-keyword);
+}
+
+:is(.markdown-preview-view, .markdown-rendered) .token.keyword {
+    color: var(--scrip-syntax-keyword);
+    font-weight: 600;
+}
+:is(.markdown-preview-view, .markdown-rendered)
+    :is(.token.string, .token.char, .token.attr-value) {
+    color: var(--scrip-syntax-string);
+}
+:is(.markdown-preview-view, .markdown-rendered)
+    :is(.token.comment, .token.prolog, .token.cdata) {
+    color: var(--scrip-syntax-comment);
+    font-style: italic;
+}
+:is(.markdown-preview-view, .markdown-rendered)
+    :is(.token.number, .token.boolean, .token.constant) {
+    color: var(--scrip-syntax-number);
+}
+:is(.markdown-preview-view, .markdown-rendered)
+    :is(.token.function, .token.class-name) {
+    color: var(--scrip-syntax-function);
+}
+:is(.markdown-preview-view, .markdown-rendered)
+    :is(.token.tag, .token.attr-name) {
+    color: var(--scrip-syntax-keyword);
 }
 
 /* [07c] List Styles */
