@@ -1,0 +1,68 @@
+<!doctype html><html class="theme-light"><head><meta charset="utf-8">
+<style>
+  html, body { margin: 0; }
+  body {
+    --font-text-theme: '??'; --font-text-override: '??'; --font-default: sans-serif;
+    --font-text: var(--font-text-override), var(--font-text-theme), var(--font-default);
+    --font-text-size: 16px;
+  }
+  .stage { width: 1440px; height: 1004px; padding-top: 88px; box-sizing: border-box; }
+  .col { width: 656px; margin: 0 auto; }
+  .tabs { display: flex; gap: 4px; align-items: flex-end; margin-bottom: 12px; }
+  .tab { padding: 6px 16px 8px; border-radius: 8px 8px 0 0; }
+  .bar { border-radius: 4px; background: currentColor; }
+  .b-row { display: flex; gap: 14px; margin: 0 0 13px; }
+  .b { height: 11px; }
+  .task-row { display: flex; align-items: center; gap: 12px; }
+  .task-list-item-checkbox { position: static; }
+</style>
+<style>* { transition: none !important; animation: none !important; }</style><style>mark { background-color: var(--highlight); color: var(--scrip-ink-strong); border-radius: 3px; padding: 1px 4px; }</style>
+<link rel="stylesheet" href="file:///C:/Users/louxi/AppData/Local/Temp/cover/app.css">
+<link rel="stylesheet" href="file:///C:/Users/louxi/Documents/github/obsidian-scriptorium/src/theme.css">
+</head><body class="show-inline-title">
+<div class="stage"><div class="workspace">
+  <div class="col">
+    <div class="tabs">
+      <div class="workspace-tab-header is-active tab"><div class="bar" style="width: 118px; height: 9px; background: var(--text-primary);"></div></div>
+      <div class="workspace-tab-header tab"><div class="bar" style="width: 94px; height: 9px; background: var(--text-muted);"></div></div>
+      <div class="workspace-tab-header tab"><div class="bar" style="width: 106px; height: 9px; background: var(--text-muted);"></div></div>
+    </div>
+    <div class="markdown-reading-view"><div class="markdown-preview-view">
+      <div class="inline-title"><div class="bar" style="width: 62%; height: 30px; background: var(--scrip-ink-strong);"></div></div>
+
+      <div style="margin-top: 30px;">
+        <div class="b-row"><div class="bar b" style="width: 31%;"></div><div class="bar b" style="width: 28%;"></div><div class="bar b" style="width: 21%;"></div></div>
+        <div class="b-row"><div class="bar b" style="width: 15%;"></div><mark style="padding: 2px 6px; border-radius: 4px;"><div class="bar b" style="width: 190px; background: var(--scrip-ink-strong);"></div></mark><div class="bar b" style="width: 24%;"></div></div>
+        <div class="b-row"><div class="bar b" style="width: 38%; background: var(--text-muted);"></div></div>
+      </div>
+
+      <blockquote style="margin: 26px 0;"><div class="b-row"><div class="bar b" style="width: 46%;"></div></div><div class="b-row"><div class="bar b" style="width: 16%; background: var(--text-muted);"></div></div></blockquote>
+
+      <h2 style="margin: 34px 0 18px;"><div class="bar" style="width: 23%; height: 21px; background: var(--scrip-ink-strong);"></div></h2>
+
+      <div class="b-row"><div class="bar b" style="width: 28%;"></div><a class="internal-link" style="padding: 2px 4px;"><div class="bar b" style="width: 84px;"></div></a><div class="bar b" style="width: 13%;"></div><a class="internal-link" style="padding: 2px 4px;"><div class="bar b" style="width: 76px;"></div></a><div class="bar b" style="width: 19%;"></div></div>
+      <div class="b-row"><div class="bar b" style="width: 44%;"></div></div>
+
+      <ul style="margin: 24px 0; padding-left: 24px; list-style: none;">
+        <li class="task-list-item" style="list-style: none; margin-bottom: 12px;"><div class="task-row"><input type="checkbox" class="task-list-item-checkbox"><div class="bar b" style="width: 34%;"></div></div></li>
+        <li class="task-list-item" style="list-style: none;"><div class="task-row"><input type="checkbox" class="task-list-item-checkbox" checked><div class="bar b" style="width: 27%; background: var(--text-muted);"></div></div></li>
+      </ul>
+
+      <table style="width: 88%; margin: 26px 0;">
+        <thead><tr><th><div class="bar" style="width: 60%; height: 10px;"></div></th><th><div class="bar" style="width: 76%; height: 10px;"></div></th><th><div class="bar" style="width: 68%; height: 10px;"></div></th></tr></thead>
+        <tbody>
+          <tr><td><div class="bar" style="width: 66%; height: 9px; background: var(--text-muted);"></div></td><td><div class="bar" style="width: 90%; height: 9px; background: var(--text-muted);"></div></td><td><div class="bar" style="width: 74%; height: 9px; background: var(--text-muted);"></div></td></tr>
+          <tr><td><div class="bar" style="width: 54%; height: 9px; background: var(--text-muted);"></div></td><td><div class="bar" style="width: 106%; height: 9px; background: var(--text-muted); overflow: hidden;"></div></td><td><div class="bar" style="width: 62%; height: 9px; background: var(--text-muted);"></div></td></tr>
+          <tr><td><div class="bar" style="width: 42%; height: 9px; background: var(--text-muted);"></div></td><td><div class="bar" style="width: 68%; height: 9px; background: var(--text-muted);"></div></td><td><div class="bar" style="width: 50%; height: 9px; background: var(--text-muted);"></div></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout" data-callout="note" style="margin: 28px 0 0;">
+        <div class="callout-title"><div class="callout-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6.4"/><line x1="8" y1="7.4" x2="8" y2="11.2"/><circle cx="8" cy="4.8" r="0.5" fill="currentColor" stroke="none"/></svg></div><div class="callout-title-inner"><div class="bar" style="width: 132px; height: 11px;"></div></div></div>
+        <div class="callout-content"><div class="b-row" style="margin-bottom: 0;"><div class="bar b" style="width: 58%;"></div></div>
+      </div>
+
+    </div></div>
+  </div>
+</div></div>
+</body></html>

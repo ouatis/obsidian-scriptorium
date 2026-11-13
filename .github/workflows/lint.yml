@@ -1,0 +1,33 @@
+name: lint-and-build
+
+on:
+  push:
+    paths:
+      - "src/theme.css"
+      - "theme.css"
+      - "package.json"
+      - "package-lock.json"
+      - "scripts/**"
+      - ".stylelintrc.json"
+      - ".github/workflows/lint.yml"
+  pull_request:
+
+jobs:
+  stylelint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - name: Build theme.css from src
+        run: npm run build
+      - name: Check generated CSS parses and comment markers are balanced
+        run: npm run check:css
+      - name: Audit WCAG contrast of the token pairs
+        run: npm run audit:contrast
+      - name: Fail if the committed theme.css drifted from src
+        run: git diff --exit-code theme.css
