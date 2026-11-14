@@ -39,6 +39,9 @@ CI(lint.yml)跑 lint + build + check:css + audit:contrast,并用 `git diff --exi
 - `theme.css` —— 构建产物,随商店分发。**不要手改**。
 - `manifest.json` —— name/version/minAppVersion;version 与发布标签保持
   一致(package.json 的 version 字段是它的镜像)。
+- 发版流程:bump manifest/package → tag → `gh release create`(写说明);
+  release-assets 工作流自动挂 theme.css + manifest.json 为 release assets
+  (Obsidian 审核要求),并校验 manifest 版本 = tag。
 - `img/` —— 品牌资产与横幅/封面的 HTML 生成器。
 
 ## 约定

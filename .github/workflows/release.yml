@@ -1,0 +1,27 @@
+name: release-assets
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Guard manifest version against the tag
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: grep -q "\"version\": \"$TAG\"" manifest.json
+
+      - name: Attach install files to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$TAG" theme.css manifest.json --clobber
