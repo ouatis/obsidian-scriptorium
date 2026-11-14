@@ -1,6 +1,6 @@
 {
   "name": "obsidian-scriptorium",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "private": true,
   "description": "A warm, minimal Obsidian theme for long-form reading and writing.",
   "scripts": {
