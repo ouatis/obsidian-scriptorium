@@ -17,6 +17,9 @@ table-compact)——能力藏在笔记里;(3) 其余可调项走 token 契约,
 改 token 即改主题。`src/theme.css` 除那段声明外不带注释,
 `snippet-example.css` 是带注释的 token 导览。新增可调项进 token,不扩面板。
 
+**注释纪律:** 所有代码尽量不写注释;设计取舍与出处写进 commit 信息
+(如 160 KiB 预算的理由在 4754a6c),不留在代码里。
+
 ## 构建与验证
 
 ```bash

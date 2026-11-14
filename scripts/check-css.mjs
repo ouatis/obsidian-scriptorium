@@ -24,10 +24,6 @@ import stylelint from "stylelint";
 
 const [srcPath = "src/theme.css", outPath = "theme.css"] = process.argv.slice(2);
 
-// The shipped stylesheet is parsed on every keystroke, so its size is typing
-// latency. Baseline's 530 KB theme.css shipped a "letters appear in groups"
-// regression (svnaxis/obsidian-baseline#265); scriptorium's edge is being
-// light, so this budget is enforced, not advisory.
 const SIZE_BUDGET = 160 * 1024;
 
 const OPEN = "/*";
