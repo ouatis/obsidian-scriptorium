@@ -3372,6 +3372,12 @@ svg.lucide-edit-3 {
     box-shadow: none;
 }
 
+.math-block {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: var(--size-2) 0;
+}
+
 @media print {
     .theme-light,
     .theme-dark {
