@@ -18,7 +18,8 @@ jobs:
       - name: Guard manifest version against the tag
         env:
           TAG: ${{ github.event.release.tag_name }}
-        run: grep -q "\"version\": \"$TAG\"" manifest.json
+        run: |
+          grep -q "\"version\": \"$TAG\"" manifest.json
 
       - name: Attach install files to the release
         env:
