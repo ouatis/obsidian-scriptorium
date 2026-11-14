@@ -1498,12 +1498,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     background-size: 100% 5px, 0 5px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
-    transition: background-size var(--ease-moderate-smooth);
     border-radius: var(--radius-s);
-
-    &:hover {
-        background-size: 100% 100%, 0 .1em;
-    }
 }
 
 [dir="rtl"] .search-result-file-matched-text {
@@ -1557,17 +1552,9 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 .markdown-rendered :is(.internal-link, .external-link) {
-    text-decoration-line: underline;
-    text-decoration-thickness: 1px;
-    text-decoration-color: transparent;
     transition:
         color var(--ease-fast-smooth),
-        opacity var(--ease-fast-smooth),
-        text-decoration-color var(--ease-fast-smooth);
-
-    &:hover {
-        text-decoration-color: currentcolor;
-    }
+        opacity var(--ease-fast-smooth);
 }
 
 .markdown-rendered .external-link,
@@ -2668,7 +2655,6 @@ body {
     --callout-icon-column: calc(var(--icon-size) + var(--size-2));
 
     --callout-shadow: none;
-    --callout-shadow-hover: none;
 
     background-color: color-mix(in srgb, var(--panel-surface) 95%, color-mix(in srgb, var(--callout-color) calc(var(--callout-bg-opacity) * 100%), transparent));
     border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 64%, color-mix(in srgb, var(--callout-color) 18%, transparent));
@@ -2677,13 +2663,7 @@ body {
     padding: 0;
     margin: var(--size-5) 0;
     overflow: hidden;
-    transition: border-color var(--ease-fast-smooth);
     box-shadow: var(--callout-shadow);
-}
-
-.callout:hover {
-    border-color: color-mix(in srgb, var(--paper-frame-border) 50%, color-mix(in srgb, var(--callout-color) 24%, transparent));
-    box-shadow: var(--callout-shadow-hover);
 }
 
 .callout-title {
@@ -2800,7 +2780,6 @@ body {
 .callout[data-callout="example"] {
     --callout-color: rgb(var(--callout-accent-rgb));
     --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
-    --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
 
 .callout[data-callout="warning"],
@@ -2808,7 +2787,6 @@ body {
 .callout[data-callout="attention"] {
     --callout-color: rgb(var(--callout-warning-rgb));
     --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
-    --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
 
 .callout[data-callout="danger"],
@@ -2819,7 +2797,6 @@ body {
 .callout[data-callout="missing"] {
     --callout-color: rgb(var(--callout-danger-rgb));
     --callout-shadow: 0 10px 24px rgba(var(--gray-100), 0.035);
-    --callout-shadow-hover: 0 12px 28px rgba(var(--gray-100), 0.04);
 }
 
 .callout[data-callout="quote"],
