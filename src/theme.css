@@ -1871,12 +1871,15 @@ body:not(.is-mobile, .view-header-title-always) .view-header :is(.view-header-le
 }
 
 body:not(.is-mobile, .view-header-title-always) .view-header-title-parent {
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 body:not(.is-mobile, .view-header-title-always) .view-header:not(:hover):not(:focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions):not(:focus-within) {
-    opacity: var(--scrip-chrome-muted-opacity);
     transform: translateY(-4px);
+}
+
+body:not(.is-mobile, .view-header-title-always) .view-header:not(:hover):not(:focus-within) :is(.view-header-left, .view-header-title-container > div:not(.view-header-title-parent), .view-actions):not(:focus-within) {
+    opacity: var(--scrip-chrome-muted-opacity);
 }
 
 body:not(.is-mobile, .view-header-title-always) .view-header:is(:hover, :focus-within) :is(.view-header-left, .view-header-title-container > div, .view-actions) {

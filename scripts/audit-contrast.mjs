@@ -431,6 +431,44 @@ const PAIRS = [
   { id: "code-function/code", fg: "--scrip-syntax-function", bg: "--scrip-syntax-surface", min: 4.5 },
 ];
 
+/* ------------------------------------------------ chrome, read back out */
+
+/**
+ * Chrome is not in the token matrix: its ink lives in a rule selector, and the
+ * idle state composes an element opacity on top of it. Read both back from the
+ * shipped CSS and audit the composed pair, so a regression in either half (a
+ * fainter token, or the breadcrumb sliding back into the dim group) fails here
+ * instead of shipping invisible.
+ */
+function breadcrumbRule(blocks) {
+  let token = null;
+  let dimmed = false;
+  for (const block of blocks) {
+    if (!block.selectors.includes(".view-header-title-parent")) continue;
+    const colorMatch = block.body.match(/color\s*:\s*var\((--[a-z0-9-]+)\)/);
+    if (colorMatch) token = colorMatch[1];
+  }
+  for (const block of blocks) {
+    if (!/opacity\s*:\s*var\(--scrip-chrome-muted-opacity\)/.test(block.body)) continue;
+    if (/view-header-title-container\s*>\s*div(?!:not\(.view-header-title-parent\))/.test(block.prelude)) {
+      dimmed = true;
+    }
+  }
+  return { token, dimmed };
+}
+
+/** The idle dim token, read from the desktop declaration (mobile restores 1). */
+function chromeOpacity(blocks) {
+  let value = 1;
+  for (const block of blocks) {
+    const match = block.body.match(/--scrip-chrome-muted-opacity\s*:\s*([\d.]+)\s*;/);
+    if (!match) continue;
+    if (/\.is-mobile/.test(block.prelude)) continue;
+    value = parseFloat(match[1]);
+  }
+  return value;
+}
+
 /* ------------------------------------------- semantic chips, read back out */
 
 const CHIPS = [
@@ -516,6 +554,30 @@ for (const mode of MODES) {
     const ratio = contrast(fg, bg);
     const status = pair.waive ? "waived" : ratio >= pair.min ? "ok" : "FAIL";
     rows.push({ mode, id: pair.id, ratio, min: pair.min, fg, bg, status, waive: pair.waive });
+  }
+
+  const crumb = breadcrumbRule(blocks);
+  if (!crumb.token) {
+    rows.push({ mode, id: "chrome breadcrumb", status: "unresolved" });
+  } else {
+    const ink = resolver.token(crumb.token);
+    const dim = crumb.dimmed ? chromeOpacity(blocks) : 1;
+    const fg = ink ? flatten([ink[0], ink[1], ink[2], ink[3] * dim], paper) : null;
+    if (!fg || !paper) {
+      rows.push({ mode, id: "chrome breadcrumb", status: "unresolved" });
+    } else {
+      const ratio = contrast(fg, paper);
+      rows.push({
+        mode,
+        id: "chrome breadcrumb",
+        ratio,
+        min: 4.5,
+        fg,
+        bg: paper,
+        status: ratio >= 4.5 ? "ok" : "FAIL",
+        note: crumb.dimmed ? `composed at opacity ${dim}` : "no idle dimming",
+      });
+    }
   }
 
   for (const chip of CHIPS) {
