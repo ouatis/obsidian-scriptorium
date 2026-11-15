@@ -1487,6 +1487,11 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     -webkit-box-decoration-break: clone;
 }
 
+.markdown-rendered mark[data-highlight],
+.cm-s-obsidian span.cm-highlight[class*="cm-highlight-"] {
+    background-color: var(--highlight-background);
+}
+
 .search-result-file-matched-text {
     --scrip-highlight-dir: to right;
     color: var(--text-normal);
@@ -1767,14 +1772,65 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     box-shadow: none;
 }
 
+.theme-light {
+    --mermaid-background: rgb(var(--white));
+    --mermaid-text-color: rgb(var(--gray-100));
+    --mermaid-muted-color: rgb(var(--gray-70));
+    --mermaid-line-color: rgb(var(--gray-70));
+    --mermaid-surface: rgb(var(--gray-10));
+    --mermaid-surface-alt: rgb(var(--gray-20));
+    --mermaid-border-color: rgb(var(--gray-30));
+    --mermaid-accent: rgb(var(--color-accent-rgb-light));
+    --mermaid-critical: rgb(var(--color-error-rgb));
+    --mermaid-error: rgb(var(--color-error-rgb));
+    --mermaid-radius: var(--radius-s);
+    --mermaid-title-weight: var(--font-semibold);
+    --mermaid-heading-weight: var(--font-semibold);
+    --mermaid-bold-weight: var(--font-bold);
+    --mermaid-color-1: rgb(var(--color-accent-rgb-light));
+    --mermaid-color-2: rgb(var(--color-secondary-rgb-light));
+    --mermaid-color-3: rgb(var(--color-warning-rgb));
+    --mermaid-color-4: rgb(var(--color-error-rgb));
+    --mermaid-color-5: var(--color-blue);
+    --mermaid-color-6: rgb(var(--color-warning-rgb));
+    --mermaid-color-7: var(--color-purple);
+    --mermaid-color-8: var(--color-pink);
+}
+
+.theme-dark {
+    --mermaid-background: rgb(var(--gray-100));
+    --mermaid-text-color: rgb(var(--gray-10));
+    --mermaid-muted-color: rgb(var(--gray-40));
+    --mermaid-line-color: rgb(var(--gray-50));
+    --mermaid-surface: rgb(var(--gray-90));
+    --mermaid-surface-alt: rgb(var(--gray-80));
+    --mermaid-border-color: rgb(var(--gray-60));
+    --mermaid-accent: rgb(var(--color-accent-rgb-dark));
+    --mermaid-critical: rgb(var(--color-error-rgb));
+    --mermaid-error: rgb(var(--color-error-rgb));
+    --mermaid-radius: var(--radius-s);
+    --mermaid-title-weight: var(--font-semibold);
+    --mermaid-heading-weight: var(--font-semibold);
+    --mermaid-bold-weight: var(--font-bold);
+    --mermaid-color-1: rgb(var(--color-accent-rgb-dark));
+    --mermaid-color-2: rgb(var(--color-secondary-rgb-dark));
+    --mermaid-color-3: rgb(var(--color-warning-rgb));
+    --mermaid-color-4: rgb(var(--color-error-rgb));
+    --mermaid-color-5: var(--color-blue);
+    --mermaid-color-6: rgb(var(--color-warning-rgb));
+    --mermaid-color-7: var(--color-purple);
+    --mermaid-color-8: var(--color-pink);
+}
+
 .theme-dark .markdown-preview-view :is(svg[id^="mermaid"], div.mermaid),
 .theme-dark .markdown-rendered :is(svg[id^="mermaid"], div.mermaid) {
-    background-color: rgb(var(--white));
+    background-color: var(--mermaid-background, rgb(var(--white)));
     border: var(--border-width) solid color-mix(in srgb, var(--paper-frame-border) 56%, transparent);
     border-radius: var(--radius-m);
     padding: var(--size-3);
 }
 
+.theme-dark :is(.markdown-preview-view, .markdown-rendered) div.mermaid svg,
 .theme-dark .markdown-preview-view svg[id^="mermaid"],
 .theme-dark .markdown-rendered svg[id^="mermaid"] {
     max-width: 100%;
