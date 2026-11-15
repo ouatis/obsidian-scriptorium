@@ -26,6 +26,8 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 
 纸页、光与连接：Scriptorium 与小台灯、技能接线台、比稿（Collate）共享安静的轮廓和视觉节奏。四件产品各自独立，使用主题不需要安装任何插件。
 
+![同一篇笔记，两种设备——左手机，右桌面。](img/promo-merged.png)
+
 > [!NOTE]
 > Scriptorium 是偏个人审美的主题。安装可选的 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 插件后，可调整 4 个阅读控件：阅读行宽、正文行高、段落间距、标题字体栈；其余可调项都在 token 契约里（见 [snippet-example.css](snippet-example.css)）与按文件生效的 helper classes。
 
@@ -45,6 +47,10 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 - 导航、搜索、菜单、标签、callout 和 embed 尽量安静，让正文居中。
 - 主题以单一 `theme.css` 发布，无外部依赖、无 `backdrop-filter`；CI 体积预算守住轻量，打字始终跟手。
 - 主界面常用图标（快速切换、图谱、日历、白板、数据库、设置、搜索等）与 callout 图标以 Phosphor 线稿绘制；同形图标、插件图标与方向微符保持原生。
+
+| 亮色阅读 | 暗色阅读 |
+| --- | --- |
+| ![亮色阅读视图：标题为 Reading 的笔记，含属性面板、引文块与强调色链接。](img/shots/reading-light.png) | ![暗色阅读视图：同一张安静的纸页铺在暗色纸面上。](img/dark-window.png) |
 
 ## 设计原则
 
@@ -77,6 +83,8 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 | `wide` | 更宽的页面与行宽——给宽表、图表和长代码用 |
 | `plain` | 去掉纸张边框、投影与标题下的编辑线 |
 | 任务语法 `[!]` `[?]` `[>]` `[-]` | 语义复选框：琥珀、苔绿、铜橙、删除线淡墨，每种各有自己的字形（! ? > 与空框）——阅读与实时预览都生效 |
+
+![暗色书桌上的两页纸——亮页在前，暗页在后。](img/store-sheet-two-pages.png)
 
 ## 插件适配
 

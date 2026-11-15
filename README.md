@@ -24,6 +24,8 @@ Scriptorium keeps the writing surface primary: soft paper tones, restrained cont
 
 Paper, light and connections: Scriptorium shares quiet shapes and a visual rhythm with Desk Lamp, Skill Switchboard and Collate. Each product works independently; the theme does not require any of the plugins.
 
+![One note, two devices — a phone on the left, a desktop window on the right.](img/promo-merged.png)
+
 > [!NOTE]
 > Scriptorium is a personal aesthetic. With the optional [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin, four reading controls appear: reading line width, prose line height, paragraph spacing, and the heading typeface. Everything else lives in the token contract (see [snippet-example.css](snippet-example.css)) and in per-file helper classes.
 
@@ -43,6 +45,10 @@ Manual install: copy `theme.css` and `manifest.json` into `.obsidian/themes/Scri
 - Navigation, search, menus, tags, callouts, and embeds stay quiet so prose remains central.
 - The theme ships as a single `theme.css` with no external dependencies and no `backdrop-filter`; a CI size budget keeps it lean, so typing stays instant.
 - Interface chrome icons (quick switcher, graph, calendar, canvas, database, settings, search and more) and callout icons are drawn in the Phosphor line language; same-shape icons, plugin icons and directional glyphs stay native.
+
+| Light reading | Dark reading |
+| --- | --- |
+| ![Light mode reading view: a note titled "Reading" with properties, a quote block, and accent links.](img/shots/reading-light.png) | ![Dark mode reading view: the same quiet page rendered on dark paper.](img/dark-window.png) |
 
 ## Design Principles
 
@@ -75,6 +81,8 @@ Per-file helper classes go in the `cssClasses` frontmatter key and compose:
 | `wide` | Wider page and line measure — for wide tables, diagrams, and long code |
 | `plain` | Drops the paper frame, its shadow, and the editorial rules under titles |
 | `[!]` `[?]` `[>]` `[-]` in tasks | Semantic task markers: amber, green, copper, and struck-muted chips, each with its own glyph (! ? > and an empty box) — in reading and live preview |
+
+![Two paper pages over a dark desk — the light page in front, the dark page behind.](img/store-sheet-two-pages.png)
 
 ## Plugin support
 
