@@ -48,7 +48,7 @@ Manual install: copy `theme.css` and `manifest.json` into `.obsidian/themes/Scri
 
 | Light reading | Dark reading |
 | --- | --- |
-| ![Light mode reading view: a note titled "Reading" with properties, a quote block, and accent links.](img/shots/reading-light.png) | ![Dark mode reading view: the same quiet page rendered on dark paper.](img/dark-window.png) |
+| ![Light mode reading view: a rounded paper card on a warm canvas, holding the note title, a quote block, a checked task and a tide table.](img/light-window.png) | ![Dark mode reading view: the same paper card on a dark canvas, with the same title, quote block, checked task and tide table.](img/dark-window.png) |
 
 ## Design Principles
 
