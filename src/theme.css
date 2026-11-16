@@ -1551,11 +1551,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     }
 }
 
-.markdown-rendered :is(.internal-link, .external-link) {
-    transition:
-        color var(--ease-fast-smooth),
-        opacity var(--ease-fast-smooth);
-}
+
 
 .markdown-rendered .external-link,
 .markdown-source-view .cm-link:not(.cm-hmd-internal-link) {
@@ -2587,10 +2583,6 @@ body {
     box-shadow: inset 3px 0 0 0 var(--interactive-accent);
 }
 
-.vertical-tab-nav-item.is-active {
-    box-shadow: inset 3px 0 0 0 var(--interactive-accent);
-}
-
 .setting-group .setting-item-heading .setting-item-name {
     font-family: var(--font-interface);
     font-size: 11px;
@@ -3484,12 +3476,7 @@ svg.lucide-edit-3 {
 
 :is(.markdown-preview-view.row-alt,
     .markdown-source-view.mod-cm6.row-alt .cm-table-widget) table tbody tr:nth-child(even) td {
-    background: var(--table-zebra-light);
-}
-
-.theme-dark :is(.markdown-preview-view.row-alt,
-    .markdown-source-view.mod-cm6.row-alt .cm-table-widget) table tbody tr:nth-child(even) td {
-    background: var(--table-zebra-dark);
+    background: var(--table-zebra);
 }
 
 :is(.markdown-preview-view.table-tabular,
@@ -3500,6 +3487,11 @@ svg.lucide-edit-3 {
 :is(.markdown-preview-view.table-nowrap,
     .markdown-source-view.mod-cm6.table-nowrap .cm-table-widget) table :is(td, th) {
     white-space: nowrap;
+}
+
+:is(.markdown-preview-view.table-fixed,
+    .markdown-source-view.mod-cm6.table-fixed .cm-table-widget) table {
+    table-layout: fixed;
 }
 
 :is(.markdown-preview-view.cards, .markdown-source-view.mod-cm6.cards .cm-table-widget)
@@ -3546,20 +3538,18 @@ svg.lucide-edit-3 {
     font-weight: var(--font-weight-semibold);
 }
 
-:is(.markdown-preview-view.cards, .markdown-source-view.mod-cm6.cards .cm-table-widget)
+:is(.markdown-preview-view.cards.cards-cols-1, .markdown-source-view.mod-cm6.cards.cards-cols-1 .cm-table-widget)
     :is(.block-language-dataview, .block-language-dataviewjs) table {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-:is(.markdown-preview-view.cards.cards-cols-1) :is(.block-language-dataview, .block-language-dataviewjs) table {
     grid-template-columns: 1fr;
 }
 
-:is(.markdown-preview-view.cards.cards-cols-3) :is(.block-language-dataview, .block-language-dataviewjs) table {
+:is(.markdown-preview-view.cards.cards-cols-3, .markdown-source-view.mod-cm6.cards.cards-cols-3 .cm-table-widget)
+    :is(.block-language-dataview, .block-language-dataviewjs) table {
     grid-template-columns: repeat(3, 1fr);
 }
 
-:is(.markdown-preview-view.cards.cards-cols-4) :is(.block-language-dataview, .block-language-dataviewjs) table {
+:is(.markdown-preview-view.cards.cards-cols-4, .markdown-source-view.mod-cm6.cards.cards-cols-4 .cm-table-widget)
+    :is(.block-language-dataview, .block-language-dataviewjs) table {
     grid-template-columns: repeat(4, 1fr);
 }
 
@@ -3592,11 +3582,7 @@ svg.lucide-edit-3 {
 }
 
 .dataview.table-view-table > tbody > tr:hover {
-    background: var(--table-hover-light);
-}
-
-.theme-dark .dataview.table-view-table > tbody > tr:hover {
-    background: var(--table-hover-dark);
+    background: var(--table-hover);
 }
 
 .dataview.small-text {
