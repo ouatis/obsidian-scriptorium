@@ -24,11 +24,6 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 
 纸页、光与连接：Scriptorium 与小台灯、技能接线台、比稿（Collate）共享安静的轮廓和视觉节奏。四件产品各自独立，使用主题不需要安装任何插件。
 
-![同一篇笔记，两种设备——左手机，右桌面。](img/promo-merged.png)
-
-> [!NOTE]
-> Scriptorium 是偏个人审美的主题。安装可选的 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 插件后，可调整 4 个阅读控件：阅读行宽、正文行高、段落间距、标题字体栈；其余可调项都在 token 契约里（见 [snippet-example.css](snippet-example.css)）与按文件生效的 helper classes。
-
 ## 安装
 
 1. 在 Obsidian 社区主题中搜索 `Scriptorium`。
@@ -50,22 +45,11 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 | --- | --- |
 | ![亮色阅读视图：暖色画布上托着一张圆角纸卡，含笔记标题、引文块、已勾选任务与潮汐表格。](img/light-window.png) | ![暗色阅读视图：同一张纸卡落在暗色画布上，标题、引文块、已勾选任务与潮汐表格一致。](img/dark-window.png) |
 
-## 设计原则
-
-主题按以下原则维护，留作后续修改时的约束：
-
-- 保持暖色纸张配色的克制。
-- 表面保持干净：纹理服务于页面，而不是与正文争夺注意力。
-- 优先使用排版层级，而非厚重的界面装饰。
-- 自动隐藏行为保持有限、可预测，阅读时容易忽略。
-- 强调色在正文尺寸的文本中承载语义时，谨慎使用。
-- callout、嵌入和浮动 UI 保持同一材质语言，但不让日常操作界面看起来像层叠卡片。
-- 标签保持安静：标注正文，而不与标题、链接竞争。
-- 阅读舒适优先于装饰新奇。
+![同一篇笔记，两种设备——左手机，右桌面。](img/promo-merged.png)
 
 ## 定制
 
-两个 opt-in 入口和一个小设置面板；不用时渲染逐字节一致。安装 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 插件后，面板会暴露 4 个阅读控件：阅读行宽、正文行高、段落间距、标题字体栈。其余可调项都在 token 契约里，带注释的导览见 [snippet-example.css](snippet-example.css)。
+两个 opt-in 入口和一个小设置面板；不用时渲染逐字节一致。安装可选的 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 插件后，面板会暴露 4 个阅读控件：阅读行宽、正文行高、段落间距、标题字体栈。其余可调项都在 token 契约里，安全覆盖层级与色阶斜坡的带注释导览见 [snippet-example.css](snippet-example.css)。
 
 按文件的 helper classes 写进 `cssClasses` frontmatter，可自由组合：
 
@@ -82,20 +66,19 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 | `plain` | 去掉纸张边框、投影与标题下的编辑线 |
 | 任务语法 `[!]` `[?]` `[>]` `[-]` | 语义复选框：琥珀、苔绿、铜橙、删除线淡墨，每种各有自己的字形（! ? > 与空框）——阅读与实时预览都生效 |
 
-![暗色书桌上的两页纸——亮页在前，暗页在后。](img/store-sheet-two-pages.png)
-
 ## 插件适配
 
 只做结构性对齐——[Dataview](https://github.com/blacksmithgu/obsidian-dataview) 与 [Quiet Outline](https://github.com/guopenghui/obsidian-quiet-outline) 的面板与卡片继承主题的表面与边线，不重新着色、不重新排版。
 
-## 给主题作者
-
-一切可调项都挂在 `src/theme.css` 顶部的 token 契约上；[snippet-example.css](snippet-example.css) 是带注释的导览：哪几层可以放心覆盖。新颜色以 token 落地，并须通过对比度审计——`npm run audit:contrast` 解析亮暗两套链路，跌破 WCAG 阈值即失败（0.20.0 的语法调色板就是这样进的库）。代码面选择器成对书写——CodeMirror `.cm-*` 与 Prism `.token.*` 指向同一组 token；新增表面时照这个形状抄。
-
 ## 开发
 
-可读源码在 `src/theme.css`。修改后运行 `npm run build`，由 esbuild 压缩生成发布的 `theme.css`，保持文件轻量以通过社区商店的体积检查。`npm run lint` 对源码运行 stylelint，`npm run audit:contrast` 会解析亮暗两套令牌链，任一对文本/表面组合跌破 WCAG 阈值即失败。
+可读源码在 `src/theme.css`，所有可调项挂在文件顶部的 token 契约上（完整导览见 [snippet-example.css](snippet-example.css)）。代码面选择器成对书写——CodeMirror `.cm-*` 与 Prism `.token.*` 指向同一组 token；新增表面时照这个形状抄。
 
-个人微调走 CSS snippet——[snippet-example.css](snippet-example.css) 是一份带注释的 token 导览：哪些变量可以放心覆盖、色阶斜坡怎么重调、三层覆盖关系，都在里面。
+修改 `src/theme.css` 后，运行以下脚本构建与校验：
+
+- `npm run lint` —— 对 `src/theme.css` 运行 stylelint
+- `npm run build` —— 使用 esbuild 将 `src/theme.css` 压缩生成 `theme.css`
+- `npm run check:css` —— 校验 `@settings` 声明保留、无多余注释，且产物在 160 KiB 体积预算内
+- `npm run audit:contrast` —— 解析亮暗两套令牌链，任一对文本/表面组合跌破 WCAG 阈值即失败
 
 由 [@ouatis](https://github.com/ouatis/) 制作。受 [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) 与 [Baseline](https://github.com/aaaaalexis/obsidian-baseline) 启发。

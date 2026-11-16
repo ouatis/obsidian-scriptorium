@@ -24,11 +24,6 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 
 紙、光、つながり。Scriptorium は Desk Lamp、Skill Switchboard、Collate と静かな輪郭と視覚リズムを共有します。各製品は独立して動作し、テーマを使うためにプラグインを導入する必要はありません。
 
-![同じノート、二つのデバイス——左はスマホ、右はデスクトップ。](img/promo-merged.png)
-
-> [!NOTE]
-> Scriptorium は個人的な美意識を前提にしたテーマです。任意の [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) プラグインを導入すると、4 つの読書コントロール（読書行幅、本文の行高、段落間隔、見出し書体）を調整できます。ほかの調整は token 契約（[snippet-example.css](snippet-example.css) 参照）とファイル単位の helper classes にあります。
-
 ## インストール
 
 1. Obsidian の Community Themes で `Scriptorium` を検索します。
@@ -50,22 +45,11 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 | --- | --- |
 | ![ライトモードの読書ビュー: 暖かい色のキャンバスに浮かぶ角丸の紙カード。ノートタイトル、引用ブロック、チェック済みタスク、潮汐表を含む。](img/light-window.png) | ![ダークモードの読書ビュー: 同じ紙カードが暗いキャンバスに。タイトル、引用ブロック、チェック済みタスク、潮汐表も同じ。](img/dark-window.png) |
 
-## デザイン原則
-
-テーマ編集時に守る指針として、以下を維持します:
-
-- 温かい紙のパレットは抑制的に保つ。
-- 面は清潔に保ち、質感はページを支え、本文と競合しない。
-- 重いクロームよりもタイポグラフィの階層を優先する。
-- 自動非表示の挙動は限定的で予測可能に保つ。
-- 本文サイズのテキストで意味を持つアクセント色は慎重に使う。
-- callout、embed、フローティング UI は同じマテリアル言語に揃えるが、日常の操作 UI を積み重なったカードのようにしない。
-- タグは静かに保ち、見出しやリンクと競合させない。
-- 読み心地を装飾的な新しさより優先する。
+![同じノート、二つのデバイス——左はスマホ、右はデスクトップ。](img/promo-merged.png)
 
 ## カスタマイズ
 
-2 つの opt-in 面と小さな設定パネルがあります。使わなければ表示はバイト単位で同一です。[Style Settings](https://github.com/mgmeyers/obsidian-style-settings) プラグインを導入すると、4 つの読書コントロール（読書行幅、本文の行高、段落間隔、見出し書体）が並びます。ほかの調整は token 契約（[snippet-example.css](snippet-example.css) 参照）にあります。
+2 つの opt-in 面と小さな設定パネルがあります。使わなければ表示はバイト単位で同一です。任意の [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) プラグインを導入すると、4 つの読書コントロール（読書行幅、本文の行高、段落間隔、見出し書体）が並びます。ほかの調整は token 契約にあり、安全な上書き層とパレットランプの注釈付きガイドは [snippet-example.css](snippet-example.css) を参照してください。
 
 ファイル単位のヘルパークラスは `cssClasses` frontmatter に書き、自由に組み合わせられます：
 
@@ -82,20 +66,19 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 | `plain` | 紙の枠、影、見出し下のエディトリアル罫線を外す |
 | タスクの `[!]` `[?]` `[>]` `[-]` | セマンティックチェックボックス：琥珀、緑、銅、打ち消し。それぞれ固有の字形（! ? > と空枠）付き——読書とライブプレビュー両方 |
 
-![暗い机の上の二枚の紙——手前に明るい紙、奥に暗い紙。](img/store-sheet-two-pages.png)
-
 ## プラグイン対応
 
 構造的な揃えのみ——[Dataview](https://github.com/blacksmithgu/obsidian-dataview) と [Quiet Outline](https://github.com/guopenghui/obsidian-quiet-outline) のペインとカードはテーマの面と罫線を引き継ぎます。再配色も再レイアウトもしません。
 
-## テーマ作者へ
-
-調整可能なものはすべて `src/theme.css` 冒頭のトークン契約に懸かっています。[snippet-example.css](snippet-example.css) は、安全に上書きできる層を注釈付きで案内するツアーです。新しい色はトークンとして追加し、コントラスト監査を通します——`npm run audit:contrast` がライト/ダーク両チェーンを解決し、WCAG しきい値を下回れば失敗します（0.20.0 のシンタックスパレットはこの手順で入りました）。コード面のセレクタはペアで書きます——CodeMirror `.cm-*` と Prism `.token.*` が同じトークンを指す形です。面を追加するときはこの形をどうぞ。
-
 ## 開発
 
-可読ソースは `src/theme.css` にあります。編集後に `npm run build` を実行すると、esbuild が配布用の `theme.css` を生成し、ストアのサイズチェックに向けた軽量さを保ちます。`npm run lint` でソースに stylelint を実行し、`npm run audit:contrast` はライト/ダーク両モードのトークン連鎖を解決し、テキストと面の組み合わせが WCAG しきい値を下回ると失敗します。
+可読ソースは `src/theme.css` にあり、調整可能なものはすべて冒頭のトークン契約に懸かっています（注釈付きツアーは [snippet-example.css](snippet-example.css) を参照）。コード面のセレクタはペアで書きます——CodeMirror `.cm-*` と Prism `.token.*` が同じトークンを指す形です。面を追加するときはこの形をどうぞ。
 
-個人的な調整は CSS スニペットで行います——[snippet-example.css](snippet-example.css) は、安全に上書きできるトークンを一つずつ注釈付きで案内するファイルです。パレットのランプと上書きの三層構造も説明しています。
+`src/theme.css` を編集した後は、次の検証・ビルドスクリプトを実行してください：
+
+- `npm run lint` —— `src/theme.css` に stylelint を実行
+- `npm run build` —— esbuild で `src/theme.css` を圧縮し `theme.css` を生成
+- `npm run check:css` —— `@settings` 宣言の維持、余分なコメントがないこと、160 KiB 予算内であることを検証
+- `npm run audit:contrast` —— ライト/ダーク両チェーンを解決し、WCAG しきい値を下回る組み合わせがあれば失敗
 
 Created by [@ouatis](https://github.com/ouatis/). Inspired by [Sanctum](https://github.com/jdanielmourao/obsidian-sanctum) and [Baseline](https://github.com/aaaaalexis/obsidian-baseline).
