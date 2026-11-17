@@ -429,6 +429,15 @@ const PAIRS = [
   { id: "code-number/code", fg: "--scrip-syntax-number", bg: "--scrip-syntax-surface", min: 4.5 },
   { id: "code-comment/code", fg: "--scrip-syntax-comment", bg: "--scrip-syntax-surface", min: 4.5 },
   { id: "code-function/code", fg: "--scrip-syntax-function", bg: "--scrip-syntax-surface", min: 4.5 },
+  // Mermaid series colours and the node border are non-text graphics: 3:1 is the
+  // WCAG floor. Series 3/6 previously shared the warning amber (2.14:1 on the
+  // light card); the border was gray-30 (1.53:1). Both now clear the floor.
+  { id: "mermaid/series-3/paper", fg: "--mermaid-color-3", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-6/paper", fg: "--mermaid-color-6", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/border/paper", fg: "--mermaid-border-color", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-5/paper", fg: "--mermaid-color-5", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-7/paper", fg: "--mermaid-color-7", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-8/paper", fg: "--mermaid-color-8", bg: "--scrip-surface-paper", min: 3 },
 ];
 
 /* ------------------------------------------------ chrome, read back out */

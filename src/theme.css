@@ -1622,12 +1622,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     margin-bottom: 0;
 }
 
-.markdown-source-view.mod-cm6 span.cm-quote.cm-quote-1,
-.markdown-source-view.mod-cm5 span.cm-quote {
-    font-style: italic;
-    color: var(--blockquote-text-color-accent);
-}
-
 .markdown-preview-view hr {
     border: none;
     height: var(--border-width);
@@ -1766,7 +1760,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 .markdown-rendered .footnote-ref .markdown-embed,
-.hover-editor .markdown-embed {
+.hover-popover .markdown-embed {
     background: none;
     border: 0;
     box-shadow: none;
@@ -1777,9 +1771,9 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     --mermaid-text-color: rgb(var(--gray-100));
     --mermaid-muted-color: rgb(var(--gray-70));
     --mermaid-line-color: rgb(var(--gray-70));
-    --mermaid-surface: rgb(var(--gray-10));
-    --mermaid-surface-alt: rgb(var(--gray-20));
-    --mermaid-border-color: rgb(var(--gray-30));
+    --mermaid-surface: rgb(var(--gray-20));
+    --mermaid-surface-alt: rgb(var(--gray-30));
+    --mermaid-border-color: rgb(var(--gray-60));
     --mermaid-accent: rgb(var(--color-accent-rgb-light));
     --mermaid-critical: rgb(var(--color-error-rgb));
     --mermaid-error: rgb(var(--color-error-rgb));
@@ -1789,12 +1783,12 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     --mermaid-bold-weight: var(--font-bold);
     --mermaid-color-1: rgb(var(--color-accent-rgb-light));
     --mermaid-color-2: rgb(var(--color-secondary-rgb-light));
-    --mermaid-color-3: rgb(var(--color-warning-rgb));
+    --mermaid-color-3: color-mix(in srgb, rgb(var(--color-warning-rgb)) 60%, rgb(var(--gray-100)));
     --mermaid-color-4: rgb(var(--color-error-rgb));
-    --mermaid-color-5: var(--color-blue);
-    --mermaid-color-6: rgb(var(--color-warning-rgb));
-    --mermaid-color-7: var(--color-purple);
-    --mermaid-color-8: var(--color-pink);
+    --mermaid-color-5: var(--color-blue, #086ddd);
+    --mermaid-color-6: var(--color-purple, #7852ee);
+    --mermaid-color-7: color-mix(in srgb, var(--color-cyan, #00bfbc) 60%, rgb(var(--gray-100)));
+    --mermaid-color-8: var(--color-pink, #d53984);
 }
 
 .theme-dark {
@@ -1816,10 +1810,10 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     --mermaid-color-2: rgb(var(--color-secondary-rgb-dark));
     --mermaid-color-3: rgb(var(--color-warning-rgb));
     --mermaid-color-4: rgb(var(--color-error-rgb));
-    --mermaid-color-5: var(--color-blue);
-    --mermaid-color-6: rgb(var(--color-warning-rgb));
-    --mermaid-color-7: var(--color-purple);
-    --mermaid-color-8: var(--color-pink);
+    --mermaid-color-5: var(--color-blue, #027aff);
+    --mermaid-color-6: var(--color-purple, #a882ff);
+    --mermaid-color-7: var(--color-cyan, #53dfdd);
+    --mermaid-color-8: var(--color-pink, #fa99cd);
 }
 
 .theme-dark .markdown-preview-view :is(svg[id^="mermaid"], div.mermaid),
@@ -1887,7 +1881,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     color: var(--nav-item-color-hover);
 }
 
-.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner):hover :is(.nav-folder-title-content, .nav-file-title-content, .tree-item-self, .nav-folder-collapse-indicator) {
+.workspace :is(.nav-folder-title, .nav-file-title, .tree-item-inner):hover :is(.nav-folder-title-content, .nav-file-title-content, .tree-item-self, .collapse-indicator) {
     color: var(--nav-folder-color-hover);
 }
 
@@ -2026,7 +2020,7 @@ body:not(.is-mobile, .view-header-title-always) .view-header:is(:hover, :focus-w
     padding-inline: 1px;
 }
 
-.workspace-tab-header.is-stacked:not(.is-active) {
+.workspace-tab-header.mod-stacked:not(.is-active) {
     background-color: color-mix(in srgb, var(--layer-2) 72%, transparent);
     border: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 55%, transparent);
 }
@@ -2308,12 +2302,12 @@ body.is-mobile .mobile-navbar {
     box-shadow: none;
 }
 
-body.is-mobile .mobile-navbar .navbar-button {
+body.is-mobile .mobile-navbar .mobile-navbar-action {
     color: var(--text-secondary);
 }
 
-body.is-mobile .mobile-navbar .navbar-button:active,
-body.is-mobile .mobile-navbar .navbar-button:hover {
+body.is-mobile .mobile-navbar .mobile-navbar-action:active,
+body.is-mobile .mobile-navbar .mobile-navbar-action:hover {
     color: var(--text-primary);
     background-color: var(--background-hover);
 }
