@@ -9,6 +9,7 @@ on:
       - "package-lock.json"
       - "scripts/**"
       - ".stylelintrc.json"
+      - "snippet-example.css"
       - "README*"
       - ".github/workflows/lint.yml"
   pull_request:

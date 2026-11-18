@@ -209,6 +209,41 @@ if (out !== null) {
   }
 }
 
+const snippetPath = "snippet-example.css";
+const snippet = await readText(snippetPath);
+if (snippet !== null) {
+  const markers = scanCommentMarkers(snippet);
+  let snippetOk = true;
+  if (markers.stray > 0) {
+    problems.push(`${snippetPath}: ${markers.stray} stray close-comment marker(s) outside a comment`);
+    snippetOk = false;
+  }
+  if (markers.unclosed > 0) {
+    problems.push(`${snippetPath}: unclosed comment at end of file`);
+    snippetOk = false;
+  }
+  if (markers.open !== markers.close) {
+    problems.push(`${snippetPath}: comment markers unbalanced (open ${markers.open}, close ${markers.close})`);
+    snippetOk = false;
+  }
+  try {
+    const result = await stylelint.lint({ code: snippet, config: { rules: {} } });
+    const syntaxErrors = result.results.flatMap((file) =>
+      file.warnings.filter((warning) => warning.rule === "CssSyntaxError"),
+    );
+    for (const error of syntaxErrors) {
+      problems.push(`${snippetPath}:${error.line}:${error.column} ${error.text}`);
+      snippetOk = false;
+    }
+  } catch (error) {
+    problems.push(`${snippetPath}: stylelint could not parse the file (${error.message})`);
+    snippetOk = false;
+  }
+  if (snippetOk) {
+    successes.push(`${snippetPath}: comment markers balanced, parses as CSS`);
+  }
+}
+
 if (problems.length > 0) {
   for (const problem of problems) {
     console.error(`✗ ${problem}`);

@@ -139,8 +139,7 @@
    - run `npm run audit:contrast` after re-inking; it catches any
      pair that drops, before a user does.
    The values below are a cool-slate variant that passes both modes.
-
-===================================================================== */
+   =====================================================================
 
 .theme-light {
     --scrip-syntax-keyword: #7c3aed;
