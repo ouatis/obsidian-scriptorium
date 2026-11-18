@@ -568,10 +568,6 @@ body {
     background-color: transparent;
 }
 
-body.is-mobile {
-    background-image: none;
-}
-
 body.is-popout-window,
 body.is-translucent {
     background-color: var(--background-secondary);
@@ -583,6 +579,7 @@ body.is-translucent .workspace {
 }
 
 body.is-mobile {
+    background-image: none;
     --scrip-app-texture: none;
     --scrip-reading-paper-radius: var(--radius-m);
     --scrip-reading-paper-border: transparent;
@@ -2396,6 +2393,8 @@ body:not(.is-mobile) .mod-sidedock.mod-right-split .workspace-tabs:last-of-type 
 .modal-container .modal,
 .popover,
 .tooltip {
+    background-color: var(--layer-1);
+    color: var(--text-normal);
     border-radius: var(--radius-m);
     border-color: color-mix(in srgb, var(--border-subtle-1) 82%, transparent);
 }
@@ -2514,15 +2513,6 @@ button.mod-cta,
     }
 }
 
-.modal-container .modal,
-.menu,
-.popover,
-.tooltip,
-.suggestion-container {
-
-    background-color: var(--layer-1);
-    color: var(--text-normal);
-}
 
 .modal-container .modal {
     border: var(--border-width) solid var(--border-subtle-1);
