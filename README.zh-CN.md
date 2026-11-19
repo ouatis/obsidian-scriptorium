@@ -16,7 +16,7 @@ _一张安静的书桌。_
 
 </div>
 
-![同一篇笔记，两种纸面——左亮右暗。](img/store-sheet-split.png)
+![同一篇笔记，两种纸面——左亮右暗。](screenshot.png)
 
 一款温暖、简洁的 Obsidian 主题，面向长文阅读与写作。
 

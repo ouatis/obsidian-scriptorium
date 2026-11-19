@@ -42,7 +42,7 @@ CI(lint.yml)跑 lint + build + check:css + audit:contrast,并用 `git diff --exi
 - 发版流程:bump manifest/package → tag → `gh release create`(写说明);
   release-assets 工作流自动挂 theme.css + manifest.json 为 release assets
   (Obsidian 审核要求),并校验 manifest 版本 = tag。
-- `img/` —— 品牌资产与横幅/封面的 HTML 生成器。
+- `img/` —— README 引用的截图与徽章资产。
 
 ## 约定
 

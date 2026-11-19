@@ -16,7 +16,7 @@ _A quiet desk for long thoughts._
 
 </div>
 
-![One note, two modes — light on the left, dark on the right.](img/store-sheet-split.png)
+![One note, two modes — light on the left, dark on the right.](screenshot.png)
 
 A warm, minimal Obsidian theme for long-form reading and writing.
 
