@@ -404,9 +404,6 @@ const PAIRS = [
     min: 4.5,
     waive: "decorative tier: timestamps and gutters, not prose",
   },
-  { id: "h3/paper", fg: "--h3-color", bg: "--scrip-surface-paper", min: 3 },
-  { id: "h4/paper", fg: "--h4-color", bg: "--scrip-surface-paper", min: 3 },
-  { id: "h5/paper", fg: "--h5-color", bg: "--scrip-surface-paper", min: 3 },
   { id: "link/paper", fg: "--link-color-base", bg: "--scrip-surface-paper", min: 4.5 },
   { id: "link-hover/paper", fg: "--link-color-hover", bg: "--scrip-surface-paper", min: 4.5 },
   {
@@ -474,6 +471,27 @@ function chromeOpacity(blocks) {
     if (!match) continue;
     if (/\.is-mobile/.test(block.prelude)) continue;
     value = parseFloat(match[1]);
+  }
+  return value;
+}
+
+/* ------------------------------------------------ headings, read back out */
+
+/**
+ * h3-h5 ink is not a bare token: the rule mixes the heading hue into the prose
+ * ink, so audit the colour the rule actually paints. h4 (1.08em) and h5
+ * (0.98em) sit below WCAG large text, and h3 is semibold rather than bold, so
+ * all three are held to the 4.5 body floor.
+ */
+const HEADINGS = [3, 4, 5];
+
+function headingInk(blocks, level) {
+  const selector = new RegExp(`(^|,)\\.markdown-preview-view h${level}($|,)`);
+  let value = null;
+  for (const block of blocks) {
+    if (!selector.test(block.selectors)) continue;
+    const match = block.body.match(/(?:^|[;\s])color\s*:\s*([^;]+);/);
+    if (match) value = match[1].trim();
   }
   return value;
 }
@@ -563,6 +581,27 @@ for (const mode of MODES) {
     const ratio = contrast(fg, bg);
     const status = pair.waive ? "waived" : ratio >= pair.min ? "ok" : "FAIL";
     rows.push({ mode, id: pair.id, ratio, min: pair.min, fg, bg, status, waive: pair.waive });
+  }
+
+  for (const level of HEADINGS) {
+    const id = `h${level}/paper`;
+    const value = headingInk(blocks, level);
+    const fg = value ? flatten(resolver.toColor(value), paper) : null;
+    if (!fg || !paper) {
+      rows.push({ mode, id, status: "unresolved" });
+      continue;
+    }
+    const ratio = contrast(fg, paper);
+    rows.push({
+      mode,
+      id,
+      ratio,
+      min: 4.5,
+      fg,
+      bg: paper,
+      status: ratio >= 4.5 ? "ok" : "FAIL",
+      note: "as painted by the rule",
+    });
   }
 
   const crumb = breadcrumbRule(blocks);
