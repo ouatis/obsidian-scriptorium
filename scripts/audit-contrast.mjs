@@ -429,10 +429,18 @@ const PAIRS = [
   // Mermaid series colours and the node border are non-text graphics: 3:1 is the
   // WCAG floor. Series 3/6 previously shared the warning amber (2.14:1 on the
   // light card); the border was gray-30 (1.53:1). Both now clear the floor.
-  { id: "mermaid/series-3/paper", fg: "--mermaid-color-3", bg: "--scrip-surface-paper", min: 3 },
-  { id: "mermaid/series-6/paper", fg: "--mermaid-color-6", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/text/bg", fg: "--mermaid-text-color", bg: "--mermaid-background", min: 4.5 },
+  { id: "mermaid/muted/bg", fg: "--mermaid-muted-color", bg: "--mermaid-background", min: 4.5 },
+  { id: "mermaid/line/bg", fg: "--mermaid-line-color", bg: "--mermaid-background", min: 3 },
+  { id: "mermaid/text/surf", fg: "--mermaid-text-color", bg: "--mermaid-surface", min: 4.5 },
+  { id: "mermaid/border/surf", fg: "--mermaid-border-color", bg: "--mermaid-surface", min: 3 },
   { id: "mermaid/border/paper", fg: "--mermaid-border-color", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-1/paper", fg: "--mermaid-color-1", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-2/paper", fg: "--mermaid-color-2", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-3/paper", fg: "--mermaid-color-3", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-4/paper", fg: "--mermaid-color-4", bg: "--scrip-surface-paper", min: 3 },
   { id: "mermaid/series-5/paper", fg: "--mermaid-color-5", bg: "--scrip-surface-paper", min: 3 },
+  { id: "mermaid/series-6/paper", fg: "--mermaid-color-6", bg: "--scrip-surface-paper", min: 3 },
   { id: "mermaid/series-7/paper", fg: "--mermaid-color-7", bg: "--scrip-surface-paper", min: 3 },
   { id: "mermaid/series-8/paper", fg: "--mermaid-color-8", bg: "--scrip-surface-paper", min: 3 },
 ];

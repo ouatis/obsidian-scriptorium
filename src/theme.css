@@ -242,17 +242,6 @@ settings:
     --scrip-icon-stroke-modifier: 0.8;
 }
 
-body {
-
-    --scrip-font-heading-stack: "IBM Plex Serif", "Noto Serif SC", "Source Han Serif SC", "Georgia", "Times New Roman", serif;
-
-
-    --density-modifier: 1;
-
-
-    --scrip-line-height-prose: 1.72;
-}
-
 .theme-light {
     color-scheme: light;
     --color-accent: rgb(var(--color-accent-rgb-light));
@@ -353,6 +342,18 @@ body {
     --scrip-app-texture: var(--scrip-texture-noise);
 
     --scrip-inset-highlight: rgba(255, 255, 255, 0.4);
+
+    --mermaid-background: rgb(var(--white));
+    --mermaid-text-color: rgb(var(--gray-100));
+    --mermaid-muted-color: rgb(var(--gray-70));
+    --mermaid-line-color: rgb(var(--gray-70));
+    --mermaid-surface: rgb(var(--gray-20));
+    --mermaid-surface-alt: rgb(var(--gray-30));
+    --mermaid-color-3: color-mix(in srgb, rgb(var(--color-warning-rgb)) 60%, rgb(var(--gray-100)));
+    --mermaid-color-5: var(--color-blue, #086ddd);
+    --mermaid-color-6: var(--color-purple, #7852ee);
+    --mermaid-color-7: color-mix(in srgb, var(--color-cyan, #00bfbc) 60%, rgb(var(--gray-100)));
+    --mermaid-color-8: var(--color-pink, #d53984);
 }
 
 .theme-dark {
@@ -439,6 +440,18 @@ body {
     --scrip-syntax-number: #d0a85c;
     --scrip-syntax-function: #8fb0cc;
     --scrip-syntax-comment: #9c9684;
+
+    --mermaid-background: rgb(var(--gray-100));
+    --mermaid-text-color: rgb(var(--gray-10));
+    --mermaid-muted-color: rgb(var(--gray-40));
+    --mermaid-line-color: rgb(var(--gray-50));
+    --mermaid-surface: rgb(var(--gray-90));
+    --mermaid-surface-alt: rgb(var(--gray-80));
+    --mermaid-color-3: rgb(var(--color-warning-rgb));
+    --mermaid-color-5: var(--color-blue, #027aff);
+    --mermaid-color-6: var(--color-purple, #a882ff);
+    --mermaid-color-7: var(--color-cyan, #53dfdd);
+    --mermaid-color-8: var(--color-pink, #fa99cd);
 }
 
 .theme-light,
@@ -544,50 +557,34 @@ body {
     --background-modifier-selected: var(--background-selected);
     --background-modifier-selected-hover: var(--background-selected-hover);
     --background-modifier-cover: var(--overlay);
+
+    --mermaid-border-color: rgb(var(--gray-60));
+    --mermaid-accent: rgb(var(--color-accent-rgb));
+    --mermaid-critical: rgb(var(--color-error-rgb));
+    --mermaid-error: rgb(var(--color-error-rgb));
+    --mermaid-radius: var(--radius-s);
+    --mermaid-title-weight: var(--font-semibold);
+    --mermaid-heading-weight: var(--font-semibold);
+    --mermaid-bold-weight: var(--font-bold);
+    --mermaid-color-1: rgb(var(--color-accent-rgb));
+    --mermaid-color-2: rgb(var(--color-secondary-rgb));
+    --mermaid-color-4: rgb(var(--color-error-rgb));
 }
 
 body {
     background-color: var(--background-primary);
     background-image: var(--scrip-app-texture);
     background-repeat: repeat;
+    text-spacing-trim: trim-start;
+    hanging-punctuation: first;
 
+    --scrip-font-heading-stack: "IBM Plex Serif", "Noto Serif SC", "Source Han Serif SC", "Georgia", "Times New Roman", serif;
+    --density-modifier: 1;
+    --scrip-line-height-prose: 1.72;
 
     --font-interface-theme: var(--scrip-font-cjk-stack);
     --font-text-theme: var(--scrip-font-cjk-stack);
     --font-monospace-theme: var(--scrip-font-mono-stack);
-
-
-    text-spacing-trim: trim-start;
-
-
-    hanging-punctuation: first;
-}
-
-.app-container,
-.workspace {
-    background-color: transparent;
-}
-
-body.is-popout-window,
-body.is-translucent {
-    background-color: var(--background-secondary);
-}
-
-body.is-popout-window .workspace,
-body.is-translucent .workspace {
-    background-color: color-mix(in srgb, var(--background-secondary) 92%, transparent);
-}
-
-body.is-mobile {
-    background-image: none;
-    --scrip-app-texture: none;
-    --scrip-reading-paper-radius: var(--radius-m);
-    --scrip-reading-paper-border: transparent;
-    --scrip-reading-paper-shadow: none;
-    --scrip-chrome-muted-opacity: 1;
-}
-
-body {
 
     --text-on-accent: rgb(var(--white));
     --text-on-accent-inverted: rgb(var(--gray-100));
@@ -595,18 +592,14 @@ body {
     --text-normal: var(--text-primary);
     --scrip-ink-strong: var(--text-primary);
     --scrip-ink-soft: color-mix(in srgb, var(--text-primary) 74%, var(--text-muted));
-
     --scrip-ink-faint: var(--text-muted);
-
 
     --text-selection: color-mix(in srgb, var(--interactive) 25%, transparent);
     --text-selection-highlight: color-mix(in srgb, var(--interactive) 20%, transparent);
 
-
     --text-error: rgb(var(--color-error-rgb));
     --text-success: rgb(var(--color-success-rgb));
     --text-warning: rgb(var(--color-warning-rgb));
-
 
     --border-color: var(--border-subtle-1);
     --border-color-hover: var(--border-subtle-2);
@@ -618,7 +611,6 @@ body {
     --border-color-secondary: rgba(var(--color-secondary-rgb), var(--opacity-moderate));
     --border-color-secondary-strong: rgba(var(--color-secondary-rgb), var(--opacity-half));
 
-
     --interactive-hover: color-mix(in srgb, var(--interactive) 88%, var(--background));
     --interactive-hover-strong: color-mix(in srgb, var(--interactive) 84%, var(--background));
     --interactive-active: color-mix(in srgb, var(--interactive) 78%, var(--background));
@@ -626,7 +618,6 @@ body {
     --interactive-pressed: color-mix(in srgb, var(--interactive) 68%, var(--background));
     --interactive-focus: color-mix(in srgb, var(--interactive) 92%, var(--layer-1));
     --interactive-disabled: color-mix(in srgb, var(--interactive) 35%, var(--text-muted));
-
 
     --interactive-bg-light: color-mix(in srgb, var(--interactive) 18%, var(--background));
     --interactive-bg-medium: color-mix(in srgb, var(--interactive) 26%, var(--background));
@@ -656,18 +647,15 @@ body {
     --scrip-native-surface-muted: color-mix(in srgb, var(--layer-2) 46%, transparent);
     --scrip-native-rule: color-mix(in srgb, var(--paper-frame-border) 52%, transparent);
 
-
     --secondary-bg-light: color-mix(in srgb, var(--color-secondary) 18%, var(--background));
     --secondary-bg-medium: color-mix(in srgb, var(--color-secondary) 26%, var(--background));
     --secondary-bg-strong: color-mix(in srgb, var(--color-secondary) 34%, var(--background));
-
 
     --icon-s: 1em;
     --icon-color: var(--icon-primary);
     --icon-color-hover: var(--icon-secondary);
     --icon-color-active: var(--interactive);
     --icon-color-disabled: var(--icon-secondary);
-
 
     --divider-color: var(--border-subtle-1);
     --tab-text-color: var(--text-secondary);
@@ -680,7 +668,6 @@ body {
     --input-shadow-hover: var(--shadow-s);
     --input-shadow-focus: 0 0 0 var(--focus-ring-width) var(--focus);
 
-
     --tag-color: var(--color-secondary);
     --tag-color-hover: var(--color-secondary-dark-2);
     --tag-color-active: var(--color-secondary-dark-3);
@@ -691,24 +678,48 @@ body {
     --tag-border-color: rgba(var(--color-secondary-rgb), var(--opacity-moderate));
     --tag-border-color-hover: rgba(var(--color-secondary-rgb), var(--opacity-half));
 
-
     --search-clear-button-color: var(--icon-secondary);
     --search-clear-button-color-hover: var(--icon-primary);
-
 
     --scrollbar-size: 8px;
     --scrollbar-radius: var(--radius-s);
     --scrollbar-thumb-color: rgba(var(--gray-65), var(--opacity-medium));
     --scrollbar-thumb-color-hover: rgba(var(--color-secondary-rgb), var(--opacity-half));
     --scrollbar-track-color: transparent;
-}
 
-body {
     --icon-xs-stroke-width: calc(2px * var(--scrip-icon-stroke-modifier));
     --icon-s-stroke-width: calc(2px * var(--scrip-icon-stroke-modifier));
     --icon-m-stroke-width: calc(2px * var(--scrip-icon-stroke-modifier));
     --icon-l-stroke-width: calc(1.75px * var(--scrip-icon-stroke-modifier));
     --icon-xl-stroke-width: calc(1.25px * var(--scrip-icon-stroke-modifier));
+
+    --setting-items-background: color-mix(in srgb, var(--panel-surface) 96%, var(--background-primary));
+    --setting-items-divider-color: color-mix(in srgb, var(--border-subtle-1) 58%, transparent);
+    --slider-track-background: color-mix(in srgb, var(--text-muted) 38%, transparent);
+}
+
+.app-container,
+.workspace {
+    background-color: transparent;
+}
+
+body.is-popout-window,
+body.is-translucent {
+    background-color: var(--background-secondary);
+}
+
+body.is-popout-window .workspace,
+body.is-translucent .workspace {
+    background-color: color-mix(in srgb, var(--background-secondary) 92%, transparent);
+}
+
+body.is-mobile {
+    background-image: none;
+    --scrip-app-texture: none;
+    --scrip-reading-paper-radius: var(--radius-m);
+    --scrip-reading-paper-border: transparent;
+    --scrip-reading-paper-shadow: none;
+    --scrip-chrome-muted-opacity: 1;
 }
 
 .workspace {
@@ -1766,56 +1777,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     box-shadow: none;
 }
 
-.theme-light {
-    --mermaid-background: rgb(var(--white));
-    --mermaid-text-color: rgb(var(--gray-100));
-    --mermaid-muted-color: rgb(var(--gray-70));
-    --mermaid-line-color: rgb(var(--gray-70));
-    --mermaid-surface: rgb(var(--gray-20));
-    --mermaid-surface-alt: rgb(var(--gray-30));
-    --mermaid-border-color: rgb(var(--gray-60));
-    --mermaid-accent: rgb(var(--color-accent-rgb-light));
-    --mermaid-critical: rgb(var(--color-error-rgb));
-    --mermaid-error: rgb(var(--color-error-rgb));
-    --mermaid-radius: var(--radius-s);
-    --mermaid-title-weight: var(--font-semibold);
-    --mermaid-heading-weight: var(--font-semibold);
-    --mermaid-bold-weight: var(--font-bold);
-    --mermaid-color-1: rgb(var(--color-accent-rgb-light));
-    --mermaid-color-2: rgb(var(--color-secondary-rgb-light));
-    --mermaid-color-3: color-mix(in srgb, rgb(var(--color-warning-rgb)) 60%, rgb(var(--gray-100)));
-    --mermaid-color-4: rgb(var(--color-error-rgb));
-    --mermaid-color-5: var(--color-blue, #086ddd);
-    --mermaid-color-6: var(--color-purple, #7852ee);
-    --mermaid-color-7: color-mix(in srgb, var(--color-cyan, #00bfbc) 60%, rgb(var(--gray-100)));
-    --mermaid-color-8: var(--color-pink, #d53984);
-}
-
-.theme-dark {
-    --mermaid-background: rgb(var(--gray-100));
-    --mermaid-text-color: rgb(var(--gray-10));
-    --mermaid-muted-color: rgb(var(--gray-40));
-    --mermaid-line-color: rgb(var(--gray-50));
-    --mermaid-surface: rgb(var(--gray-90));
-    --mermaid-surface-alt: rgb(var(--gray-80));
-    --mermaid-border-color: rgb(var(--gray-60));
-    --mermaid-accent: rgb(var(--color-accent-rgb-dark));
-    --mermaid-critical: rgb(var(--color-error-rgb));
-    --mermaid-error: rgb(var(--color-error-rgb));
-    --mermaid-radius: var(--radius-s);
-    --mermaid-title-weight: var(--font-semibold);
-    --mermaid-heading-weight: var(--font-semibold);
-    --mermaid-bold-weight: var(--font-bold);
-    --mermaid-color-1: rgb(var(--color-accent-rgb-dark));
-    --mermaid-color-2: rgb(var(--color-secondary-rgb-dark));
-    --mermaid-color-3: rgb(var(--color-warning-rgb));
-    --mermaid-color-4: rgb(var(--color-error-rgb));
-    --mermaid-color-5: var(--color-blue, #027aff);
-    --mermaid-color-6: var(--color-purple, #a882ff);
-    --mermaid-color-7: var(--color-cyan, #53dfdd);
-    --mermaid-color-8: var(--color-pink, #fa99cd);
-}
-
 .theme-dark .markdown-preview-view :is(svg[id^="mermaid"], div.mermaid),
 .theme-dark .markdown-rendered :is(svg[id^="mermaid"], div.mermaid) {
     background-color: var(--mermaid-background, rgb(var(--white)));
@@ -2606,12 +2567,6 @@ button.mod-cta,
 
 .tooltip {
     padding: var(--size-2) var(--size-3);
-}
-
-body {
-    --setting-items-background: color-mix(in srgb, var(--panel-surface) 96%, var(--background-primary));
-    --setting-items-divider-color: color-mix(in srgb, var(--border-subtle-1) 58%, transparent);
-    --slider-track-background: color-mix(in srgb, var(--text-muted) 38%, transparent);
 }
 
 .setting-group {
