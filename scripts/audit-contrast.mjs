@@ -409,7 +409,7 @@ const PAIRS = [
   {
     id: "mark-text/mark",
     fg: "--text-normal",
-    bg: "--text-mark-subtle",
+    bg: "--highlight-subtle",
     surface: "--scrip-surface-paper",
     min: 4.5,
   },

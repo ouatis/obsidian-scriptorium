@@ -66,6 +66,27 @@ Scriptorium は本文を主役に保ちます。やわらかな紙の色、抑�
 | `plain` | 紙の枠、影、見出し下のエディトリアル罫線を外す |
 | タスクの `[!]` `[?]` `[>]` `[-]` | セマンティックチェックボックス：琥珀、緑、銅、打ち消し。それぞれ固有の字形（! ? > と空枠）付き——読書とライブプレビュー両方 |
 
+## 削除した変数
+
+カスタムプロパティ 21 個は宣言だけがあり、読み手がありませんでした——このテーマも Obsidian 1.15.1 も読んでいません——ので、2026-11-20 に削除しました。これらを設定していた snippet は以前から効いておらず、今回消えたのは名前だけです。古い snippet を確認しやすいよう、系統別に挙げます：
+
+| 系統 | 削除した変数 |
+| --- | --- |
+| リンク色 | `--text-link`、`--text-link-hover`、`--text-link-active`、`--text-link-subtle` |
+| 二次サーフェス | `--secondary-bg-light`、`--secondary-bg-medium`、`--secondary-bg-strong` |
+| メニューの文字 | `--menu-text-color`、`--menu-text-color-hover`、`--menu-background-hover` |
+| マーカー色 | `--text-mark`、`--text-mark-subtle`、`--text-mark-strong` |
+| 反転サーフェス | `--background-inverse` |
+| 検索クリアボタン | `--search-clear-button-color-hover` |
+| 見出しの罫線 | `--title-rule-color` |
+| スクロールバー | `--scrollbar-size` |
+| テーブル見出し | `--table-header-bg` |
+| リンク hover の別名 | `--text-a-hover` |
+| ハイライト背景 | `--text-highlight-bg-active` |
+| ハイライトのインク | `--highlight-color` |
+
+マーカー色の 3 つは別名で、本体は残っています：`--highlight`、`--highlight-subtle`、`--highlight-strong` がハイライト文字の色階を、`--text-highlight-bg` が背景を持ちます。
+
 ## プラグイン対応
 
 構造的な揃えのみ——[Dataview](https://github.com/blacksmithgu/obsidian-dataview) と [Quiet Outline](https://github.com/guopenghui/obsidian-quiet-outline) のペインとカードはテーマの面と罫線を引き継ぎます。再配色も再レイアウトもしません。

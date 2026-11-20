@@ -272,7 +272,6 @@ settings:
     --background-active: rgba(var(--gray-50), var(--opacity-moderate));
     --background-selected: rgba(var(--gray-50), var(--opacity-moderate));
     --background-selected-hover: rgba(var(--gray-50), var(--opacity-moderate));
-    --background-inverse: rgb(var(--gray-80));
 
 
     --layer-glass-1: rgba(var(--layer-1-rgb), var(--opacity-glass));
@@ -506,8 +505,6 @@ settings:
     --highlight-subtle: rgba(var(--color-warning-rgb), 0.3);
     --highlight-strong: rgba(var(--color-warning-rgb), 0.55);
     --text-highlight-bg: var(--highlight);
-    --text-highlight-bg-active: var(--highlight);
-    --highlight-color: var(--highlight);
     --color-accent-1: color-mix(in srgb, var(--interactive) 90%, var(--layer-1));
     --color-accent-2: color-mix(in srgb, var(--interactive) 82%, var(--layer-1));
     --color-accent-3: color-mix(in srgb, var(--interactive) 70%, var(--layer-1));
@@ -632,7 +629,6 @@ body {
     --panel-surface-strong: var(--scrip-surface-paper-muted);
     --panel-border-color: var(--scrip-rule-soft);
     --panel-shadow-soft: 0 8px 18px -18px rgba(var(--gray-100), 0.12);
-    --title-rule-color: var(--scrip-rule-accent);
     --scrip-reading-paper-radius: var(--radius-l);
     --scrip-reading-paper-border: color-mix(in srgb, var(--paper-frame-border) 48%, transparent);
     --scrip-reading-paper-shadow: 0 18px 42px rgba(var(--gray-100), 0.08);
@@ -644,9 +640,6 @@ body {
     --scrip-native-surface-muted: color-mix(in srgb, var(--layer-2) 46%, transparent);
     --scrip-native-rule: color-mix(in srgb, var(--paper-frame-border) 52%, transparent);
 
-    --secondary-bg-light: color-mix(in srgb, var(--color-secondary) 18%, var(--background));
-    --secondary-bg-medium: color-mix(in srgb, var(--color-secondary) 26%, var(--background));
-    --secondary-bg-strong: color-mix(in srgb, var(--color-secondary) 34%, var(--background));
 
     --icon-s: 1em;
     --icon-color: var(--icon-primary);
@@ -676,9 +669,7 @@ body {
     --tag-border-color-hover: rgba(var(--color-secondary-rgb), var(--opacity-half));
 
     --search-clear-button-color: var(--icon-secondary);
-    --search-clear-button-color-hover: var(--icon-primary);
 
-    --scrollbar-size: 8px;
     --scrollbar-radius: var(--radius-s);
     --scrollbar-thumb-color: rgba(var(--gray-65), var(--opacity-medium));
     --scrollbar-thumb-color-hover: rgba(var(--color-secondary-rgb), var(--opacity-half));
@@ -739,9 +730,6 @@ body.is-mobile {
 
 
     --menu-background: var(--layer-1);
-    --menu-background-hover: var(--layer-hover-1);
-    --menu-text-color: var(--text-primary);
-    --menu-text-color-hover: var(--text-primary);
     --menu-border-color: var(--border-subtle-1);
 
 
@@ -759,16 +747,8 @@ body.is-mobile {
     --text-title-h6: var(--text-muted);
 
 
-    --text-link: var(--interactive);
-    --text-link-hover: var(--interactive-hover);
-    --text-link-active: var(--interactive-active);
-    --text-link-subtle: var(--text-accent-subtle);
     --text-a: var(--interactive);
-    --text-a-hover: var(--text-accent-hover);
     --text-a-active: var(--text-accent-active);
-    --text-mark: var(--highlight);
-    --text-mark-subtle: var(--highlight-subtle);
-    --text-mark-strong: var(--highlight-strong);
 
 
     --icon-size: 1em;
@@ -1170,7 +1150,6 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
     --table-border-radius: var(--radius-l);
     --table-border-width: var(--border-width);
     --table-border-color: var(--border-subtle-1);
-    --table-header-bg: var(--layer-2);
 
     --table-header-border-width: 0;
     --table-header-border-color: transparent;

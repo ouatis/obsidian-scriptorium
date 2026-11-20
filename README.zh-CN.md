@@ -66,6 +66,27 @@ Scriptorium 让正文保持主位：柔和纸色、克制对比、安静的工�
 | `plain` | 去掉纸张边框、投影与标题下的编辑线 |
 | 任务语法 `[!]` `[?]` `[>]` `[-]` | 语义复选框：琥珀、苔绿、铜橙、删除线淡墨，每种各有自己的字形（! ? > 与空框）——阅读与实时预览都生效 |
 
+## 已移除的变量
+
+有 21 个自定义属性只有声明、没有任何读取方——主题自身不读，Obsidian 1.15.1 也不读——已于 2026-11-20 移除。写过这些名字的 snippet 早就不生效，这次只是把名字清掉。按族列出，方便核对旧 snippet：
+
+| 族 | 已移除 |
+| --- | --- |
+| 链接色 | `--text-link`、`--text-link-hover`、`--text-link-active`、`--text-link-subtle` |
+| 次级表面 | `--secondary-bg-light`、`--secondary-bg-medium`、`--secondary-bg-strong` |
+| 菜单文字 | `--menu-text-color`、`--menu-text-color-hover`、`--menu-background-hover` |
+| 标记色 | `--text-mark`、`--text-mark-subtle`、`--text-mark-strong` |
+| 反相表面 | `--background-inverse` |
+| 搜索清除按钮 | `--search-clear-button-color-hover` |
+| 标题分隔线 | `--title-rule-color` |
+| 滚动条 | `--scrollbar-size` |
+| 表头 | `--table-header-bg` |
+| 链接 hover 别名 | `--text-a-hover` |
+| 高亮背景 | `--text-highlight-bg-active` |
+| 高亮墨色 | `--highlight-color` |
+
+标记色三个只是别名，本体仍在：`--highlight`、`--highlight-subtle`、`--highlight-strong` 仍然承载高亮文字的色阶，`--text-highlight-bg` 仍然是高亮背景。
+
 ## 插件适配
 
 只做结构性对齐——[Dataview](https://github.com/blacksmithgu/obsidian-dataview) 与 [Quiet Outline](https://github.com/guopenghui/obsidian-quiet-outline) 的面板与卡片继承主题的表面与边线，不重新着色、不重新排版。

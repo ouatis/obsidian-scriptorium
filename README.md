@@ -66,6 +66,27 @@ Per-file helper classes go in the `cssClasses` frontmatter key and compose:
 | `plain` | Drops the paper frame, its shadow, and the editorial rules under titles |
 | `[!]` `[?]` `[>]` `[-]` in tasks | Semantic task markers: amber, green, copper, and struck-muted chips, each with its own glyph (! ? > and an empty box) — in reading and live preview |
 
+## Removed variables
+
+Twenty-one custom properties were declared but read by nothing — not by this theme, not by Obsidian 1.15.1 — so they were removed on 2026-11-20. A snippet that sets one of them has had no visible effect for a long time; the only change is that the name is gone. They are listed by family so old snippets are easy to check:
+
+| Family | Removed |
+| --- | --- |
+| Link tones | `--text-link`, `--text-link-hover`, `--text-link-active`, `--text-link-subtle` |
+| Secondary surfaces | `--secondary-bg-light`, `--secondary-bg-medium`, `--secondary-bg-strong` |
+| Menu text | `--menu-text-color`, `--menu-text-color-hover`, `--menu-background-hover` |
+| Mark tones | `--text-mark`, `--text-mark-subtle`, `--text-mark-strong` |
+| Inverse surface | `--background-inverse` |
+| Search clear button | `--search-clear-button-color-hover` |
+| Title rule | `--title-rule-color` |
+| Scrollbar | `--scrollbar-size` |
+| Table header | `--table-header-bg` |
+| Link hover alias | `--text-a-hover` |
+| Highlight background | `--text-highlight-bg-active` |
+| Highlight ink | `--highlight-color` |
+
+The mark tones were aliases of tokens that remain: `--highlight`, `--highlight-subtle`, and `--highlight-strong` still carry the highlighted-text colours, and `--text-highlight-bg` still carries the background.
+
 ## Plugin support
 
 Structural styling only — panes and cards from [Dataview](https://github.com/blacksmithgu/obsidian-dataview) and [Quiet Outline](https://github.com/guopenghui/obsidian-quiet-outline) inherit the theme's surfaces and borders. No plugin is re-colored or re-laid-out.
