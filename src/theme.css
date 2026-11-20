@@ -79,12 +79,9 @@ settings:
     --scrip-type-h3-tracking: 0;
 
 
-    --font-size-h1: var(--scrip-type-h1-size);
-    --font-size-h2: var(--scrip-type-h2-size);
-    --font-size-h3: var(--scrip-type-h3-size);
-    --font-size-h4: calc(var(--font-text-size, 16px) * 1.08);
-    --font-size-h5: calc(var(--font-text-size, 16px) * 0.98);
-    --font-size-h6: calc(var(--font-text-size, 16px) * 0.9);
+    --scrip-type-h4-size: calc(var(--font-text-size, 16px) * 1.08);
+    --scrip-type-h5-size: calc(var(--font-text-size, 16px) * 0.98);
+    --scrip-type-h6-size: calc(var(--font-text-size, 16px) * 0.9);
 
 
     --font-weight-regular: 400;
@@ -1069,17 +1066,17 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 .markdown-preview-view h4 {
-    font-size: var(--font-size-h4);
+    font-size: var(--scrip-type-h4-size);
     color: color-mix(in srgb, var(--h4-color) 78%, var(--text-primary));
 }
 
 .markdown-preview-view h5 {
-    font-size: var(--font-size-h5);
+    font-size: var(--scrip-type-h5-size);
     color: color-mix(in srgb, var(--h5-color) 86%, var(--text-primary));
 }
 
 .markdown-preview-view h6 {
-    font-size: var(--font-size-h6);
+    font-size: var(--scrip-type-h6-size);
     color: var(--scrip-ink-soft);
 }
 
@@ -1135,12 +1132,12 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 .markdown-source-view.mod-cm6 .HyperMD-header-4.cm-line {
-    font-size: var(--font-size-h4);
+    font-size: var(--scrip-type-h4-size);
     color: color-mix(in srgb, var(--h4-color) 78%, var(--text-primary));
 }
 
 .markdown-source-view.mod-cm6 .HyperMD-header-5.cm-line {
-    font-size: var(--font-size-h5);
+    font-size: var(--scrip-type-h5-size);
     color: color-mix(in srgb, var(--h5-color) 86%, var(--text-primary));
 }
 
@@ -2052,17 +2049,16 @@ body:not(.is-mobile) .app-container .status-bar {
     align-items: center;
     justify-content: flex-end;
 
-    background-color: var(--layer-1);
-    border: var(--border-width) solid var(--border-subtle-1);
+    background-color: color-mix(in srgb, var(--layer-1) 60%, transparent);
+    border: var(--border-width) solid color-mix(in srgb, var(--border-subtle-1) 60%, transparent);
     border-radius: 999px;
     padding: 0;
-    opacity: 0.6;
     box-shadow: var(--scrip-shadow-tactile);
 
     transition:
-        opacity var(--ease-fast-smooth),
         box-shadow var(--ease-fast-smooth),
         background-color var(--ease-fast-smooth),
+        border-color var(--ease-fast-smooth),
         max-width var(--ease-fast-smooth),
         padding-left var(--ease-fast-smooth);
 }
@@ -2070,7 +2066,8 @@ body:not(.is-mobile) .app-container .status-bar {
 body:not(.is-mobile) .app-container .status-bar:hover,
 body:not(.is-mobile) .app-container .status-bar:focus-within {
     max-width: var(--scrip-status-expanded-width);
-    opacity: 1;
+    background-color: var(--layer-1);
+    border-color: var(--border-subtle-1);
     box-shadow: var(--shadow-s);
     padding-left: var(--size-3);
 }
@@ -2283,7 +2280,8 @@ body.is-mobile .mobile-toolbar {
     body:not(.is-mobile) .app-container .status-bar {
         max-width: var(--scrip-status-expanded-width);
         padding-left: var(--size-3);
-        opacity: 0.82;
+        background-color: color-mix(in srgb, var(--layer-1) 82%, transparent);
+        border-color: color-mix(in srgb, var(--border-subtle-1) 82%, transparent);
     }
 
     body:not(.is-mobile) .app-container .status-bar:not(:hover):not(:focus-within) .status-bar-item {
@@ -3401,6 +3399,20 @@ svg.lucide-edit-3 {
         --table-hover: var(--table-hover-light);
         --scrip-shadow-color: 28deg 15% 35%;
         --scrip-inset-highlight: rgba(255, 255, 255, 0.4);
+        --mermaid-background: rgb(var(--white));
+        --mermaid-text-color: rgb(var(--gray-100));
+        --mermaid-muted-color: rgb(var(--gray-70));
+        --mermaid-line-color: rgb(var(--gray-70));
+        --mermaid-surface: rgb(var(--gray-20));
+        --mermaid-surface-alt: rgb(var(--gray-30));
+        --mermaid-critical: rgb(201, 76, 59);
+        --mermaid-error: rgb(201, 76, 59);
+        --mermaid-color-3: color-mix(in srgb, rgb(227, 163, 59) 60%, rgb(var(--gray-100)));
+        --mermaid-color-4: rgb(201, 76, 59);
+        --mermaid-color-5: #086ddd;
+        --mermaid-color-6: #7852ee;
+        --mermaid-color-7: color-mix(in srgb, #00bfbc 60%, rgb(var(--gray-100)));
+        --mermaid-color-8: #d53984;
     }
 
     body {
