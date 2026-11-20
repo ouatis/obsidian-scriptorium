@@ -550,6 +550,80 @@ function chipInk(block) {
   return match ? `#${match[1]}` : null;
 }
 
+/* ------------------------------------------------ chrome status bar, read back out */
+
+/**
+ * The idle status bar is a pill that subsides. It used to fade the whole element
+ * with `opacity: .6`, which composites the ink too: the only item still visible
+ * when collapsed then painted the muted ink at 2.71:1 on the light sheet. Read
+ * the shipped rule back, so either half of that regression — a fading container
+ * or a fainter ink — fails here instead of shipping invisible.
+ */
+function statusBarRule(blocks) {
+  for (const block of blocks) {
+    if (!block.selectors.includes(".status-bar")) continue;
+    if (/:hover|:focus-within/.test(block.selectors)) continue;
+    const bg = block.body.match(/background-color\s*:\s*([^;]+);/);
+    if (!bg) continue;
+    const opacity = block.body.match(/(?:^|[;\s])opacity\s*:\s*([\d.]+)\s*;/);
+    return { bg: bg[1].trim(), opacity: opacity ? parseFloat(opacity[1]) : 1 };
+  }
+  return null;
+}
+
+/* ------------------------------------------------ print sheet, read back out */
+
+/**
+ * Printing in dark mode repaints the sheet light. The token matrix cannot see it
+ * (print is not a screen state, so `@media print` stays out of the mode tables),
+ * and a Mermaid canvas that keeps its dark palette still scores a high ink-on-its
+ * -own-canvas ratio — the defect is the canvas, not the ink. Compare the print
+ * override with the light palette, token by token.
+ */
+const PRINT_TOKENS = [
+  "--mermaid-background",
+  "--mermaid-text-color",
+  "--mermaid-muted-color",
+  "--mermaid-line-color",
+  "--mermaid-surface",
+  "--mermaid-surface-alt",
+  "--mermaid-critical",
+  "--mermaid-error",
+  "--mermaid-color-3",
+  "--mermaid-color-4",
+  "--mermaid-color-5",
+  "--mermaid-color-6",
+  "--mermaid-color-7",
+  "--mermaid-color-8",
+];
+
+/** Declarations re-pointed inside `@media print` on a `.theme-dark` sheet. */
+function printDeclarations(css) {
+  const out = [];
+  const media = /@media[^{]*\bprint\b[^{]*\{/g;
+  let match;
+  while ((match = media.exec(css))) {
+    let depth = 1;
+    let i = match.index + match[0].length;
+    const start = i;
+    while (i < css.length && depth > 0) {
+      if (css[i] === "{") depth += 1;
+      else if (css[i] === "}") depth -= 1;
+      i += 1;
+    }
+    for (const block of parseBlocks(css.slice(start, i - 1))) {
+      const selectors = selectorsOf(block.prelude);
+      if (!selectors.length) continue;
+      if (!selectors.every((selector) => selector.includes(".theme-dark"))) continue;
+      for (const decl of block.body.matchAll(/(--[a-z0-9-]+)\s*:\s*([^;{}]+)/gi)) {
+        out.push({ name: decl[1], value: decl[2].trim() });
+      }
+    }
+    media.lastIndex = i;
+  }
+  return out;
+}
+
 /* -------------------------------------------------------------------- run */
 
 const css = stripComments(await readFile(srcPath, "utf8"));
@@ -636,6 +710,32 @@ for (const mode of MODES) {
     }
   }
 
+  const bar = statusBarRule(blocks);
+  const backdrop = flatten(resolver.token("--background"), null);
+  const pillPaint = bar && backdrop ? flatten(resolver.toColor(bar.bg), backdrop) : null;
+  const inkPaint =
+    pillPaint && resolver.token("--text-muted")
+      ? flatten(resolver.token("--text-muted"), pillPaint)
+      : null;
+  if (!bar || !pillPaint || !inkPaint || !backdrop) {
+    rows.push({ mode, id: "chrome status-bar", status: "unresolved" });
+  } else {
+    const alpha = bar.opacity;
+    const ink = alpha >= 1 ? inkPaint : flatten([inkPaint[0], inkPaint[1], inkPaint[2], alpha], backdrop);
+    const pill = alpha >= 1 ? pillPaint : flatten([pillPaint[0], pillPaint[1], pillPaint[2], alpha], backdrop);
+    const ratio = contrast(ink, pill);
+    rows.push({
+      mode,
+      id: "chrome status-bar",
+      ratio,
+      min: 4.5,
+      fg: ink,
+      bg: pill,
+      status: ratio >= 4.5 ? "ok" : "FAIL",
+      note: alpha >= 1 ? "pill thinned, ink at full strength" : `composed at opacity ${alpha}`,
+    });
+  }
+
   for (const chip of CHIPS) {
     const rule = chipRule(blocks, chip.char, mode === "dark");
     const ink = chipInk(rule);
@@ -671,8 +771,42 @@ for (const mode of MODES) {
   });
 }
 
+const printRows = [];
+{
+  const overrides = printDeclarations(css);
+  const table = new Map();
+  for (const layer of ["base", "dark", "shared"]) {
+    for (const decl of decls) {
+      if (decl.layer === layer) table.set(decl.name, decl.value);
+    }
+  }
+  for (const decl of overrides) table.set(decl.name, decl.value);
+  const printResolver = createResolver(table);
+  const lightResolver = createResolver(tableFor("light"));
+  for (const token of PRINT_TOKENS) {
+    const painted = printResolver.token(token);
+    const target = lightResolver.token(token);
+    if (!painted || !target) {
+      printRows.push({ mode: "print-dark", id: token, status: "unresolved" });
+      continue;
+    }
+    const spread = Math.max(...[0, 1, 2].map((i) => Math.abs(painted[i] - target[i])));
+    printRows.push({
+      mode: "print-dark",
+      id: token,
+      min: 0,
+      status: spread <= 2 ? "ok" : "FAIL",
+      note:
+        spread <= 2
+          ? `prints the light palette ${describe(target)}`
+          : `prints ${describe(painted)}, not the light ${describe(target)}`,
+    });
+  }
+}
+rows.push(...printRows);
+
 const width = Math.max(...rows.map((row) => row.id.length));
-for (const mode of MODES) {
+for (const mode of [...MODES, "print-dark"]) {
   console.log(`\n${mode}`);
   for (const row of rows.filter((entry) => entry.mode === mode)) {
     const label = row.id.padEnd(width);
