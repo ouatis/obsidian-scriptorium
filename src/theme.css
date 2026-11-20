@@ -2319,6 +2319,11 @@ body.is-mobile .mobile-toolbar {
         scroll-behavior: auto;
     }
 
+    :root, .theme-light, .theme-dark {
+        --duration-fast: 0.01ms;
+        --duration-moderate: 0.01ms;
+    }
+
 
     body:not(.is-mobile, .view-header-title-always) .view-header :is(.view-header-left, .view-header-title-container > div, .view-actions),
     body:not(.is-mobile) .app-container .status-bar,

@@ -598,9 +598,10 @@ const PRINT_TOKENS = [
 ];
 
 /** Declarations re-pointed inside `@media print` on a `.theme-dark` sheet. */
-function printDeclarations(css) {
-  const out = [];
-  const media = /@media[^{]*\bprint\b[^{]*\{/g;
+/** Bodies of every at-rule block whose prelude matches, minus the braces. */
+function mediaBodies(css, pattern) {
+  const bodies = [];
+  const media = new RegExp(pattern.source, "g");
   let match;
   while ((match = media.exec(css))) {
     let depth = 1;
@@ -611,7 +612,32 @@ function printDeclarations(css) {
       else if (css[i] === "}") depth -= 1;
       i += 1;
     }
-    for (const block of parseBlocks(css.slice(start, i - 1))) {
+    bodies.push(css.slice(start, i - 1));
+    media.lastIndex = i;
+  }
+  return bodies;
+}
+
+/** Substitute custom properties textually, for values that are not colours. */
+function resolveText(value, table, seen = new Set()) {
+  return value.replace(/var\(\s*(--[a-z0-9-]+)\s*(?:,\s*([^()]*))?\)/gi, (whole, name, fallback) => {
+    if (!table.has(name) || seen.has(name)) return fallback !== undefined ? fallback : whole;
+    seen.add(name);
+    return resolveText(table.get(name), table, seen);
+  });
+}
+
+/** First time component of a timing shorthand, in milliseconds. */
+function timeOf(value) {
+  const match = value.match(/(\d*\.?\d+)\s*(ms|s)\b/);
+  if (!match) return null;
+  return match[2] === "s" ? parseFloat(match[1]) * 1000 : parseFloat(match[1]);
+}
+
+function printDeclarations(css) {
+  const out = [];
+  for (const body of mediaBodies(css, /@media[^{]*\bprint\b[^{]*\{/)) {
+    for (const block of parseBlocks(body)) {
       const selectors = selectorsOf(block.prelude);
       if (!selectors.length) continue;
       if (!selectors.every((selector) => selector.includes(".theme-dark"))) continue;
@@ -619,9 +645,28 @@ function printDeclarations(css) {
         out.push({ name: decl[1], value: decl[2].trim() });
       }
     }
-    media.lastIndex = i;
   }
   return out;
+}
+
+/**
+ * Reduced motion is a promise about duration, not about properties. This theme
+ * bakes its timings into tokens (--ease-fast-smooth carries 160ms, the state
+ * shorthands carry the ease pair), so a lone transition-delay in the reduce
+ * block leaves every hover and every panel slide playing. Read the reduce block
+ * back: the duration and ease tokens must be overridden there and must resolve
+ * to a fraction of a millisecond.
+ */
+const MOTION_TOKENS = ["--duration-fast", "--duration-moderate", "--ease-fast-smooth", "--ease-moderate-smooth"];
+
+function motionOverrides(css) {
+  const table = new Map();
+  for (const body of mediaBodies(css, /@media[^{]*\(prefers-reduced-motion:\s*reduce\)[^{]*\{/)) {
+    for (const decl of body.matchAll(/(--[a-z0-9-]+)\s*:\s*([^;{}]+)/gi)) {
+      table.set(decl[1], decl[2].trim());
+    }
+  }
+  return table;
 }
 
 /* -------------------------------------------------------------------- run */
@@ -805,8 +850,39 @@ const printRows = [];
 }
 rows.push(...printRows);
 
+{
+  const overrides = motionOverrides(css);
+  const table = new Map();
+  for (const layer of ["base", "dark", "shared"]) {
+    for (const decl of decls) {
+      if (decl.layer === layer) table.set(decl.name, decl.value);
+    }
+  }
+  for (const [name, value] of overrides) table.set(name, value);
+
+  for (const token of MOTION_TOKENS) {
+    const raw = table.get(token);
+    if (raw === undefined) {
+      rows.push({ mode: "reduce", id: token, min: 0, status: "unresolved" });
+      continue;
+    }
+    const resolved = resolveText(raw, table);
+    const ms = timeOf(resolved);
+    rows.push({
+      mode: "reduce",
+      id: token,
+      min: 0,
+      status: ms !== null && ms <= 1 ? "ok" : "FAIL",
+      note:
+        ms !== null && ms <= 1
+          ? `reduced to ${resolved}`
+          : `still ${resolved}${overrides.has(token) ? "" : " (token untouched by the reduce block)"}`,
+    });
+  }
+}
+
 const width = Math.max(...rows.map((row) => row.id.length));
-for (const mode of [...MODES, "print-dark"]) {
+for (const mode of [...MODES, "print-dark", "reduce"]) {
   console.log(`\n${mode}`);
   for (const row of rows.filter((entry) => entry.mode === mode)) {
     const label = row.id.padEnd(width);
