@@ -57,8 +57,6 @@ const CALLOUTS = [
 	{ types: ["quote", "cite"], icon: "quotes" },
 ];
 
-const BEGIN = "/* [13a] Callout icons (generated from Phosphor by scripts/build-callout-icons.mjs) — begin */";
-
 // Chrome mapping: Obsidian's own UI icons (lucide-*) redrawn as Phosphor.
 // Only pairs with a real shape difference; same-shape icons stay Lucide.
 // Failure mode is graceful — if Obsidian renames a class the old rule goes
@@ -80,23 +78,32 @@ const CHROME = [
 	{ lucide: "edit-3", icon: "pencil-line" },
 ];
 
-const CHROME_BEGIN = "/* [04d] Chrome icon mapping (generated from Phosphor by scripts/build-callout-icons.mjs) — begin */";
-const CHROME_END = "/* — end of generated chrome icons */";
-const END = "/* — end of generated callout icons */";
+// One custom property per distinct icon. Each paint used to repeat the encoded
+// data URI twice (vendor prefix + standard), and several callouts share a
+// shape, which is what pushed theme.css toward the 160 KiB budget. The tokens
+// are written as part of this generated block, so the tables above stay the
+// single source of truth: edit them and re-run `npm run icons`.
+const TOKEN_NAMES = [...new Set([...CALLOUTS.map((c) => c.icon), ...CHROME.map((c) => c.icon)])];
 
-function encode(inner) {
-	const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">${inner}</svg>`;
-	return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-}
+const encode = (inner) =>
+	`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">${inner}</svg>`)}")`;
 
-let block = `${BEGIN}\n`;
-for (const { types, icon } of CALLOUTS) {
-	const inner = PHOSPHOR[icon];
-	if (!inner) {
+function tokenFor(icon) {
+	if (!PHOSPHOR[icon]) {
 		console.error(`missing Phosphor entry: ${icon}`);
 		process.exit(1);
 	}
-	const mask = encode(inner);
+	return `--scrip-icon-${icon}`;
+}
+
+let block = ":root {\n";
+for (const icon of TOKEN_NAMES) {
+	block += `\t${tokenFor(icon)}: ${encode(PHOSPHOR[icon])};\n`;
+}
+block += "}\n\n";
+
+for (const { types, icon } of CALLOUTS) {
+	const mask = `var(${tokenFor(icon)})`;
 	// Every alias needs the full compound selector — a bare list entry would
 	// turn the hide/mask declarations onto the callout element itself.
 	const hideSelector = types.map((t) => `.callout[data-callout="${t}"] .callout-icon svg`).join(",\n");
@@ -121,19 +128,12 @@ ${paintSelector} {
 
 `;
 }
-block += END;
 
 // Chrome block: hide the original Lucide geometry and paint the svg's own
 // box through a Phosphor mask, so size/color behavior stays identical.
-let chromeBlock = `${CHROME_BEGIN}\n`;
 for (const { lucide, icon } of CHROME) {
-	const inner = PHOSPHOR[icon];
-	if (!inner) {
-		console.error(`missing Phosphor entry: ${icon}`);
-		process.exit(1);
-	}
-	const mask = encode(inner);
-	chromeBlock += `svg.lucide-${lucide} > * {
+	const mask = `var(${tokenFor(icon)})`;
+	block += `svg.lucide-${lucide} > * {
 	visibility: hidden;
 }
 
@@ -145,51 +145,60 @@ svg.lucide-${lucide} {
 
 `;
 }
-chromeBlock += CHROME_END;
 
 const themePath = path.join(process.cwd(), "src", "theme.css");
-let css = fs.readFileSync(themePath, "utf8");
-const start = css.indexOf(BEGIN);
-if (start >= 0) {
-	const end = css.indexOf(END, start);
-	if (end < 0) {
-		console.error("begin marker found but end marker missing");
-		process.exit(1);
-	}
-	css = css.slice(0, start) + block + css.slice(end + END.length);
-} else {
-	const anchor = "/* [14] Embedded Notes";
-	const at = css.indexOf(anchor);
-	if (at < 0) {
-		console.error("insertion anchor [14] not found");
-		process.exit(1);
-	}
-	css = css.slice(0, at) + block + "\n" + css.slice(at);
+const css = fs.readFileSync(themePath, "utf8");
+
+// The generated block carries no comments (scripts/check-css.mjs forbids every
+// comment after the @settings declaration), so it is located by its own rules:
+// the first callout hide rule through the last chrome paint rule, optionally
+// preceded by the token block this script writes.
+const HIDE_RULE = /^\.callout\[data-callout="[a-z-]+"\] \.callout-icon svg(?:,|\s\{)$/m;
+const CHROME_PAINT = /^svg\.lucide-[a-z0-9-]+ \{$/gm;
+const TOKEN_BLOCK = /^:root \{\n(?:\t--scrip-icon-[a-z0-9-]+: url\("data:image\/svg\+xml,[^"]+"\);\n)+\}\n\n/mg;
+
+const hideMatch = HIDE_RULE.exec(css);
+const chromePaints = [...css.matchAll(CHROME_PAINT)];
+if (hideMatch === null || chromePaints.length === 0) {
+	console.error("generated icon region not found (callout hide rule or chrome paint rule)");
+	process.exit(1);
 }
-const chromeStart = css.indexOf(CHROME_BEGIN);
-if (chromeStart >= 0) {
-	const chromeEnd = css.indexOf(CHROME_END, chromeStart);
-	if (chromeEnd < 0) {
-		console.error("chrome begin marker found but end marker missing");
-		process.exit(1);
-	}
-	css = css.slice(0, chromeStart) + chromeBlock + css.slice(chromeEnd + CHROME_END.length);
-} else {
-	const calloutEnd = css.indexOf(END, css.indexOf(BEGIN));
-	if (calloutEnd < 0) {
-		console.error("callout block end not found; cannot place chrome block");
-		process.exit(1);
-	}
-	const at = calloutEnd + END.length;
-	css = css.slice(0, at) + "\n\n" + chromeBlock + css.slice(at);
+let start = hideMatch.index;
+for (const tokens of css.matchAll(TOKEN_BLOCK)) {
+	if (tokens.index + tokens[0].length === start) start = tokens.index;
 }
-const commentOpens = (css.match(/\/\*/g) || []).length;
-const commentCloses = (css.match(/\*\//g) || []).length;
+const closeBrace = css.indexOf("}", chromePaints.at(-1).index);
+const endsWithBlankLine = css.startsWith("\n\n", closeBrace + 1);
+if (closeBrace < 0 || !endsWithBlankLine) {
+	console.error("the last chrome rule is not followed by a blank line; refusing to guess the region end");
+	process.exit(1);
+}
+const end = closeBrace + 3;
+if (end <= start) {
+	console.error(`generated region has no extent (start ${start}, end ${end})`);
+	process.exit(1);
+}
+
+const region = css.slice(start, end);
+const regionCallouts = (region.match(/^\.callout\[data-callout="[a-z-]+"\] \.callout-icon \{$/gm) || []).length;
+const regionChrome = (region.match(CHROME_PAINT) || []).length;
+if (regionCallouts !== CALLOUTS.length || regionChrome !== CHROME.length) {
+	console.error(
+		`refusing to replace an unexpected region: ${regionCallouts} callout paint rules (expected ${CALLOUTS.length}), ${regionChrome} chrome paint rules (expected ${CHROME.length})`,
+	);
+	process.exit(1);
+}
+
+const next = css.slice(0, start) + block + css.slice(end);
+const commentOpens = (next.match(/\/\*/g) || []).length;
+const commentCloses = (next.match(/\*\//g) || []).length;
 if (commentOpens !== commentCloses) {
 	console.error(
 		`comment markers unbalanced: ${commentOpens} "/*" vs ${commentCloses} "*/" — refusing to write broken CSS`,
 	);
 	process.exit(1);
 }
-fs.writeFileSync(themePath, css);
-console.log(`callout icons: ${CALLOUTS.length} types · chrome mapping: ${CHROME.length} icons · ${(css.match(/mask(-image)?:/g) || []).length} mask declarations`);
+fs.writeFileSync(themePath, next);
+console.log(
+	`callout groups: ${CALLOUTS.length} · chrome icons: ${CHROME.length} · icon tokens: ${TOKEN_NAMES.length} · ${(next.match(/mask(-image)?:/g) || []).length} mask declarations`,
+);
