@@ -279,6 +279,7 @@ settings:
 
     --layer-1-rgb: var(--white);
     --layer-2-rgb: var(--gray-10);
+    --scrip-table-header-bg: rgb(180, 173, 162);
     --layer-hover-1: rgb(var(--gray-10));
     --layer-hover-2: rgba(var(--gray-20), var(--opacity-half));
     --layer-active-1: rgb(var(--gray-30));
@@ -383,6 +384,7 @@ settings:
 
     --layer-1-rgb: var(--gray-90);
     --layer-2-rgb: var(--gray-80);
+    --scrip-table-header-bg: color-mix(in srgb, var(--layer-2) 96%, var(--panel-surface));
     --layer-hover-1: rgba(var(--layer-1-rgb), var(--opacity-half));
     --layer-hover-2: rgba(var(--layer-2-rgb), var(--opacity-half));
     --layer-active-1: rgb(var(--gray-70));
@@ -1170,7 +1172,7 @@ body.styled-scrollbars .nav-folder-children:not(:hover)::-webkit-scrollbar-thumb
 }
 
 :is(.markdown-preview-view, .markdown-source-view.mod-cm6 .cm-table-widget) table th {
-    background-color: color-mix(in srgb, var(--layer-2) 96%, var(--panel-surface));
+    background-color: var(--scrip-table-header-bg);
     font-weight: var(--font-semibold);
     padding: var(--size-2) var(--size-4);
     text-align: start;
