@@ -178,6 +178,7 @@
    Paper & surfaces
      --scrip-surface-paper         primary paper surface
      --scrip-surface-paper-muted   secondary paper surface
+     --scrip-table-header-bg       table header row surface
      --scrip-native-surface        native panel surface (settings, modals)
      --scrip-native-surface-muted  muted native panel surface
      --scrip-reading-paper-radius  reading sheet corner radius
