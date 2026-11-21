@@ -391,9 +391,25 @@ function describe(color) {
  * 4.5 body text, 3.0 large text (>=24px or >=18.66px bold) and non-text UI;
  * `waive` documents a deliberate exception.
  */
+const MIN_TABLE_HEADER_SURFACE_LIGHT = 2;
+const MIN_TABLE_HEADER_SURFACE_DARK = 1.25;
+
 const PAIRS = [
   { id: "prose/paper", fg: "--text-primary", bg: "--scrip-surface-paper", min: 4.5 },
   { id: "prose/app", fg: "--text-primary", bg: "--background", min: 4.5 },
+  {
+    id: "table-header/paper",
+    fg: "--scrip-table-header-bg",
+    bg: "--scrip-surface-paper",
+    min: { light: MIN_TABLE_HEADER_SURFACE_LIGHT, dark: MIN_TABLE_HEADER_SURFACE_DARK },
+  },
+  {
+    id: "table-header/text",
+    fg: "--text-primary",
+    bg: "--scrip-table-header-bg",
+    surface: "--scrip-surface-paper",
+    min: 4.5,
+  },
   { id: "ink-soft/paper", fg: "--scrip-ink-soft", bg: "--scrip-surface-paper", min: 4.5 },
   { id: "ink-faint/paper", fg: "--scrip-ink-faint", bg: "--scrip-surface-paper", min: 4.5 },
   { id: "muted/paper", fg: "--text-muted", bg: "--scrip-surface-paper", min: 4.5 },
@@ -706,8 +722,9 @@ for (const mode of MODES) {
     }
 
     const ratio = contrast(fg, bg);
-    const status = pair.waive ? "waived" : ratio >= pair.min ? "ok" : "FAIL";
-    rows.push({ mode, id: pair.id, ratio, min: pair.min, fg, bg, status, waive: pair.waive });
+    const min = typeof pair.min === "number" ? pair.min : pair.min[mode];
+    const status = pair.waive ? "waived" : ratio >= min ? "ok" : "FAIL";
+    rows.push({ mode, id: pair.id, ratio, min, fg, bg, status, waive: pair.waive });
   }
 
   for (const level of HEADINGS) {
