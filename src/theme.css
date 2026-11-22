@@ -659,8 +659,8 @@ body {
     --input-shadow-focus: 0 0 0 var(--focus-ring-width) var(--focus);
 
     --tag-color: var(--color-secondary);
-    --tag-color-hover: var(--color-secondary-dark-2);
-    --tag-color-active: var(--color-secondary-dark-3);
+    --tag-color-hover: var(--text-secondary-accent-hover);
+    --tag-color-active: var(--text-secondary-accent-active);
     --tag-color-subtle: var(--text-secondary-accent-subtle);
     --tag-background: rgba(var(--color-secondary-rgb), var(--opacity-subtle));
     --tag-background-hover: rgba(var(--color-secondary-rgb), var(--opacity-moderate));
